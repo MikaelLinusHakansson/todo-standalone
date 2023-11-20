@@ -1,47 +1,143 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <h2>Todo list</h2>
+    <input type="text" v-model="newTask">
+    <button @click="addNewTask">Add task</button>
+    <ul>
+      <li v-for="(tasks, index) in task" :key="tasks.id" @click="removeTask(index)"><span> {{ tasks.name }}</span></li>
+    </ul>
+  </div>
 </template>
 
-<style scoped>
+<script>
+  export default {
+    data(){
+      return {
+        task: [
+          {
+            id: new Date(),
+            name: 'item1'
+          },
+
+          {
+            id: new Date(),
+            name: 'item2'
+          },
+
+          {
+            id: new Date(),
+            name: 'item3'
+          },
+        ],
+        newTask: ''
+      }
+    },
+
+    methods: {
+      addNewTask (){
+        const newTask = {
+          id: new Date(),
+          name: this.newTask
+        }
+
+        this.task.push(newTask);
+        this.newTask = "";
+      },
+
+      removeTask (list){
+        this.task.splice(list, 1);
+      }
+    }
+  }
+</script>
+
+
+
+
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Jost', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
 header {
-  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #1b995e;
+  color: white;
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+#app {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+#app h2 {
+  font-size: 2rem;
+  border-bottom: 4px solid #ccc;
+  color: #1b995e;
+  margin: 0 0 1rem 0;
 }
+
+#app ul {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+#app li {
+  margin: 1rem 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: #8ddba4;
+  padding: 0.5rem;
+  color: #1f1f1f;
+  border-radius: 25px;
+}
+
+#app input {
+  font: inherit;
+  border: 1px solid #ccc;
+}
+
+#app input:focus {
+  outline: none;
+  border-color: #1b995e;
+  background-color: #d7fdeb;
+}
+
+#app button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #ff0077;
+  background-color: #ff0077;
+  color: white;
+  padding: 0.05rem 1rem;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
+}
+
+#app .small-button {
+  height: 12px;
+}
+
+#app button:hover,
+#app button:active {
+  background-color: #ec3169;
+  border-color: #ec3169;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
 </style>
