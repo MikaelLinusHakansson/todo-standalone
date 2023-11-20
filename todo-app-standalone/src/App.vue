@@ -11,41 +11,31 @@
 
 <script>
   export default {
-    data(){
+    data() {
       return {
-        task: [
-          {
-            id: new Date(),
-            name: 'item1'
-          },
-
-          {
-            id: new Date(),
-            name: 'item2'
-          },
-
-          {
-            id: new Date(),
-            name: 'item3'
-          },
-        ],
+        task: [],
         newTask: ''
       }
     },
 
     methods: {
-      addNewTask (){
+      addNewTask () {
         const newTask = {
           id: new Date(),
           name: this.newTask
         }
 
-        this.task.push(newTask);
+        this.task.unshift(newTask);
+        this.validateTask(newTask)
         this.newTask = "";
       },
 
-      removeTask (list){
+      removeTask (list) {
         this.task.splice(list, 1);
+      },
+
+      validateTask(item) {
+        console.log(item.length)
       }
     }
   }
