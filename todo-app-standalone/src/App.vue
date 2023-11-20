@@ -4,7 +4,12 @@
     <input type="text" v-model="newTask">
     <button @click="addNewTask">Add task</button>
     <ul>
-      <li v-for="(tasks, index) in task" :key="tasks.id" @click="removeTask(index)"><span> {{ tasks.name }}</span></li>
+      <li
+      v-for="(tasks, index) in task"
+      :key="tasks.id"
+      @click="removeTask(index)">
+      <span> {{ tasks.name }}</span>
+      </li>
     </ul>
   </div>
 </template>
@@ -40,9 +45,6 @@
     }
   }
 </script>
-
-
-
 
 <style>
   * {
