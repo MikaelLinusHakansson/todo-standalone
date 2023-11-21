@@ -8,7 +8,7 @@
       v-for="(tasks, index) in task"
       :key="tasks.id"
       @click="removeTask(index)">
-      {{ tasks.name }} <button class="small-button">x</button>
+      {{ tasks.name }}
       </li>
       
     </ul>
