@@ -27,12 +27,17 @@
       addNewTask () {
         const newTask = {
           id: new Date(),
-          name: this.newTask
+          name: this.newTask.trim()
         }
 
-        this.task.unshift(newTask);
-        this.validateTask(newTask)
-        this.newTask = "";
+        console.log(this.validateTask(this.newTask))
+
+        if (this.validateTask(this.newTask)) {
+          this.task.unshift(newTask);
+          this.newTask = "";
+        } else {
+          alert("Task is empty")
+        } 
       },
 
       removeTask (list) {
@@ -40,7 +45,7 @@
       },
 
       validateTask(item) {
-        console.log(item.length)
+        return item.length > 0
       }
     }
   }
