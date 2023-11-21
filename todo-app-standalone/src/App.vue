@@ -10,24 +10,38 @@
       @click="removeTask(index)">
       {{ tasks.name }}
       </li>
-      
     </ul>
+    <ul>
+      <li
+      v-for="(items, notIndex) in items"
+      :key="items.date"
+      @click="removeTask(notIndex)">
+      {{ items.title }}
+      </li>
+    </ul>
+    <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
   </div>
 </template>
 
+
 <script>
+  
+  import items from "@/data/items.json";
+  import { todoStore } from "@/stores/todoStore.js";
+
   export default {
     data() {
       return {
         task: [],
-        newTask: ''
+        newTask: '',
+        items: []
       }
     },
 
     methods: {
-      addNewTask () {
+      addNewTask() {
         const newTask = {
-          id: new Date(),
+          id: new Date().toJSON,
           name: this.newTask.trim()
         }
 
@@ -36,19 +50,27 @@
           this.newTask = "";
         } else {
           alert("Task is empty")
-        } 
-      },
-
-      removeTask (list) {
-        this.task.splice(list, 1);
+        }
       },
 
       validateTask(item) {
         return item.length > 0
-      }
+      },
+
+      fetchJsonTasks() {
+              for (let i = 0; i < items.length; i++) {
+                this.items.push(items[i])
+              }
+            },
+
+      removeTask(list) {
+        this.task.splice(list, 1);
+        this.items.splice(list, 1)
+      },
     }
   }
 </script>
+
 
 <style>
   * {
