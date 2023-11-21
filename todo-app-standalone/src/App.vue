@@ -8,8 +8,9 @@
       v-for="(tasks, index) in task"
       :key="tasks.id"
       @click="removeTask(index)">
-      <span> {{ tasks.name }}</span>
+      {{ tasks.name }}
       </li>
+      
     </ul>
   </div>
 </template>
@@ -29,8 +30,6 @@
           id: new Date(),
           name: this.newTask.trim()
         }
-
-        console.log(this.validateTask(this.newTask))
 
         if (this.validateTask(this.newTask)) {
           this.task.unshift(newTask);
@@ -126,8 +125,9 @@ header {
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
 }
 
-#app .small-button {
+.small-button {
   height: 12px;
+  width: 12px;
 }
 
 #app button:hover,
@@ -136,5 +136,4 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
-
 </style>
