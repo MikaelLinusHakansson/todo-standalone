@@ -13,13 +13,14 @@
     </ul>
     <ul>
       <li
-      v-for="(items, notIndex) in items"
+      v-for="(items, notIndex) in this.items"
       :key="items.date"
       @click="removeTask(notIndex)">
       {{ items.title }}
       </li>
     </ul>
     <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
+    <button @click="testMethod">test</button>
   </div>
 </template>
 
@@ -28,17 +29,27 @@
   
   import items from "@/data/items.json";
   import { todoStore } from "@/stores/todoStore.js";
+  import { mapState } from "pinia"
 
   export default {
     data() {
       return {
         task: [],
         newTask: '',
-        items: []
+        items: [],
       }
     },
 
+    computed: {
+      ...mapState(todoStore, ['getItems']),
+    },
+
     methods: {
+      testMethod() {
+        const store = todoStore();
+        console.log(this.getItems)
+      },
+
       addNewTask() {
         const newTask = {
           id: new Date().toJSON,
