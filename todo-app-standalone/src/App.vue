@@ -8,7 +8,7 @@
       v-for="(tasks, index) in task"
       :key="tasks.id"
       @click="removeTask(index)">
-      {{ tasks.name }}
+      {{ tasks.name }} <button class="small-button">x</button>
       </li>
       
     </ul>
@@ -126,8 +126,12 @@ header {
 }
 
 .small-button {
-  height: 12px;
-  width: 12px;
+  display: inline-block;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #ff0077;
+  background-color: ;
+  
 }
 
 #app button:hover,
