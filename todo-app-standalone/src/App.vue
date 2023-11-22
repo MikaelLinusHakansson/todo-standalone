@@ -23,6 +23,20 @@
         </ul>
 
         <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
+
+        <button @click="testDayjs">dayjs</button>
+
+        <div>
+          <table>
+          <div>
+            <ul>
+              <span>
+                {{ date }}
+              </span>
+            </ul>
+          </div>
+        </table>
+        </div>
   </div>
 </template>
 
@@ -31,12 +45,15 @@
   import { mapState } from "pinia"
   import { useTodoStore } from "@/stores/todoStore.js";
 
+  import dayjs from 'dayjs'
+
   export default {
     data() {
       return {
         task: [],
         newTask: '',
         items: [],
+        date: ''
       }
     },
 
@@ -62,17 +79,22 @@
       validateTask(item) {
         return item.length > 0
       },
+      
+      removeTask(list) {
+        this.task.splice(list, 1);
+        this.items.splice(list, 1)
+      },
 
       fetchJsonTasks() {
               for (let i = 0; i < this.getItems.length; i++) {
                 this.items.push(this.getItems[i])
               }
-            },
-
-      removeTask(list) {
-        this.task.splice(list, 1);
-        this.items.splice(list, 1)
       },
+
+      testDayjs() {
+        this.date = dayjs(new Date()).toDate()
+        return this.date
+      }
     }
   }
 </script>
