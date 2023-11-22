@@ -1,12 +1,15 @@
 import { defineStore } from "pinia";
 
 export const useTodoStore = defineStore("todoStore", {
-    state: () => ({
-            items: [],
-    }),
+
+    state: () => {
+        return {
+            tasks: []
+          }
+      },
 
     getters: {
-        getItems() {
+        getTask() {
             const tasksInJson = [
                 {
                 "title": "Shopping",
@@ -21,9 +24,23 @@ export const useTodoStore = defineStore("todoStore", {
                     "date": "Thu Nov 23 2023 11:41:24 GMT+0100"
                 }
             ]
+            return tasksInJson
+        },
 
-            this.items = tasksInJson  
-            return this.items
+ 
+    },
+
+    actions: {
+        addTask(task) {
+            this.tasks.unshift(task)
+        },
+
+        removeTasks(task) {
+            this.tasks.splice(task, 1);
+        },
+
+        markDone(task) {
+
         },
     }
 });

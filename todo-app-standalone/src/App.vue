@@ -1,104 +1,98 @@
 <template>
   <div>
-      <h2>Todo list</h2>
-        <input type="text" v-model="newTask">
-        <button @click="addNewTask">Add task</button>
+    <h2>Todo list</h2>
+      <label for="taskname">Task: </label>
+      <input type="text" id="taskname" name="taskname" v-model="newTask">
+      <br>
       
-        <ul>
-          <li
-          v-for="(tasks, index) in task"
-          :key="tasks.id"
-          @click="removeTask(index)">
-          {{ tasks.name }}
-          </li>
-        </ul>
+      <label for="date">Date: </label>
+      <input type="text" id="date" name="date" v-model="date">
+      
+      <br>
+      <button @click="addNewTask">Add task</button>
+      
+      <ul>
+        <li
+        v-for="(tasks, index) in tasks"
+        :key="tasks.id"
+        @click="this.removeTask(index)">
+        {{ tasks.name }}  | {{ tasks.date }}
+        </li>
+      </ul>
 
-        <ul>
-          <li
-          v-for="(items, notIndex) in this.items"
-          :key="items.date"
-          @click="removeTask(notIndex)">
-          {{ items.title }}
-          </li>
-        </ul>
+      <ul>
+        <li
+        v-for="(items) in this.items"
+        :key="items.date"
+        @click="removeTask(items.date)">
+        {{ items.title }}
+        </li>
+      </ul>
 
-        <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
 
-        <button @click="testDayjs">dayjs</button>
-
-        <div>
-          <table>
-          <div>
-            <ul>
-              <span>
-                {{ date }}
-              </span>
-            </ul>
-          </div>
-        </table>
-        </div>
+      <!-- <button @click="fetchJsonTasks">Saved todo's from store objekt</button> -->
   </div>
 </template>
 
-
 <script>
-  import { mapState } from "pinia"
-  import { useTodoStore } from "@/stores/todoStore.js";
+  import { mapState, mapActions } from "pinia"
+  import { useTodoStore } from "./stores/TodoStore";
 
   import dayjs from 'dayjs'
 
   export default {
     data() {
       return {
-        task: [],
-        newTask: '',
+        task: '',
+        // newTask: [],
         items: [],
         date: ''
       }
     },
 
     computed: {
-      ...mapState(useTodoStore, ['getItems']),
+      ...mapState(useTodoStore, ['tasks', 'getTask']),
     },
 
     methods: {
+      ...mapActions(useTodoStore, ['addTask', 'removeTasks', 'markDone']),
+
       addNewTask() {
         const newTask = {
           id: new Date().toJSON,
-          name: this.newTask.trim()
+          name: this.newTask.trim(),
+          date: dayjs().format('YY-MM-DD HH:mm')
         }
 
-        if (this.validateTask(this.newTask)) {
-          this.task.unshift(newTask);
-          this.newTask = "";
-        } else {
-          alert("Task is empty")
-        }
+        this.addTask(newTask)
+        this.task = this.tasks
+      },
+
+      validateDate() {
+        return dayjs(this.date).isValid();
       },
 
       validateTask(item) {
-        return item.length > 0
+        return item !== null
       },
       
-      removeTask(list) {
-        this.task.splice(list, 1);
-        this.items.splice(list, 1)
+      removeTask(task) {
+        this.removeTasks(task)
       },
 
       fetchJsonTasks() {
-              for (let i = 0; i < this.getItems.length; i++) {
-                this.items.push(this.getItems[i])
+              for (let i = 0; i < this.getTask.length; i++) {
+                this.items.push(this.getTask[i])
               }
       },
 
       testDayjs() {
-        this.date = dayjs(new Date()).toDate()
+        this.date = dayjs()
         return this.date
-      }
+      },
     }
   }
 </script>
-
 
 <style>
   * {
