@@ -1,18 +1,12 @@
 import { defineStore } from "pinia";
 
-import items from "@/data/items.json";
-
-export const todoStore = defineStore("todoStore", {
-    // state
+export const useTodoStore = defineStore("todoStore", {
     state: () => ({
             items: [],
     }),
-    // actions 
 
-    // getters
     getters: {
         getItems() {
-            const something = items
             const tasksInJson = [
                 {
                 "title": "Shopping",
@@ -28,7 +22,7 @@ export const todoStore = defineStore("todoStore", {
                 }
             ]
 
-            this.items = something  
+            this.items = tasksInJson  
             return this.items
         },
     }

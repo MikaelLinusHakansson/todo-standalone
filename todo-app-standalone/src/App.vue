@@ -1,35 +1,35 @@
 <template>
   <div>
-    <h2>Todo list</h2>
-    <input type="text" v-model="newTask">
-    <button @click="addNewTask">Add task</button>
-    <ul>
-      <li
-      v-for="(tasks, index) in task"
-      :key="tasks.id"
-      @click="removeTask(index)">
-      {{ tasks.name }}
-      </li>
-    </ul>
-    <ul>
-      <li
-      v-for="(items, notIndex) in this.items"
-      :key="items.date"
-      @click="removeTask(notIndex)">
-      {{ items.title }}
-      </li>
-    </ul>
-    <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
-    <button @click="testMethod">test</button>
+      <h2>Todo list</h2>
+        <input type="text" v-model="newTask">
+        <button @click="addNewTask">Add task</button>
+      
+        <ul>
+          <li
+          v-for="(tasks, index) in task"
+          :key="tasks.id"
+          @click="removeTask(index)">
+          {{ tasks.name }}
+          </li>
+        </ul>
+
+        <ul>
+          <li
+          v-for="(items, notIndex) in this.items"
+          :key="items.date"
+          @click="removeTask(notIndex)">
+          {{ items.title }}
+          </li>
+        </ul>
+
+        <button @click="fetchJsonTasks">Saved todo's from .jsonfile</button>
   </div>
 </template>
 
 
 <script>
-  
-  import items from "@/data/items.json";
-  import { todoStore } from "@/stores/todoStore.js";
   import { mapState } from "pinia"
+  import { useTodoStore } from "@/stores/todoStore.js";
 
   export default {
     data() {
@@ -41,15 +41,10 @@
     },
 
     computed: {
-      ...mapState(todoStore, ['getItems']),
+      ...mapState(useTodoStore, ['getItems']),
     },
 
     methods: {
-      testMethod() {
-        const store = todoStore();
-        console.log(this.getItems)
-      },
-
       addNewTask() {
         const newTask = {
           id: new Date().toJSON,
@@ -69,8 +64,8 @@
       },
 
       fetchJsonTasks() {
-              for (let i = 0; i < items.length; i++) {
-                this.items.push(items[i])
+              for (let i = 0; i < this.getItems.length; i++) {
+                this.items.push(this.getItems[i])
               }
             },
 
@@ -163,7 +158,7 @@ header {
   font: inherit;
   cursor: pointer;
   border: 1px solid #ff0077;
-  background-color: ;
+  background-color: black;
   
 }
 
