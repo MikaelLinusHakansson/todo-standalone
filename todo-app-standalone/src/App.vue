@@ -1,14 +1,17 @@
 <template>
   <div>
     <h2>Todo list</h2>
-      <label for="taskname">Task: </label>
-      <input
-      type="text" 
-      id="taskname" 
-      name="taskname" 
-      v-model="newTaskName">
-      <br>
-      
+
+    <div>
+        <label for="taskname">Task: </label>
+        <input
+        type="text" 
+        id="taskname" 
+        name="taskname" 
+        v-model="newTaskName">
+    </div>
+    
+    <div>
       <label for="date">Date: </label>
       <input 
       type="text"
@@ -16,21 +19,26 @@
       name="date" 
       v-model="newTaskDate" 
       placeholder="YYYY-MM-DD">
-      <br>
-      <button @click="addNewTask">Add task</button>
-      
+    </div>
+
+    
+    <div>
       <ul>
         <li 
-        v-for="(task, index) in tasks" 
-        :key="task.id">
+          v-for="(task, index) in tasks" 
+          :key="task.id">
           <input 
           type="checkbox" 
           v-model="task.status"
           @click="markDone(index)">
           {{ task.name }}  | {{ task.date }}
           <button @click="this.removeTasks(index)">x</button>
+          <button>edit</button>
         </li>
       </ul>
+    </div>
+
+    <button @click="addNewTask">Add</button>
   </div>
 </template>
 
