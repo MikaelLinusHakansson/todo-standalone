@@ -2,40 +2,38 @@
   <div>
     <h2>Todo list</h2>
       <label for="taskname">Task: </label>
-      <input type="text" id="taskname" name="taskname" v-model="newTask">
+      <input 
+      type="text"
+      id="taskname"
+      name="taskname"
+      v-model="newTask">
       <br>
       
       <label for="date">Date: </label>
-      <input type="text" id="date" name="date" v-model="date">
-      
+      <input
+      type="text"
+      id="date"
+      name="date"
+      v-model="date"
+      placeholder="YYYY-MM-DD">
       <br>
+
       <button @click="addNewTask">Add task</button>
       
       <ul>
         <li
         v-for="(tasks, index) in tasks"
-        :key="tasks.id"
-        @click="this.removeTask(index)">
+        :key="tasks.id">
+        <input type="checkbox" v-model="newTask.status" @click="completeStatus">
         {{ tasks.name }}  | {{ tasks.date }}
+        <button @click="this.removeTask(index)">x</button>
         </li>
       </ul>
-
-      <ul>
-        <li
-        v-for="(items) in this.items"
-        :key="items.date"
-        @click="removeTask(items.date)">
-        {{ items.title }}
-        </li>
-      </ul>
-
-
-      <!-- <button @click="fetchJsonTasks">Saved todo's from store objekt</button> -->
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from "pinia"
+  import { mapState, mapWritableState, mapActions } from "pinia"
   import { useTodoStore } from "./stores/TodoStore";
 
   import dayjs from 'dayjs'
@@ -43,52 +41,67 @@
   export default {
     data() {
       return {
-        task: '',
-        // newTask: [],
-        items: [],
-        date: ''
+        newTask: {
+          id: '',
+          name: '',
+          date: '',
+          status: false
+        },
+        // completedTask: false,
+        tasks: [],
+        date: '',
       }
     },
 
     computed: {
       ...mapState(useTodoStore, ['tasks', 'getTask']),
+      ...mapWritableState(useTodoStore, ['tasks']),
     },
 
     methods: {
       ...mapActions(useTodoStore, ['addTask', 'removeTasks', 'markDone']),
 
       addNewTask() {
-        const newTask = {
-          id: new Date().toJSON,
+        const task = {
+          id: new Date().toJSON(),
           name: this.newTask.trim(),
-          date: dayjs().format('YY-MM-DD HH:mm')
+          date: this.date,
         }
 
-        this.addTask(newTask)
-        this.task = this.tasks
+        if (this.validateTask(task.name) === '' || !this.validateDate(task.date)) {  // TODO: seperate logic to the store
+          if (task.name === '') {
+            alert("No task found")
+          } else if (task.name !== '' && !this.validateDate(task.date)) {
+            alert("Wrong date format")
+          } else {
+            alert("Invalid input")
+          }
+        } else {
+          this.addTask(task)
+          this.newTask = ''
+          this.date = ''
+        }
       },
 
-      validateDate() {
-        return dayjs(this.date).isValid();
-      },
-
-      validateTask(item) {
-        return item !== null
+      completeStatus() {
+        changeStatusOfTask != this.completedTask
+        console.log(this.completedTask)
       },
       
+      validateTask(task) {
+        if (task.length > 0) {
+          return task
+        } else {
+          return ''
+        }
+      },
+
+      validateDate(date) {
+        return dayjs(date).isValid()
+      },
+
       removeTask(task) {
         this.removeTasks(task)
-      },
-
-      fetchJsonTasks() {
-              for (let i = 0; i < this.getTask.length; i++) {
-                this.items.push(this.getTask[i])
-              }
-      },
-
-      testDayjs() {
-        this.date = dayjs()
-        return this.date
       },
     }
   }
