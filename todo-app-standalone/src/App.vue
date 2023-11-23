@@ -2,31 +2,33 @@
   <div>
     <h2>Todo list</h2>
       <label for="taskname">Task: </label>
-      <input 
-      type="text"
-      id="taskname"
-      name="taskname"
-      v-model="newTask">
+      <input
+      type="text" 
+      id="taskname" 
+      name="taskname" 
+      v-model="newTaskName">
       <br>
       
       <label for="date">Date: </label>
-      <input
+      <input 
       type="text"
-      id="date"
-      name="date"
-      v-model="date"
+      id="date" 
+      name="date" 
+      v-model="newTaskDate" 
       placeholder="YYYY-MM-DD">
       <br>
-
       <button @click="addNewTask">Add task</button>
       
       <ul>
-        <li
-        v-for="(tasks, index) in tasks"
-        :key="tasks.id">
-        <input type="checkbox" v-model="changeStatusOfTask">
-        {{ tasks.name }}  | {{ tasks.date }}
-        <button @click="this.removeTask(index)">x</button>
+        <li 
+        v-for="(task, index) in tasks" 
+        :key="task.id">
+          <input 
+          type="checkbox" 
+          v-model="task.status"
+          @click="completeStatus(index)">
+          {{ task.name }}  | {{ task.date }}
+          <button @click="this.removeTask(index)">x</button>
         </li>
       </ul>
   </div>
@@ -36,65 +38,38 @@
   import { mapState, mapWritableState, mapActions } from "pinia"
   import { useTodoStore } from "./stores/TodoStore";
 
-  import dayjs from 'dayjs'
-
   export default {
     data() {
       return {
-        completedTask: false,
-        newTask: '',
-        date: '',
+        newTaskName: '',
+        newTaskDate: ''
       }
     },
 
     computed: {
-      ...mapState(useTodoStore, ['tasks', 'getTask']),
+      ...mapState(useTodoStore, ['tasks']),
       ...mapWritableState(useTodoStore, ['tasks']),
     },
 
     methods: {
-      ...mapActions(useTodoStore, ['addTask', 'removeTasks', 'markDone']),
+      ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone']),
 
       addNewTask() {
-        const task = {
-          id: new Date().toJSON(),
-          name: this.newTask.trim(),
-          date: this.date,
-        }
-
-        if (this.validateTask(task.name) === '' || !this.validateDate(task.date)) {  // TODO: seperate logic to the store
-          if (task.name === '') {
-            alert("No task found")
-          } else if (task.name !== '' && !this.validateDate(task.date)) {
-            alert("Wrong date format")
-          } else {
-            alert("Invalid input")
-          }
+        if (this.createNewTask({name: this.newTaskName, date: this.newTaskDate})) {
+          this.newTaskName = ''
+          this.newTaskDate = ''
         } else {
-          this.addTask(task)
-          this.newTask = ''
-          this.date = ''
+          alert("Invalid input")
         }
       },
 
-      completeStatus() {
-        changeStatusOfTask != this.completedTask
-      },
-      
-      validateTask(task) {
-        if (task.length > 0) {
-          return task
-        } else {
-          return ''
-        }
+      completeStatus(index) {
+        this.markDone(index)
+        console.log(this.tasks[index].status)
       },
 
-      validateDate(date) {
-        return dayjs(date).isValid()
-      },
-
-      removeTask(task) {
-        this.removeTasks(task)
+      removeTask(index) {
+        this.removeTasks(index)
       },
     }
   }
