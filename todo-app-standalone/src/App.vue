@@ -32,8 +32,16 @@
           v-model="task.status"
           @click="markDone(index)">
           {{ task.name }}  | {{ task.date }}
+          <div>
+            <label for="editTask"></label>
+            <label for="editDate"></label>
+            <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable">
+            <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable">
+          </div>
           <button @click="this.removeTasks(index)">x</button>
-          <button>edit</button>
+          <button @click="editTask(index)">edit</button>
+          <br>
+          <button :hidden="isVisable">save</button>
         </li>
       </ul>
     </div>
@@ -50,7 +58,8 @@
     data() {
       return {
         newTaskName: '',
-        newTaskDate: ''
+        newTaskDate: '',
+        isVisable: false
       }
     },
 
@@ -69,6 +78,11 @@
           alert("Invalid input")
         }
       },
+
+      editTask(index) {
+        this.isVisable = !this.isVisable
+        console.log(index)
+      }
     }
   }
 </script>
