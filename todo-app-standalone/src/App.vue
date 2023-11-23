@@ -24,7 +24,7 @@
         <li
         v-for="(tasks, index) in tasks"
         :key="tasks.id">
-        <input type="checkbox" v-model="newTask.status" @click="completeStatus">
+        <input type="checkbox" v-model="changeStatusOfTask">
         {{ tasks.name }}  | {{ tasks.date }}
         <button @click="this.removeTask(index)">x</button>
         </li>
@@ -41,14 +41,8 @@
   export default {
     data() {
       return {
-        newTask: {
-          id: '',
-          name: '',
-          date: '',
-          status: false
-        },
-        // completedTask: false,
-        tasks: [],
+        completedTask: false,
+        newTask: '',
         date: '',
       }
     },
@@ -85,7 +79,6 @@
 
       completeStatus() {
         changeStatusOfTask != this.completedTask
-        console.log(this.completedTask)
       },
       
       validateTask(task) {

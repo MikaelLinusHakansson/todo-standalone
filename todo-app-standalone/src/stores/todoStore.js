@@ -18,8 +18,8 @@ export const useTodoStore = defineStore("todoStore", {
             this.tasks.unshift(task)
         },
 
-        removeTasks(task) {
-            this.tasks.splice(task, 1);
+        removeTasks(index) {
+            this.tasks.splice(index, 1);
         },
 
         markDone(index) {
