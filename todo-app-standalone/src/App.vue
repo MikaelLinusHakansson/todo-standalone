@@ -28,7 +28,7 @@
           v-model="task.status"
           @click="completeStatus(index)">
           {{ task.name }}  | {{ task.date }}
-          <button @click="this.removeTask(index)">x</button>
+          <button @click="this.removeTasks(index)">x</button>
         </li>
       </ul>
   </div>
@@ -66,10 +66,6 @@
       completeStatus(index) {
         this.markDone(index)
         console.log(this.tasks[index].status)
-      },
-
-      removeTask(index) {
-        this.removeTasks(index)
       },
     }
   }

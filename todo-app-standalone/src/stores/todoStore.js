@@ -17,7 +17,7 @@ export const useTodoStore = defineStore("todoStore", {
     actions: {
         createNewTask(newTask) {
             if (this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
-                newTask.id = new Date().toDateString
+                newTask.id = new Date().toDateString()
                 this.tasks.unshift(newTask)
                 return true
             } else {
