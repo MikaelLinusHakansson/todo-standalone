@@ -26,7 +26,7 @@
           <input 
           type="checkbox" 
           v-model="task.status"
-          @click="completeStatus(index)">
+          @click="markDone(index)">
           {{ task.name }}  | {{ task.date }}
           <button @click="this.removeTasks(index)">x</button>
         </li>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import { mapState, mapWritableState, mapActions } from "pinia"
+  import { mapState, mapActions } from "pinia"
   import { useTodoStore } from "./stores/TodoStore";
 
   export default {
@@ -48,7 +48,6 @@
 
     computed: {
       ...mapState(useTodoStore, ['tasks']),
-      ...mapWritableState(useTodoStore, ['tasks']),
     },
 
     methods: {
@@ -61,11 +60,6 @@
         } else {
           alert("Invalid input")
         }
-      },
-
-      completeStatus(index) {
-        this.markDone(index)
-        console.log(this.tasks[index].status)
       },
     }
   }
