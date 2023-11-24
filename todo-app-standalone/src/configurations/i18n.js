@@ -12,7 +12,8 @@ const translations = {
         date: 'date',
         task: 'task',
         showCompleted: 'completed tasks',
-        done: 'done'
+        done: 'done',
+        showAll: 'show all tasks'
     },
 
     sv: {
@@ -25,7 +26,8 @@ const translations = {
         date: 'datum',
         task: 'uppgift',
         showCompleted: 'visa utförda uppgifter',
-        done: 'klara'
+        done: 'klara',
+        showAll: 'visa alla uppgifter'
     }
 };
 

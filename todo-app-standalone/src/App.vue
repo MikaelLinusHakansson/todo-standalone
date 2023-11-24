@@ -1,119 +1,147 @@
 <template>
-  <div>
-    <div>
-      <h2>
-        {{ $t('todo') }}
-      </h2>
-      <button 
-        @click="changeTheLanguage('en')">
-        English
-      </button>
-      <button 
-        @click="changeTheLanguage('sv')">
-        Swedish
-      </button>
-    </div>
+  <div 
+    class="container mt-4">
+      <div class="mb-3">
+        <h2>
+          {{ $t('todo') }}
+        </h2>
+        <button 
+          @click="changeTheLanguage('en')"
+          class="btn btn-primary m-1">
+          English
+        </button>
+        <button 
+          @click="changeTheLanguage('sv')"
+          class="btn btn-primary m-1">
+          Swedish
+        </button>
+      </div>
     
-    <br>
+      <br>
     
-    <div>
+    <div
+      class="mb-3">
         <label 
-          for="taskname">
-          {{ $t('task') }}:
+          for="taskname"
+          class="form-label">
+            {{ $t('task') }}:
         </label>
         <input
         type="text" 
         id="taskname" 
         name="taskname" 
-        v-model="newTaskName">
+        v-model="newTaskName"
+        class="form-control">
     </div>
     
-    <div>
-      <label
-      for="date">
-        {{ $t('date') }}:
-      </label>
-      <input 
-      type="text"
-      id="date" 
-      name="date" 
-      v-model="newTaskDate" 
-      placeholder="YYYY-MM-DD">
+    <div 
+      class="mb-3">
+        <label
+        for="date"
+        class="form-label">
+          {{ $t('date') }}:
+        </label>
+        <input 
+        type="text"
+        id="date" 
+        name="date" 
+        v-model="newTaskDate" 
+        placeholder="YYYY-MM-DD"
+        class="form-control">
     </div>
 
-    <div>
-      <button 
-        @click="addNewTask">
-        {{ $t('add') }}
+    <div
+      class="mb-3">
+        <button 
+          @click="addNewTask"
+          class="btn btn-primary m-1">
+          {{ $t('add') }}
+        </button>
+        <button @click="toggleAll" class="btn btn-secondary m-1">
+          {{ $t('showAll') }}
+        </button>
+        <button 
+          @click="toggleCompleted"
+          class="btn btn-secondary m-1">
+          {{ $t('showDone') }}
       </button>
-      <button 
-        @click="toggleCompleted">
-        {{ $t('showDone') }}
-    </button>
-      <button
-        @click="ToggleEdit()">
-          <span>
-            {{$t('edit')}}
-          </span>
-      </button>
+        <button
+          @click="ToggleEdit()"
+          class="btn btn-info m-1">
+            <span>
+              {{$t('edit')}}
+            </span>
+        </button>
     </div>
     
-    <div>
-      <ul>
-        <li
-          v-for="(task, index) in tasks" 
-          :key="task.id">
-          <input 
-            type="checkbox" 
-            v-model="task.status"
-            @click="markDone(index)">
-            {{ task.name }} | {{ task.date }}
-          <div>
-            <label
-              for="editTask">
-            </label>
-            <label 
-              for="editDate">
-            </label>
-            <input 
-              type="text" 
-              id="editTask" 
-              placeholder="Task:" 
-              :hidden="isVisable"
-              v-model="task.name">
-            <input 
-              type="text" 
-              id="editDate" 
-              placeholder="YYYY-MM-DD" 
-              :hidden="isVisable"
-              v-model="task.date">
-            <button 
-              :hidden="isVisable"
-              @click="saveEdits(index, task.name, task.date)">
-              {{ $t('save') }}
-            </button>
-            <button
-              @click="this.removeTasks(index)"
-              :hidden="isVisable">
-              {{ $t('delete') }}
-            </button>
-          </div>
-        </li>
-      </ul>
+    <div
+      class="mb-3"
+      :hidden="visableAllTasks">
+        <ul
+          class="list-group">
+            <li
+              v-for="(task, index) in tasks" 
+              :key="task.id"
+              class="list-group-item d-flex justify-content-between align-items-center">
+              <input 
+                type="checkbox" 
+                v-model="task.status"
+                @click="markDone(index)"
+                class="form-check-input me-3">
+                  {{ task.name }} | {{ task.date }}
+              <div>
+                <label
+                  for="editTask">
+                </label>
+                <label 
+                  for="editDate">
+                </label>
+                <input 
+                  type="text" 
+                  id="editTask" 
+                  placeholder="Task:" 
+                  :hidden="isVisable"
+                  v-model="task.name"
+                  class="form-control me-2">
+                <input 
+                  type="text" 
+                  id="editDate" 
+                  placeholder="YYYY-MM-DD" 
+                  :hidden="isVisable"
+                  v-model="task.date"
+                  class="form-control me-2">
+                <button 
+                  :hidden="isVisable"
+                  @click="saveEdits(index, task.name, task.date)"
+                  class="btn btn-success me-2 m-1">
+                  {{ $t('save') }}
+                </button>
+                <button
+                  @click="this.removeTasks(index)"
+                  :hidden="isVisable"
+                  class="btn btn-danger m-1">
+                  {{ $t('delete') }}
+                </button>
+              </div>
+            </li>
+        </ul>
     </div>
     
     <br>
     <div
       :hidden="this.visableCompleted">
-        <span>
+        <span
+          class="text-primary fw-bold">
           <Strong>
             {{ $t('done') }}:
           </Strong>
         </span>
-        <ul>
+        <ul
+          class="list-group">
           <li
           v-for="(completedTasks) in this.completedTasks"
-          :key="completedTasks.id">
+          :key="completedTasks.id"
+          class="list-group-item">
           {{ completedTasks.name }}
           {{ completedTasks.date }}
           </li>
@@ -133,6 +161,7 @@
         newTaskDate: '',
         isVisable: true,
         visableCompleted: true,
+        visableAllTasks: true
       }
     },
 
@@ -155,14 +184,18 @@
       ToggleEdit() {
         this.isVisable = !this.isVisable
       },
+      
+      saveEdits(index, task, date) {
+        this.tasks[index].name = task
+        this.tasks[index].date = date
+      },
 
       toggleCompleted() {
         this.visableCompleted = !this.visableCompleted
       },
 
-      saveEdits(index, task, date) {
-        this.tasks[index].name = task
-        this.tasks[index].date = date
+      toggleAll() {
+        this.visableAllTasks = !this.visableAllTasks
       },
 
       changeTheLanguage(locale) {
@@ -171,95 +204,3 @@
     }
   }
 </script>
-
-<style>
-  * {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: 'Jost', sans-serif;
-}
-
-body {
-  margin: 0;
-}
-
-header {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 3rem;
-  border-radius: 10px;
-  padding: 1rem;
-  background-color: #1b995e;
-  color: white;
-  text-align: center;
-}
-
-#app {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 3rem;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-}
-
-#app h2 {
-  font-size: 2rem;
-  border-bottom: 4px solid #ccc;
-  color: #1b995e;
-  margin: 0 0 1rem 0;
-}
-
-#app ul {
-  list-style: none;
-  margin: 1rem 0;
-  padding: 0;
-}
-
-#app li {
-  margin: 1rem 0;
-  font-size: 1.25rem;
-  font-weight: bold;
-  background-color: #8ddba4;
-  padding: 0.5rem;
-  color: #1f1f1f;
-  border-radius: 25px;
-}
-
-#app input {
-  font: inherit;
-  border: 1px solid #ccc;
-}
-
-#app input:focus {
-  outline: none;
-  border-color: #1b995e;
-  background-color: #d7fdeb;
-}
-
-#app button {
-  font: inherit;
-  cursor: pointer;
-  border: 1px solid #ff0077;
-  background-color: #ff0077;
-  color: white;
-  padding: 0.05rem 1rem;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
-}
-
-.small-button {
-  display: inline-block;
-  font: inherit;
-  cursor: pointer;
-  border: 1px solid #ff0077;
-  background-color: black;
-  
-}
-
-#app button:hover,
-#app button:active {
-  background-color: #ec3169;
-  border-color: #ec3169;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
-}
-</style>
