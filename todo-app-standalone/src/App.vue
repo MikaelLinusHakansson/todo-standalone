@@ -1,9 +1,26 @@
 <template>
   <div>
-    <h2>Todo list</h2>
-
     <div>
-        <label for="taskname">Task: </label>
+      <h2>
+        {{ $t('todo') }}
+      </h2>
+      <button 
+        @click="changeTheLanguage('en')">
+        English
+      </button>
+      <button 
+        @click="changeTheLanguage('sv')">
+        Swedish
+      </button>
+    </div>
+    
+    <br>
+    
+    <div>
+        <label 
+          for="taskname">
+          {{ $t('task') }}:
+        </label>
         <input
         type="text" 
         id="taskname" 
@@ -12,7 +29,10 @@
     </div>
     
     <div>
-      <label for="date">Date: </label>
+      <label
+      for="date">
+        {{ $t('date') }}:
+      </label>
       <input 
       type="text"
       id="date" 
@@ -21,30 +41,40 @@
       placeholder="YYYY-MM-DD">
     </div>
 
+    <div>
+      <button 
+        @click="addNewTask">
+        {{ $t('add') }}
+      </button>
+      <button 
+        @click="toggleCompleted">
+        {{ $t('showDone') }}
+    </button>
+      <button
+        @click="ToggleEdit()">
+          <span>
+            {{$t('edit')}}
+          </span>
+      </button>
+    </div>
     
     <div>
       <ul>
-        <button @click="addNewTask">Add</button>
-        <button @click="toggleCompleted">show completed</button>
-        <button
-          @click="ToggleEdit()">
-          edit mode
-        </button>
-
-        <br>
-
         <li
           v-for="(task, index) in tasks" 
           :key="task.id">
           <input 
-          type="checkbox" 
-          v-model="task.status"
-          @click="markDone(index)">
-          {{ task.name }}  | {{ task.date }}
-
+            type="checkbox" 
+            v-model="task.status"
+            @click="markDone(index)">
+            {{ task.name }} | {{ task.date }}
           <div>
-            <label for="editTask"></label>
-            <label for="editDate"></label>
+            <label
+              for="editTask">
+            </label>
+            <label 
+              for="editDate">
+            </label>
             <input 
               type="text" 
               id="editTask" 
@@ -60,29 +90,34 @@
             <button 
               :hidden="isVisable"
               @click="saveEdits(index, task.name, task.date)">
-              save
+              {{ $t('save') }}
             </button>
             <button
-            @click="this.removeTasks(index)"
-            :hidden="isVisable">
-            delete
+              @click="this.removeTasks(index)"
+              :hidden="isVisable">
+              {{ $t('delete') }}
             </button>
           </div>
-
         </li>
       </ul>
     </div>
     
     <br>
-    <div :hidden="this.visableCompleted">
-      <span><Strong>Done:</Strong></span>
-      <ul>
-        <li
-        v-for="(completedTasks) in this.completedTasks"
-        :key="completedTasks.id">
-        {{ completedTasks.name }} {{ completedTasks.date }}
-        </li>
-      </ul>
+    <div
+      :hidden="this.visableCompleted">
+        <span>
+          <Strong>
+            {{ $t('done') }}:
+          </Strong>
+        </span>
+        <ul>
+          <li
+          v-for="(completedTasks) in this.completedTasks"
+          :key="completedTasks.id">
+          {{ completedTasks.name }}
+          {{ completedTasks.date }}
+          </li>
+        </ul>
     </div>
   </div>
 </template>
@@ -96,8 +131,8 @@
       return {
         newTaskName: '',
         newTaskDate: '',
-        isVisable: false,
-        visableCompleted: false,
+        isVisable: true,
+        visableCompleted: true,
       }
     },
 
@@ -129,6 +164,10 @@
         this.tasks[index].name = task
         this.tasks[index].date = date
       },
+
+      changeTheLanguage(locale) {
+        this.$i18n.locale = locale
+      }
     }
   }
 </script>
