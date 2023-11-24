@@ -7,6 +7,7 @@ export const useTodoStore = defineStore("todoStore", {
     state: () => {
         return {
             tasks: [],
+            completedTasks: [],
           }
       },
 
@@ -39,6 +40,11 @@ export const useTodoStore = defineStore("todoStore", {
 
         markDone(index) {
             this.tasks[index].status = !this.tasks[index].status
+           
         },
+        
+        getCompletedList() {
+           
+        }
     }
 })

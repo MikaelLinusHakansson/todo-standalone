@@ -24,7 +24,16 @@
     
     <div>
       <ul>
-        <li 
+        <button @click="addNewTask">Add</button>
+        <button @click="toggleCompleted">show completed</button>
+        <button
+          @click="ToggleEdit()">
+          edit mode
+        </button>
+
+        <br>
+
+        <li
           v-for="(task, index) in tasks" 
           :key="task.id">
           <input 
@@ -32,21 +41,49 @@
           v-model="task.status"
           @click="markDone(index)">
           {{ task.name }}  | {{ task.date }}
+
           <div>
             <label for="editTask"></label>
             <label for="editDate"></label>
-            <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable">
-            <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable">
+            <input 
+              type="text" 
+              id="editTask" 
+              placeholder="Task:" 
+              :hidden="isVisable"
+              v-model="task.name">
+            <input 
+              type="text" 
+              id="editDate" 
+              placeholder="YYYY-MM-DD" 
+              :hidden="isVisable"
+              v-model="task.date">
+            <button 
+              :hidden="isVisable"
+              @click="saveEdits(index, task.name, task.date)">
+              save
+            </button>
+            <button
+            @click="this.removeTasks(index)"
+            :hidden="isVisable">
+            delete
+            </button>
           </div>
-          <button @click="this.removeTasks(index)">x</button>
-          <button @click="editTask(index)">edit</button>
-          <br>
-          <button :hidden="isVisable">save</button>
+          
         </li>
       </ul>
     </div>
-
-    <button @click="addNewTask">Add</button>
+    
+    <br>
+    <div :hidden="this.visableCompleted">
+      <span><Strong>Done:</Strong></span>
+      <ul>
+        <li
+        v-for="(completedTasks) in this.completedTasks"
+        :key="completedTasks.id">
+        {{ completedTasks.name }} {{ completedTasks.date }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -59,12 +96,13 @@
       return {
         newTaskName: '',
         newTaskDate: '',
-        isVisable: false
+        isVisable: false,
+        visableCompleted: false,
       }
     },
 
     computed: {
-      ...mapState(useTodoStore, ['tasks']),
+      ...mapState(useTodoStore, ['tasks', 'completedTasks']),
     },
 
     methods: {
@@ -79,10 +117,18 @@
         }
       },
 
-      editTask(index) {
+      ToggleEdit() {
         this.isVisable = !this.isVisable
-        console.log(index)
-      }
+      },
+
+      toggleCompleted() {
+        this.visableCompleted = !this.visableCompleted
+      },
+
+      saveEdits(index, task, date) {
+        this.tasks[index].name = task
+        this.tasks[index].date = date
+      },
     }
   }
 </script>
