@@ -45,6 +45,6 @@ export const useTodoStore = defineStore("todoStore", {
         
         getCompletedList() {
            
-        }
+        },
     }
 })

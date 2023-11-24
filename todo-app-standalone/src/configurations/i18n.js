@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n';
 
 const translations = {
     en: {
-        todo: 'todo list',
+        todo: 'Todo list',
         save: 'save task',
         delete: 'delete task',
         showDone: 'show done tasks',
@@ -17,7 +17,7 @@ const translations = {
     },
 
     sv: {
-        todo: 'att göra lista',
+        todo: 'Att göra lista',
         save: 'spara uppgift',
         delete: 'ta bort uppgift',
         showDone: 'visa slutförda uppgifter',
