@@ -45,23 +45,26 @@
       </button>
     </div>
 
+    <div>
+      <label for="editTask">
+      </label>
+      <label for="editDate">
+      </label>
+      <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable" v-model="editName"
+        class="form-control me-2">
+      <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
+        class="form-control me-2">
+    </div>
+
     <div class="mb-3" :hidden="visableAllTasks">
       <ul class="list-group">
         <li v-for="(task, index) in tasks" :key="task.id"
           class="list-group-item d-flex justify-content-between align-items-center">
           <input type="checkbox" v-model="task.status" @click="markDone(index)" class="form-check-input me-3">
-          {{ task.name }} | {{ task.date }}
+          {{ task.name }} - {{ task.date }}
           <div>
-            <label for="editTask">
-            </label>
-            <label for="editDate">
-            </label>
-            <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable" v-model="task.name"
-              class="form-control me-2">
-            <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable" v-model="task.date"
-              class="form-control me-2">
-            <button :hidden="isVisable" @click="this.editTask(index, task.name, task.date)"
-              class="btn btn-success me-2 m-1">
+
+            <button :hidden="isVisable" @click="saveEdits(index, editName, editDate)" class="btn btn-success me-2 m-1">
               {{ $t('save') }}
             </button>
             <button @click="this.removeTasks(index)" :hidden="isVisable" class="btn btn-danger m-1">
@@ -100,7 +103,10 @@ export default {
       newTaskDate: '',
       isVisable: true,
       visableCompleted: true,
-      visableAllTasks: true
+      visableAllTasks: true,
+
+      editName: '',
+      editDate: '',
     }
   },
 
@@ -109,7 +115,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask']),
+    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate']),
 
     addNewTask() {
       if (this.createNewTask({ name: this.newTaskName, date: this.newTaskDate })) {
@@ -124,10 +130,20 @@ export default {
       this.isVisable = !this.isVisable
     },
 
-    // saveEdits(index, task, date) {
-    //   this.tasks[index].name = task
-    //   this.tasks[index].date = date
-    // },
+    saveEdits(index, name, date) {
+      const configureTask = {
+        name: name,
+        date: date
+      }
+
+      if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
+        this.editTask(index, configureTask)
+        this.editName = ''
+        this.editDate = ''
+      } else {
+        alert("Invalid input")
+      }
+    },
 
     toggleCompleted() {
       this.visableCompleted = !this.visableCompleted

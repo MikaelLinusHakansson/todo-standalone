@@ -40,11 +40,9 @@ export const useTodoStore = defineStore("todoStore", {
       this.tasks[index].status = !this.tasks[index].status;
     },
 
-    editTask(index, taskName, taskDate) {
-      this.tasks[index].name = taskName;
-      this.tasks[index].date = taskDate;
+    editTask(index, task) {
+      this.tasks[index].name = task.name;
+      this.tasks[index].date = task.date;
     },
-
-    getCompletedList() {},
   },
 });
