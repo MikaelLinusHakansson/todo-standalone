@@ -1,206 +1,145 @@
 <template>
-  <div 
-    class="container mt-4">
-      <div class="mb-3">
-        <h2>
-          {{ $t('todo') }}
-        </h2>
-        <button 
-          @click="changeTheLanguage('en')"
-          class="btn btn-primary m-1">
-          English
-        </button>
-        <button 
-          @click="changeTheLanguage('sv')"
-          class="btn btn-primary m-1">
-          Swedish
-        </button>
-      </div>
-    
-      <br>
-    
-    <div
-      class="mb-3">
-        <label 
-          for="taskname"
-          class="form-label">
-            {{ $t('task') }}:
-        </label>
-        <input
-        type="text" 
-        id="taskname" 
-        name="taskname" 
-        v-model="newTaskName"
-        class="form-control">
-    </div>
-    
-    <div 
-      class="mb-3">
-        <label
-        for="date"
-        class="form-label">
-          {{ $t('date') }}:
-        </label>
-        <input 
-        type="text"
-        id="date" 
-        name="date" 
-        v-model="newTaskDate" 
-        placeholder="YYYY-MM-DD"
-        class="form-control">
+  <div class="container mt-4">
+    <div class="mb-3">
+      <h2>
+        {{ $t('todo') }}
+      </h2>
+      <button @click="changeTheLanguage('en')" class="btn btn-primary m-1">
+        English
+      </button>
+      <button @click="changeTheLanguage('sv')" class="btn btn-primary m-1">
+        Swedish
+      </button>
     </div>
 
-    <div
-      class="mb-3">
-        <button 
-          @click="addNewTask"
-          class="btn btn-primary m-1">
-          {{ $t('add') }}
-        </button>
-        <button @click="toggleAll" class="btn btn-secondary m-1">
-          {{ $t('showAll') }}
-        </button>
-        <button 
-          @click="toggleCompleted"
-          class="btn btn-secondary m-1">
-          {{ $t('showDone') }}
-      </button>
-        <button
-          @click="ToggleEdit()"
-          class="btn btn-info m-1">
-            <span>
-              {{$t('edit')}}
-            </span>
-        </button>
-    </div>
-    
-    <div
-      class="mb-3"
-      :hidden="visableAllTasks">
-        <ul
-          class="list-group">
-            <li
-              v-for="(task, index) in tasks" 
-              :key="task.id"
-              class="list-group-item d-flex justify-content-between align-items-center">
-              <input 
-                type="checkbox" 
-                v-model="task.status"
-                @click="markDone(index)"
-                class="form-check-input me-3">
-                  {{ task.name }} | {{ task.date }}
-              <div>
-                <label
-                  for="editTask">
-                </label>
-                <label 
-                  for="editDate">
-                </label>
-                <input 
-                  type="text" 
-                  id="editTask" 
-                  placeholder="Task:" 
-                  :hidden="isVisable"
-                  v-model="task.name"
-                  class="form-control me-2">
-                <input 
-                  type="text" 
-                  id="editDate" 
-                  placeholder="YYYY-MM-DD" 
-                  :hidden="isVisable"
-                  v-model="task.date"
-                  class="form-control me-2">
-                <button 
-                  :hidden="isVisable"
-                  @click="saveEdits(index, task.name, task.date)"
-                  class="btn btn-success me-2 m-1">
-                  {{ $t('save') }}
-                </button>
-                <button
-                  @click="this.removeTasks(index)"
-                  :hidden="isVisable"
-                  class="btn btn-danger m-1">
-                  {{ $t('delete') }}
-                </button>
-              </div>
-            </li>
-        </ul>
-    </div>
-    
     <br>
-    <div
-      :hidden="this.visableCompleted">
-        <span
-          class="text-primary fw-bold">
-            <Strong>
-              {{ $t('done') }}:
-            </Strong>
+
+    <div class="mb-3">
+      <label for="taskname" class="form-label">
+        {{ $t('task') }}:
+      </label>
+      <input type="text" id="taskname" name="taskname" v-model="newTaskName" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">
+        {{ $t('date') }}:
+      </label>
+      <input type="text" id="date" name="date" v-model="newTaskDate" placeholder="YYYY-MM-DD" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <button @click="addNewTask" class="btn btn-primary m-1">
+        {{ $t('add') }}
+      </button>
+      <button @click="toggleAll" class="btn btn-secondary m-1">
+        {{ $t('showAll') }}
+      </button>
+      <button @click="toggleCompleted" class="btn btn-secondary m-1">
+        {{ $t('showDone') }}
+      </button>
+      <button @click="ToggleEdit()" class="btn btn-info m-1">
+        <span>
+          {{ $t('edit') }}
         </span>
-        <ul
-          class="list-group">
-          <li
-            v-for="(completedTasks) in this.completedTasks"
-            :key="completedTasks.id"
-            class="list-group-item">
-            {{ completedTasks.name }}
-            {{ completedTasks.date }}
-          </li>
-        </ul>
+      </button>
+    </div>
+
+    <div class="mb-3" :hidden="visableAllTasks">
+      <ul class="list-group">
+        <li v-for="(task, index) in tasks" :key="task.id"
+          class="list-group-item d-flex justify-content-between align-items-center">
+          <input type="checkbox" v-model="task.status" @click="markDone(index)" class="form-check-input me-3">
+          {{ task.name }} | {{ task.date }}
+          <div>
+            <label for="editTask">
+            </label>
+            <label for="editDate">
+            </label>
+            <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable" v-model="task.name"
+              class="form-control me-2">
+            <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable" v-model="task.date"
+              class="form-control me-2">
+            <button :hidden="isVisable" @click="this.editTask(index, task.name, task.date)"
+              class="btn btn-success me-2 m-1">
+              {{ $t('save') }}
+            </button>
+            <button @click="this.removeTasks(index)" :hidden="isVisable" class="btn btn-danger m-1">
+              {{ $t('delete') }}
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <br>
+    <div :hidden="this.visableCompleted">
+      <span class="text-primary fw-bold">
+        <Strong>
+          {{ $t('done') }}:
+        </Strong>
+      </span>
+      <ul class="list-group">
+        <li v-for="(completedTasks) in this.completedTasks" :key="completedTasks.id" class="list-group-item">
+          {{ completedTasks.name }}
+          {{ completedTasks.date }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from "pinia"
-  import { useTodoStore } from "./stores/TodoStore";
+import { mapState, mapActions } from "pinia"
+import { useTodoStore } from "./stores/TodoStore";
 
-  export default {
-    data() {
-      return {
-        newTaskName: '',
-        newTaskDate: '',
-        isVisable: true,
-        visableCompleted: true,
-        visableAllTasks: true
+export default {
+  data() {
+    return {
+      newTaskName: '',
+      newTaskDate: '',
+      isVisable: true,
+      visableCompleted: true,
+      visableAllTasks: true
+    }
+  },
+
+  computed: {
+    ...mapState(useTodoStore, ['tasks', 'completedTasks']),
+  },
+
+  methods: {
+    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask']),
+
+    addNewTask() {
+      if (this.createNewTask({ name: this.newTaskName, date: this.newTaskDate })) {
+        this.newTaskName = ''
+        this.newTaskDate = ''
+      } else {
+        alert("Invalid input")
       }
     },
 
-    computed: {
-      ...mapState(useTodoStore, ['tasks', 'completedTasks']),
+    ToggleEdit() {
+      this.isVisable = !this.isVisable
     },
 
-    methods: {
-      ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone']),
+    // saveEdits(index, task, date) {
+    //   this.tasks[index].name = task
+    //   this.tasks[index].date = date
+    // },
 
-      addNewTask() {
-        if (this.createNewTask({name: this.newTaskName, date: this.newTaskDate})) {
-          this.newTaskName = ''
-          this.newTaskDate = ''
-        } else {
-          alert("Invalid input")
-        }
-      },
+    toggleCompleted() {
+      this.visableCompleted = !this.visableCompleted
+    },
 
-      ToggleEdit() {
-        this.isVisable = !this.isVisable
-      },
-      
-      saveEdits(index, task, date) {
-        this.tasks[index].name = task
-        this.tasks[index].date = date
-      },
+    toggleAll() {
+      this.visableAllTasks = !this.visableAllTasks
+    },
 
-      toggleCompleted() {
-        this.visableCompleted = !this.visableCompleted
-      },
-
-      toggleAll() {
-        this.visableAllTasks = !this.visableAllTasks
-      },
-
-      changeTheLanguage(locale) {
-        this.$i18n.locale = locale
-      }
+    changeTheLanguage(locale) {
+      this.$i18n.locale = locale
     }
   }
+}
 </script>
