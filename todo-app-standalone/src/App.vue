@@ -1,37 +1,16 @@
 <template>
   <div class="container mt-4">
-    <div class="mb-3">
-      <h2>
-        {{ $t('todo') }}
-      </h2>
-      <button @click="changeTheLanguage('en')" class="btn btn-primary m-1">
-        English
-      </button>
-      <button @click="changeTheLanguage('sv')" class="btn btn-primary m-1">
-        Swedish
-      </button>
-    </div>
+    <task-title-header />
 
-    <br>
+    <task-change-language />
+
+    <task-form
+      :taskNameId="'taskname'" 
+      :taskDateId="'taskdate'" 
+      @submit-new-task="addNewTask">
+    </task-form>
 
     <div class="mb-3">
-      <label for="taskname" class="form-label">
-        {{ $t('task') }}:
-      </label>
-      <input type="text" id="taskname" name="taskname" v-model="newTaskName" class="form-control">
-    </div>
-
-    <div class="mb-3">
-      <label for="date" class="form-label">
-        {{ $t('date') }}:
-      </label>
-      <input type="text" id="date" name="date" v-model="newTaskDate" placeholder="YYYY-MM-DD" class="form-control">
-    </div>
-
-    <div class="mb-3">
-      <button @click="addNewTask" class="btn btn-primary m-1">
-        {{ $t('add') }}
-      </button>
       <button @click="toggleAll" class="btn btn-secondary m-1">
         {{ $t('showAll') }}
       </button>
@@ -99,7 +78,17 @@
 import { mapState, mapActions } from "pinia"
 import { useTodoStore } from "./stores/TodoStore";
 
+import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
+import TaskTitleHeader from "./components/TaskTitleHeader.vue";
+import TaskForm from "./components/taskForm.vue";
+
 export default {
+  components: {
+    TaskChangeLanguage,
+    TaskTitleHeader,
+    TaskForm
+  },
+
   data() {
     return {
       newTaskName: '',
@@ -112,6 +101,12 @@ export default {
     }
   },
 
+  provide() {
+    return {
+      i18n: this.$i18n
+    }
+  },
+
   computed: {
     ...mapState(useTodoStore, ['tasks', 'completedTasks']),
   },
@@ -119,8 +114,8 @@ export default {
   methods: {
     ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate']),
 
-    addNewTask() {
-      if (this.createNewTask({ name: this.newTaskName, date: this.newTaskDate })) {
+    addNewTask(newTaskData) {
+      if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
         this.newTaskName = ''
         this.newTaskDate = ''
       } else {
