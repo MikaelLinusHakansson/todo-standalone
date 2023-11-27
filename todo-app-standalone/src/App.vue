@@ -38,6 +38,11 @@
       <button @click="toggleCompleted" class="btn btn-secondary m-1">
         {{ $t('showDone') }}
       </button>
+      <button @click="ToggleEdit()" class="btn btn-info m-1">
+        <span>
+          {{ $t('edit') }}
+        </span>
+      </button>
     </div>
 
     <div>
@@ -45,10 +50,13 @@
       </label>
       <label for="editDate">
       </label>
-      <input type="text" id="editTask" placeholder="Edit task:" :hidden="isVisable" v-model="editName"
+      <div>
+        <input type="text" id="editTask" placeholder="Edit task:" :hidden="isVisable" v-model="editName"
         class="form-control me-2">
-      <input type="text" id="editDate" placeholder="Edit date: YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
+        <input type="text" id="editDate" placeholder="Edit date: YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
         class="form-control me-2">
+      </div>
+      
     </div>
 
     <div class="mb-3" :hidden="visableAllTasks">
@@ -64,11 +72,7 @@
             <button @click="this.removeTasks(index)" :hidden="isVisable" class="btn btn-danger m-1">
               {{ $t('delete') }}
             </button>
-            <button @click="ToggleEdit()" class="btn btn-info m-1">
-              <span>
-                {{ $t('edit') }}
-              </span>
-            </button>
+            
           </div>
         </li>
       </ul>
@@ -104,8 +108,7 @@ export default {
       visableCompleted: true,
       visableAllTasks: true,
       editName: '',
-      editDate: '',
-      isVisableEdit: false
+      editDate: ''
     }
   },
 
@@ -125,10 +128,6 @@ export default {
       }
     },
 
-    ToggleEdit() {
-      this.isVisable = !this.isVisable
-    },
-
     saveEdits(index, name, date) {
       const configureTask = {
         name: name,
@@ -140,8 +139,8 @@ export default {
         this.editName = ''
         this.editDate = ''
       } else {
-        alert("Invalid input")
-      }
+         alert("Invalid input")
+        }
     },
 
     toggleCompleted() {
@@ -151,9 +150,9 @@ export default {
     toggleAll() {
       this.visableAllTasks = !this.visableAllTasks
     },
-
-    toggleEdit() {
-      this.isVisableEdit = !this.isVisableEdit
+    
+    ToggleEdit() {
+        this.isVisable = !this.isVisable
     },
 
     changeTheLanguage(locale) {
