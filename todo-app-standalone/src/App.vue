@@ -50,9 +50,9 @@
       </label>
       <label for="editDate">
       </label>
-      <input type="text" id="editTask" placeholder="Task:" :hidden="isVisable" v-model="editName"
+      <input type="text" id="editTask" placeholder="Edit task:" :hidden="isVisable" v-model="editName"
         class="form-control me-2">
-      <input type="text" id="editDate" placeholder="YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
+      <input type="text" id="editDate" placeholder="Edit date: YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
         class="form-control me-2">
     </div>
 
@@ -63,7 +63,6 @@
           <input type="checkbox" v-model="task.status" @click="markDone(index)" class="form-check-input me-3">
           {{ task.name }} - {{ task.date }}
           <div>
-
             <button :hidden="isVisable" @click="saveEdits(index, editName, editDate)" class="btn btn-success me-2 m-1">
               {{ $t('save') }}
             </button>
