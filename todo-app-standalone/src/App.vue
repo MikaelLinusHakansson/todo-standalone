@@ -38,11 +38,6 @@
       <button @click="toggleCompleted" class="btn btn-secondary m-1">
         {{ $t('showDone') }}
       </button>
-      <button @click="ToggleEdit()" class="btn btn-info m-1">
-        <span>
-          {{ $t('edit') }}
-        </span>
-      </button>
     </div>
 
     <div>
@@ -68,6 +63,11 @@
             </button>
             <button @click="this.removeTasks(index)" :hidden="isVisable" class="btn btn-danger m-1">
               {{ $t('delete') }}
+            </button>
+            <button @click="ToggleEdit()" class="btn btn-info m-1">
+              <span>
+                {{ $t('edit') }}
+              </span>
             </button>
           </div>
         </li>
@@ -103,9 +103,9 @@ export default {
       isVisable: true,
       visableCompleted: true,
       visableAllTasks: true,
-
       editName: '',
       editDate: '',
+      isVisableEdit: false
     }
   },
 
@@ -150,6 +150,10 @@ export default {
 
     toggleAll() {
       this.visableAllTasks = !this.visableAllTasks
+    },
+
+    toggleEdit() {
+      this.isVisableEdit = !this.isVisableEdit
     },
 
     changeTheLanguage(locale) {

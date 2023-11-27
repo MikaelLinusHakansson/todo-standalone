@@ -3,10 +3,10 @@ import { createI18n } from 'vue-i18n';
 const translations = {
     en: {
         todo: 'Todo list',
-        save: 'save task',
+        save: 'press to save edit',
         delete: 'delete task',
         showDone: 'show done tasks',
-        edit: 'edit mode',
+        edit: 'Edit',
         add: 'add task',
         delete: 'delete task',
         date: 'date',
@@ -18,10 +18,10 @@ const translations = {
 
     sv: {
         todo: 'Att göra lista',
-        save: 'spara uppgift',
+        save: 'tryck för att spara redigering',
         delete: 'ta bort uppgift',
         showDone: 'visa slutförda uppgifter',
-        edit: 'redigera läge',
+        edit: 'Redigera',
         add: 'lägg till uppgift',
         date: 'datum',
         task: 'uppgift',
