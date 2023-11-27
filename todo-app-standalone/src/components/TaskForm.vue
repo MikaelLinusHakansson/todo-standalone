@@ -28,7 +28,8 @@
         <button
             @click="submitNewTask"
             class="btn btn-primary m-1"> 
-                {{ $t('add') }}
+                {{ $t('add') }} 
+                <!-- https://gitbrent.github.io/bootstrap-switch-button/ -->
         </button>
     </div>
 </template>
