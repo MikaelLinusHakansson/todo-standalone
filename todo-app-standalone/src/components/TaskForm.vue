@@ -51,7 +51,6 @@
 
         methods: {
             submitNewTask() {
-                console.log('Skickar ny uppgift:', { name: this.taskName, date: this.taskDate });
                 this.$emit('submit-new-task', {
                     name: this.taskName,
                     date: this.taskDate
