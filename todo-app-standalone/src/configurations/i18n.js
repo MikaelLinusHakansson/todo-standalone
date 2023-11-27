@@ -3,31 +3,31 @@ import { createI18n } from 'vue-i18n';
 const translations = {
     en: {
         todo: 'Todo list',
-        save: 'save task',
-        delete: 'delete task',
-        showDone: 'show done tasks',
-        edit: 'edit mode',
-        add: 'add task',
-        delete: 'delete task',
-        date: 'date',
-        task: 'task',
-        showCompleted: 'completed tasks',
-        done: 'done',
-        showAll: 'show all tasks'
+        save: 'Press to save here',
+        delete: 'Delete task',
+        showDone: 'Show done tasks',
+        edit: 'Edit',
+        add: 'Add task',
+        delete: 'Delete task',
+        date: 'Date',
+        task: 'Task',
+        showCompleted: 'Completed tasks',
+        done: 'Done',
+        showAll: 'Show all tasks'
     },
 
     sv: {
         todo: 'Att göra lista',
-        save: 'spara uppgift',
-        delete: 'ta bort uppgift',
-        showDone: 'visa slutförda uppgifter',
-        edit: 'redigera läge',
-        add: 'lägg till uppgift',
-        date: 'datum',
-        task: 'uppgift',
-        showCompleted: 'visa utförda uppgifter',
-        done: 'klara',
-        showAll: 'visa alla uppgifter'
+        save: 'Tryck för att spara här',
+        delete: 'Ta bort uppgift',
+        showDone: 'Visa slutförda uppgifter',
+        edit: 'Redigera',
+        add: 'Lägg till uppgift',
+        date: 'Datum',
+        task: 'Uppgift',
+        showCompleted: 'Visa utförda uppgifter',
+        done: 'Klara',
+        showAll: 'Visa alla uppgifter'
     }
 };
 
