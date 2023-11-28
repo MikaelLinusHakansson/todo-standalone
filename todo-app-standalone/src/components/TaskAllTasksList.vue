@@ -28,6 +28,8 @@ import { useTodoStore } from '../stores/TodoStore'
 import TaskEditor from './TaskEditor.vue';
 
 export default {
+    components: { TaskEditor },
+
     computed: {
         ...mapState(useTodoStore, ["tasks"])
     },
@@ -50,24 +52,22 @@ export default {
 
         saveEdits(data) {
             this.editTask(data)
+            if (this.validateTask(data.name) && this.validateDate(data.date)) {
+                this.editTask(configureTask)
+                this.editName = ''
+                this.editDate = ''
+            } else {
+                alert("Invalid input")
+            }
+        },
 
-      if (this.validateTask(data.name) && this.validateDate(data.date)) {
-        this.editTask(configureTask)
-        this.editName = ''
-        this.editDate = ''
-      } else {
-         alert("Invalid input")
-        }
-    },
-
-    markDoneSender(index) {
-        this.markDone(index)
-    },
+        markDoneSender(index) {
+            this.markDone(index)
+        },
 
         removeTask(data) {
             this.removeTasks(data)
         }
     },
-    components: { TaskEditor }
 }
 </script>
