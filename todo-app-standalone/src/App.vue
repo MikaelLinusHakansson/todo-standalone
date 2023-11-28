@@ -16,6 +16,22 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
+    <!-- <div class="mb-3" :hidden="visableAllTasks">
+      <ul>
+        <task-all-tasks-list 
+        v-for="(tasks, index) in tasks"
+        :key="tasks.id"
+        :task="task"
+        :index="index"
+        :isVisable="isVisable"
+        :edit-name="editName"
+        :edit-date="editDate"
+        @edit-name-sender="saveEdits"
+        @delete-task-sender="removeTasks">
+        </task-all-tasks-list>
+      </ul>
+    </div> -->
+
     <div 
       class="mb-3"
       :hidden="visableAllTasks">
@@ -27,25 +43,21 @@
             class="list-group-item d-flex justify-content-between align-items-center">
             <input 
               type="checkbox" 
-              v-model.trim="task.status" 
+              v-model="task.status" 
               @click="markDone(index)" 
               class="form-check-input me-3">
                 {{ task.name }} - {{ task.date }}
-          <div>
-            <task-editor 
-              :hidden="isVisable"
-              v-model:edit-name="editName"
-              v-model:edit-date="editDate"
-              :task-index="index"
-              @edit-name-sender="saveEdits"
-              @delete-task-sender="removeTasks">
+                <task-editor 
+                :hidden="isVisable"
+                :edit-name="editName"
+                :edit-date="editDate"
+                :task-index="index"
+                @edit-name-sender="saveEdits"
+                @delete-task-sender="removeTasks">
             </task-editor>
-          </div>
         </li>
       </ul>
     </div>
-
-    <br>
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
 </template>
@@ -60,6 +72,7 @@ import TaskForm from "./components/taskForm.vue";
 import TaskControls from "./components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "./components/TaskCompletedList.vue";
+// import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
 export default {
   components: {
@@ -68,7 +81,8 @@ export default {
     TaskForm,
     TaskControls,
     TaskEditor,
-    TaskCompletedList
+    TaskCompletedList,
+    // TaskAllTasksList
   },
 
   data() {
