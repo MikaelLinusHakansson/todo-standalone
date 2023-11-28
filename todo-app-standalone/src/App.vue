@@ -37,14 +37,9 @@
               v-model:edit-name="editName"
               v-model:edit-date="editDate"
               :task-index="index"
-              @edit-name-sender="saveEdits">
+              @edit-name-sender="saveEdits"
+              @delete-task-sender="removeTasks">
             </task-editor>
-            <button 
-              @click="this.removeTasks(index)" 
-              :hidden="isVisable" 
-              class="btn btn-danger m-1">
-                {{ $t('delete') }}
-            </button>
           </div>
         </li>
       </ul>

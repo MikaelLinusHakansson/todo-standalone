@@ -32,8 +32,8 @@ export const useTodoStore = defineStore("todoStore", {
       return dayjs(date).isValid();
     },
 
-    removeTasks(index) {
-      this.tasks.splice(index, 1);
+    removeTasks(data) {
+      this.tasks.splice(data.index, 1);
     },
 
     markDone(index) {

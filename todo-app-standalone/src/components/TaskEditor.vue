@@ -22,12 +22,19 @@
         class="btn btn-success me-2 m-1">
             {{ $t('save') }}
         </button>
-        <!-- make this button send the correct data to the edit method in parent komponent -->
+        <button 
+              @click="deleteTaskSender" 
+              :hidden="isVisable" 
+              class="btn btn-danger m-1">
+                {{ $t('delete') }}
+            </button>
     </div>
 </template>
 
 <script>
 export default {
+    emits: ['edit-name-sender', 'delete-task-sender'],
+
     props: {
         taskIndex: Number,
     },
@@ -50,6 +57,12 @@ export default {
             this.editName = ''
             this.editDate = ''
         },
+
+        deleteTaskSender() {
+            this.$emit('delete-task-sender', {
+                index: this.taskIndex
+            })
+        }
     }
 }
 </script>
