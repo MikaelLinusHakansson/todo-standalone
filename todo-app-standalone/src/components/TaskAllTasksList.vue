@@ -1,21 +1,22 @@
 <template>
-    <div 
-      class="mb-3">
+    <div>
         <li 
-            class="list-group-item d-flex justify-content-between align-items-center">
+            class="list-group-item d-flex justify-content-between align-items-center"
+            v-for="(task, index) in tasks" 
+            :key="task.id">
             <input 
                 type="checkbox" 
                 v-model="task.status" 
-                @click="markDone" 
+                @click="markDoneSender" 
                 class="form-check-input me-3">
                 {{ task.name }} - {{ task.date }}
                 <task-editor 
                 :hidden="isVisable"
-                v-model="editName"
+                :edit-name="editName"
                 :edit-date="editDate"
                 :task-index="index"
                 @edit-name-sender="saveEdits"
-                @delete-task-sender="removeTasks">
+                @delete-task-sender="removeTask">
             </task-editor>
             </li>
     </div>
@@ -31,7 +32,6 @@ export default {
         ...mapState(useTodoStore, ["tasks"])
     },
 
-
     props: {
         task: Object,
         index: Number,
@@ -46,18 +46,26 @@ export default {
         };
     },
     methods: {
-        ...mapActions(useTodoStore, ["markDone"]),
+        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
 
-        saveEdits() {
-            this.$emit('edit-name-sender', {
-                index: this.index,
-                name: this.editName,
-                date: this.editDate
-            })
-        },
+        saveEdits(data) {
+            this.editTask(data)
 
-        removeTasks() {
-            this.$emit('delete-task-sender', this.index)
+      if (this.validateTask(data.name) && this.validateDate(data.date)) {
+        this.editTask(configureTask)
+        this.editName = ''
+        this.editDate = ''
+      } else {
+         alert("Invalid input")
+        }
+    },
+
+    markDoneSender(index) {
+        this.markDone(index)
+    },
+
+        removeTask(data) {
+            this.removeTasks(data)
         }
     },
     components: { TaskEditor }

@@ -16,11 +16,9 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
-    <!-- <div class="mb-3" :hidden="visableAllTasks">
-      <ul>
+    <div class="mb-3" :hidden="visableAllTasks">
+      <ul class="list-group">
         <task-all-tasks-list 
-        v-for="(tasks, index) in tasks"
-        :key="tasks.id"
         :task="task"
         :index="index"
         :isVisable="isVisable"
@@ -30,9 +28,9 @@
         @delete-task-sender="removeTasks">
         </task-all-tasks-list>
       </ul>
-    </div> -->
+    </div>
 
-    <div 
+    <!-- <div 
       class="mb-3"
       :hidden="visableAllTasks">
         <ul 
@@ -57,7 +55,7 @@
             </task-editor>
         </li>
       </ul>
-    </div>
+    </div> -->
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
 </template>
@@ -72,7 +70,7 @@ import TaskForm from "./components/taskForm.vue";
 import TaskControls from "./components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "./components/TaskCompletedList.vue";
-// import TaskAllTasksList from "./components/TaskAllTasksList.vue";
+import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
 export default {
   components: {
@@ -82,7 +80,7 @@ export default {
     TaskControls,
     TaskEditor,
     TaskCompletedList,
-    // TaskAllTasksList
+    TaskAllTasksList
   },
 
   data() {
