@@ -44,21 +44,9 @@
         </li>
       </ul>
     </div>
-
+    
     <br>
-    <div :hidden="this.visableCompleted">
-      <span class="text-primary fw-bold">
-        <Strong>
-          {{ $t('done') }}:
-        </Strong>
-      </span>
-      <ul class="list-group">
-        <li v-for="(completedTasks) in this.completedTasks" :key="completedTasks.id" class="list-group-item">
-          {{ completedTasks.name }}
-          {{ completedTasks.date }}
-        </li>
-      </ul>
-    </div>
+    <task-completed-list :hidden="this.visableCompleted" />
   </div>
 </template>
 
@@ -71,6 +59,7 @@ import TaskTitleHeader from "./components/TaskTitleHeader.vue";
 import TaskForm from "./components/taskForm.vue";
 import TaskControls from "./components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
+import TaskCompletedList from "./components/TaskCompletedList.vue";
 
 export default {
   components: {
@@ -78,7 +67,8 @@ export default {
     TaskTitleHeader,
     TaskForm,
     TaskControls,
-    TaskEditor
+    TaskEditor,
+    TaskCompletedList
   },
 
   data() {
