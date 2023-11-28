@@ -44,7 +44,7 @@
         </li>
       </ul>
     </div>
-    
+
     <br>
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
@@ -90,7 +90,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodoStore, ['tasks', 'completedTasks']),
+    ...mapState(useTodoStore, ['tasks']),
   },
 
   methods: {

@@ -1,21 +1,24 @@
 <template>
-    <div :hidden="this.visableCompleted">
-      <span class="text-primary fw-bold">
-        <Strong>
-          {{ $t('done') }}:
-        </Strong>
-      </span>
-      <ul 
-        class="list-group">
-            <li
-                v-for="(completedTasks) in this.completedTasks" 
-                :key="completedTasks.id" 
-                class="list-group-item">
-                    {{ completedTasks.name }}
-                    {{ completedTasks.date }}
-            </li>
-      </ul>
-    </div>
+    <table>
+        <div :hidden="this.visableCompleted">
+            <span class="text-primary fw-bold">
+                <Strong>
+                    {{ $t('done') }}:
+                </Strong>
+            </span>
+            <ul
+                class="list-group">
+                <li
+                    v-for="(completedTasks) in this.completedTasks" 
+                    :key="completedTasks.id" 
+                    class="list-group-item">
+                        {{ completedTasks.name }}
+                        {{ completedTasks.date }}
+                </li>
+            </ul>
+        </div>
+    </table>
+    
 </template>
 
 <script>
