@@ -1,4 +1,5 @@
 <template>
+  <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
     <table>
       <task-title-header />
