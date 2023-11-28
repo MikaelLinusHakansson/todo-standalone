@@ -1,57 +1,50 @@
 <template>
   <div class="container mt-4">
-    <task-title-header />
+    <table>
+      <task-title-header />
+      <task-change-language />
+      <task-form
+          :taskNameId="'taskname'" 
+          :taskDateId="'taskdate'" 
+          @submit-new-task="addNewTask">
+      </task-form>
+    </table>
 
-    <task-change-language />
+    <task-controls 
+      :toggle-all="toggleAll"
+      :toggle-completed="toggleCompleted"
+      :toggle-edit="ToggleEdit">
+    </task-controls>
 
-    <task-form
-      :taskNameId="'taskname'" 
-      :taskDateId="'taskdate'" 
-      @submit-new-task="addNewTask">
-    </task-form>
-
-    <div class="mb-3">
-      <button @click="toggleAll" class="btn btn-secondary m-1">
-        {{ $t('showAll') }}
-      </button>
-      <button @click="toggleCompleted" class="btn btn-secondary m-1">
-        {{ $t('showDone') }}
-      </button>
-      <button @click="ToggleEdit()" class="btn btn-info m-1">
-        <span>
-          {{ $t('edit') }}
-        </span>
-      </button>
-    </div>
-
-    <div>
-      <label for="editTask">
-      </label>
-      <label for="editDate">
-      </label>
-      <div>
-        <input type="text" id="editTask" placeholder="Edit task:" :hidden="isVisable" v-model="editName"
-        class="form-control me-2">
-        <input type="text" id="editDate" placeholder="Edit date: YYYY-MM-DD" :hidden="isVisable" v-model="editDate"
-        class="form-control me-2">
-      </div>
-      
-    </div>
-
-    <div class="mb-3" :hidden="visableAllTasks">
-      <ul class="list-group">
-        <li v-for="(task, index) in tasks" :key="task.id"
-          class="list-group-item d-flex justify-content-between align-items-center">
-          <input type="checkbox" v-model="task.status" @click="markDone(index)" class="form-check-input me-3">
-          {{ task.name }} - {{ task.date }}
+    <div 
+      class="mb-3"
+      :hidden="visableAllTasks">
+        <ul 
+          class="list-group">
+          <li 
+            v-for="(task, index) in tasks" 
+            :key="task.id"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            <input 
+              type="checkbox" 
+              v-model.trim="task.status" 
+              @click="markDone(index)" 
+              class="form-check-input me-3">
+                {{ task.name }} - {{ task.date }}
           <div>
-            <button :hidden="isVisable" @click="saveEdits(index, editName, editDate)" class="btn btn-success me-2 m-1">
-              {{ $t('save') }}
+            <task-editor 
+              :hidden="isVisable"
+              v-model:edit-name="editName"
+              v-model:edit-date="editDate"
+              :task-index="index"
+              @edit-name-sender="saveEdits">
+            </task-editor>
+            <button 
+              @click="this.removeTasks(index)" 
+              :hidden="isVisable" 
+              class="btn btn-danger m-1">
+                {{ $t('delete') }}
             </button>
-            <button @click="this.removeTasks(index)" :hidden="isVisable" class="btn btn-danger m-1">
-              {{ $t('delete') }}
-            </button>
-            
           </div>
         </li>
       </ul>
@@ -81,12 +74,16 @@ import { useTodoStore } from "./stores/TodoStore";
 import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
 import TaskForm from "./components/taskForm.vue";
+import TaskControls from "./components/TaskControls.vue";
+import TaskEditor from "./components/TaskEditor.vue";
 
 export default {
   components: {
     TaskChangeLanguage,
     TaskTitleHeader,
-    TaskForm
+    TaskForm,
+    TaskControls,
+    TaskEditor
   },
 
   data() {
@@ -97,7 +94,7 @@ export default {
       visableCompleted: true,
       visableAllTasks: true,
       editName: '',
-      editDate: ''
+      editDate: '',
     }
   },
 
@@ -123,14 +120,15 @@ export default {
       }
     },
 
-    saveEdits(index, name, date) {
+    saveEdits(data) {
       const configureTask = {
-        name: name,
-        date: date
+        index: data.index,
+        name: data.name,
+        date: data.date
       }
 
       if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
-        this.editTask(index, configureTask)
+        this.editTask(configureTask)
         this.editName = ''
         this.editDate = ''
       } else {
