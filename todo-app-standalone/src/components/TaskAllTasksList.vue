@@ -55,7 +55,6 @@ export default {
 
     data() {
         return {
-            trueOrFalse: false
         };
     },
 
@@ -65,9 +64,7 @@ export default {
         saveEdits(data) {
             this.editTask(data)
             if (this.validateTask(data.name) && this.validateDate(data.date)) {
-                this.editTask(configureTask)
-                this.editName = ''
-                this.editDate = ''
+                this.editTask(data)
             } else {
                 alert("Invalid input")
             }
