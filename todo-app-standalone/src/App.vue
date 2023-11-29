@@ -31,32 +31,6 @@
       </ul>
     </div>
 
-    <!-- <div 
-      class="mb-3"
-      :hidden="visableAllTasks">
-        <ul 
-          class="list-group">
-          <li 
-            v-for="(task, index) in tasks" 
-            :key="task.id"
-            class="list-group-item d-flex justify-content-between align-items-center">
-            <input 
-              type="checkbox" 
-              v-model="task.status" 
-              @click="markDone(index)" 
-              class="form-check-input me-3">
-                {{ task.name }} - {{ task.date }}
-                <task-editor 
-                :hidden="isVisable"
-                :edit-name="editName"
-                :edit-date="editDate"
-                :task-index="index"
-                @edit-name-sender="saveEdits"
-                @delete-task-sender="removeTasks">
-            </task-editor>
-        </li>
-      </ul>
-    </div> -->
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
 </template>
