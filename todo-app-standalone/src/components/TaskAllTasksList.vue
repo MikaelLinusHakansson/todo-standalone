@@ -7,7 +7,7 @@
             <input 
                 type="checkbox" 
                 v-model="task.status" 
-                @click="markDoneSender" 
+                @click="markDoneSender(index)" 
                 class="form-check-input me-3">
                 {{ task.name }} - {{ task.date }}
                 <task-editor 
@@ -47,6 +47,7 @@ export default {
             trueOrFalse: false
         };
     },
+    
     methods: {
         ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
 
