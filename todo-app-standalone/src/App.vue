@@ -1,47 +1,127 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
+  <div class="container mt-4">
+    <table>
+      <task-title-header />
+      <task-change-language />
+      <task-form
+          :taskNameId="'taskname'" 
+          :taskDateId="'taskdate'" 
+          @submit-new-task="addNewTask">
+      </task-form>
+    </table>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <task-controls 
+      :toggle-all="toggleAll"
+      :toggle-completed="toggleCompleted"
+      :toggle-edit="ToggleEdit">
+    </task-controls>
+
+    <div class="mb-3" :hidden="visableAllTasks">
+        <task-all-tasks-list
+        class="list-group d-flex" 
+        :task="task"
+        :index="index"
+        :isVisable="isVisable"
+        :edit-name="editName"
+        :edit-date="editDate"
+        @edit-name-sender="saveEdits"
+        @delete-task-sender="removeTasks">
+        </task-all-tasks-list>
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <task-completed-list :hidden="this.visableCompleted" />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import { mapState, mapActions } from "pinia"
+import { useTodoStore } from "./stores/TodoStore";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
+import TaskTitleHeader from "./components/TaskTitleHeader.vue";
+import TaskForm from "./components/taskForm.vue";
+import TaskControls from "./components/TaskControls.vue";
+import TaskEditor from "./components/TaskEditor.vue";
+import TaskCompletedList from "./components/TaskCompletedList.vue";
+import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+export default {
+  components: {
+    TaskChangeLanguage,
+    TaskTitleHeader,
+    TaskForm,
+    TaskControls,
+    TaskEditor,
+    TaskCompletedList,
+    TaskAllTasksList
+  },
+
+  data() {
+    return {
+      newTaskName: '',
+      newTaskDate: '',
+      isVisable: true,
+      visableCompleted: true,
+      visableAllTasks: true,
+      editName: '',
+      editDate: '',
+    }
+  },
+
+  provide() {
+    return {
+      i18n: this.$i18n
+    }
+  },
+
+  computed: {
+    ...mapState(useTodoStore, ['tasks']),
+  },
+
+  methods: {
+    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate']),
+
+    addNewTask(newTaskData) {
+      if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
+        this.newTaskName = ''
+        this.newTaskDate = ''
+      } else {
+        alert("Invalid input")
+      }
+    },
+
+    saveEdits(data) {
+      const configureTask = {
+        index: data.index,
+        name: data.name,
+        date: data.date
+      }
+
+      if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
+        this.editTask(configureTask)
+        this.editName = ''
+        this.editDate = ''
+      } else {
+         alert("Invalid input")
+        }
+    },
+
+    toggleCompleted() {
+      this.visableCompleted = !this.visableCompleted
+    },
+
+    toggleAll() {
+      this.visableAllTasks = !this.visableAllTasks
+    },
+    
+    ToggleEdit() {
+        this.isVisable = !this.isVisable
+    },
+
+    changeTheLanguage(locale) {
+      this.$i18n.locale = locale
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
-</style>
+</script>
