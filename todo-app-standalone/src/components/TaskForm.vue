@@ -6,6 +6,7 @@
                 {{ $t('task') }}
         </label>
         <input
+            maxlength="50"
             type="text"
             :id="taskNameId"
             :name="taskNameId"
@@ -18,6 +19,7 @@
                 {{ $t('date') }}
         </label>
         <input
+            maxlength="10"
             type="text"
             :name="taskDateId"
             :id="taskDateId"

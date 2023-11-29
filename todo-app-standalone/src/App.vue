@@ -18,8 +18,8 @@
     </task-controls>
 
     <div class="mb-3" :hidden="visableAllTasks">
-      <ul class="list-group">
-        <task-all-tasks-list 
+        <task-all-tasks-list
+        class="list-group d-flex" 
         :task="task"
         :index="index"
         :isVisable="isVisable"
@@ -28,7 +28,6 @@
         @edit-name-sender="saveEdits"
         @delete-task-sender="removeTasks">
         </task-all-tasks-list>
-      </ul>
     </div>
 
     <task-completed-list :hidden="this.visableCompleted" />

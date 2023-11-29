@@ -6,12 +6,14 @@
       </label>
       <div>
         <input
+            maxlength="50"
             type="text"
             id="editTask"
             placeholder="Edit task:"
             v-model.trim="editName"
             class="form-control me-2">
         <input
+            maxlength="10"
             type="text"
             id="editDate"
             placeholder="Edit date: YYYY-MM-DD"

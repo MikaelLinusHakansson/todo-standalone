@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <li 
+    <div class="mb-3">
+        <ul class="list-group d-flex">
+            <li 
             class="list-group-item d-flex justify-content-between align-items-center"
             v-for="(task, index) in tasks" 
             :key="task.id">
@@ -9,7 +10,16 @@
                 v-model="task.status" 
                 @click="markDoneSender(index)" 
                 class="form-check-input me-3">
-                {{ task.name }} - {{ task.date }}
+                <div class="flex-grow-1">
+                    <div >
+                        <div>
+                            {{ task.name }}
+                        </div>
+                        <div>
+                            {{ task.date }}
+                        </div>
+                    </div>
+                </div>
                 <task-editor 
                 :hidden="isVisable"
                 :edit-name="editName"
@@ -19,6 +29,7 @@
                 @delete-task-sender="removeTask">
             </task-editor>
             </li>
+        </ul>
     </div>
 </template>
 
@@ -47,7 +58,7 @@ export default {
             trueOrFalse: false
         };
     },
-    
+
     methods: {
         ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
 

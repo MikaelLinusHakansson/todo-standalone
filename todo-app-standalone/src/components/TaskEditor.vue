@@ -4,17 +4,19 @@
       <label for="editDate" />
       <div>
         <input
-          type="text"
-          id="editTask"
-          placeholder="Edit task:"
-          v-model.trim="editName"
-          class="form-control me-2">
+            maxlength="50"
+            type="text"
+            id="editTask"
+            placeholder="Edit task:"
+            v-model.trim="editName"
+            class="form-control me-2">
         <input
-          type="text"
-          id="editDate"
-          placeholder="Edit date: YYYY-MM-DD"
-          v-model.trim="editDate"
-          class="form-control me-2">
+            maxlength="10"
+            type="text"
+            id="editDate"
+            placeholder="Edit date: YYYY-MM-DD"
+            v-model.trim="editDate"
+            class="form-control me-2">
       </div>
       <button
         @click="editNameSender"
