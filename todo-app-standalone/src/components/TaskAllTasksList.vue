@@ -24,7 +24,7 @@
                 :hidden="isVisable"
                 :edit-name="editName"
                 :edit-date="editDate"
-                :task-index="index"
+                :task-index="task.id"
                 @edit-name-sender="saveEdits"
                 @delete-task-sender="removeTask">
             </task-editor>

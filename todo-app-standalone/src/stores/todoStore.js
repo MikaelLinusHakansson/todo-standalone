@@ -25,105 +25,110 @@ export const useTodoStore = defineStore("todoStore", {
             id: newTask.id,
             name: newTask.name,
             date: newTask.date,
-            completed : false,
-          }
+            completed: false,
+          };
 
           const response = await fetch("http://localhost:8080/add", {
-
             method: "POST",
 
             headers: {
-
-              "Content-Type" : "application/json",
+              "Content-Type": "application/json",
             },
 
-            body: JSON.stringify(data)
-          })
-          
-          this.tasks.unshift(data)
-          
+            body: JSON.stringify(data),
+          });
+
+          this.tasks.unshift(data);
+
           return true;
-        }
-
-        catch(Error) {
-          console.log(Error)
-        }
-      } 
+        } 
         
-      else if (!this.validateDate(newTask.date) && this.validateTask(newTask.name)) {
+        catch (Error) {
 
-        alert("Wrong date format")
+          console.log(Error);
+        }
       } 
+      
+      else if (
 
-      else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
-        
-        alert("Invalid name input")
+        !this.validateDate(newTask.date) &&
+        this.validateTask(newTask.name)
+      ) {
+
+        alert("Wrong date format");
       } 
+      
+      else if (
 
+        !this.validateTask(newTask.name) &&
+        this.validateDate(newTask.date)
+      ) {
+
+        alert("Invalid name input");
+      } 
+      
       else {
 
-        alert("Invalid input")
+        alert("Invalid input");
       }
     },
 
     async fetchData() {
-
       try {
-
-        const response = await fetch("http://localhost:8080/getall")
+        const response = await fetch("http://localhost:8080/getall");
 
         if (!response.ok) {
-
-          throw new Error (`Error error ${response.status}`)
+          throw new Error(`Error error ${response.status}`);
         }
 
-        const data = await response.json()
+        const data = await response.json();
 
-        this.tasks = data
+        this.tasks = data;
       } 
+      
+      catch (Error) {
 
-      catch(Error) {
-
-        console.log(Error)
+        console.log(Error);
       }
     },
 
     validateTask(task) {
+
       return task.length > 0;
     },
 
     validateDate(date) {
+
       return dayjs(date).isValid();
     },
 
-    async removeTasks(taskData) {
-
+    async removeTasks(taskData) {  // Uppdatera UI efter borttagning
       try {
-        const response = await fetch("http://localhost:8080/delete/7", {
-          
+
+        const response = await fetch(`http://localhost:8080/delete/${taskData.index}`, {
+
           method: "DELETE",
 
           headers: {
 
-            "Access-Control-Allow-Origin" : "http://localhost:5174"
+            "Access-Control-Allow-Origin": "http://localhost:5174",
           },
-        })
+        });
 
         if (!response.ok) {
 
-          throw new Error (`Error error ${response.status}`)
+          throw new Error(`Error error ${response.status}`);
         }
 
-        this.tasks.splice(taskData.index, 1);
-      } 
 
-      catch(Error) {
+      } catch (Error) {
 
-        console.log(Error)
+        console.log(Error);
       }
     },
 
     markDone(index) {
+
       this.tasks[index].status = !this.tasks[index].status;
     },
 

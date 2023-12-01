@@ -51,7 +51,9 @@ export default {
 
     methods: {
         editNameSender() {
+
             this.$emit('edit-name-sender', {
+
                 index: this.taskIndex,
                 name: this.editName,
                 date: this.editDate
@@ -62,7 +64,9 @@ export default {
         },
 
         deleteTaskSender() {
+
             this.$emit('delete-task-sender', {
+
                 index: this.taskIndex
             })
         }
