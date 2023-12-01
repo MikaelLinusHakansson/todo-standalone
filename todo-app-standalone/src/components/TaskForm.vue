@@ -55,6 +55,7 @@
         methods: {
             submitNewTask() {
                 this.$emit('submit-new-task', {
+                    id: this.taskName.length + 1,
                     name: this.taskName,
                     date: this.taskDate
                 })
