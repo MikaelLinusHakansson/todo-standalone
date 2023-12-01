@@ -99,13 +99,11 @@ export const useTodoStore = defineStore("todoStore", {
     async removeTasks(taskData) {
 
       try {
-        const response = await fetch("http://localhost:8080/delete/5", {
+        const response = await fetch("http://localhost:8080/delete/7", {
           
           method: "DELETE",
 
           headers: {
-
-            // "Content-Type" : "application/json",
 
             "Access-Control-Allow-Origin" : "http://localhost:5174"
           },
