@@ -50,6 +50,7 @@ import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
 export default {
   components: {
+
     TaskChangeLanguage,
     TaskTitleHeader,
     TaskForm,
@@ -87,19 +88,6 @@ export default {
 
   methods: {
     ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
-
-    // addNewTask(newTaskData) {
-
-    //   if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
-
-    //     this.newTaskName = ''
-    //     this.newTaskDate = ''
-    //   } 
-      
-    //   else {
-    //     alert("Invalid input")
-    //   }
-    // },
 
     saveEdits(data) {
 

@@ -39,6 +39,7 @@ export default {
 
     props: {
         taskIndex: Number,
+        taskName: String,
     },
 
     data() {

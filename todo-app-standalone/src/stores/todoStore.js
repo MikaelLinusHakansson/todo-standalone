@@ -34,7 +34,7 @@ export const useTodoStore = defineStore("todoStore", {
 
             headers: {
 
-              "Content-Type": "application/json",
+              "Content-Type" : "application/json",
             },
 
             body: JSON.stringify(data)
@@ -96,8 +96,33 @@ export const useTodoStore = defineStore("todoStore", {
       return dayjs(date).isValid();
     },
 
-    removeTasks(data) {
-      this.tasks.splice(data.index, 1);
+    async removeTasks(taskData) {
+
+      try {
+        const response = await fetch("http://localhost:8080/delete/5", {
+          
+          method: "DELETE",
+
+          headers: {
+
+            // "Content-Type" : "application/json",
+
+            "Access-Control-Allow-Origin" : "http://localhost:5174"
+          },
+        })
+
+        if (!response.ok) {
+
+          throw new Error (`Error error ${response.status}`)
+        }
+
+        this.tasks.splice(taskData.index, 1);
+      } 
+
+      catch(Error) {
+
+        console.log(Error)
+      }
     },
 
     markDone(index) {
