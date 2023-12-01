@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
-    
     return {
       tasks: [],
       completedTasks: [],
@@ -11,7 +10,6 @@ export const useTodoStore = defineStore("todoStore", {
   },
 
   getters: {
-
     completedTasks: (state) => state.tasks.filter((task) => task.status),
   },
 
@@ -48,14 +46,23 @@ export const useTodoStore = defineStore("todoStore", {
         }
 
         catch(Error) {
-
           console.log(Error)
         }
       } 
         
-      else {
+      else if (!this.validateDate(newTask.date) && this.validateTask(newTask.name)) {
+
+        alert("Wrong date format")
+      } 
+
+      else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
         
-        return false;
+        alert("Invalid name input")
+      } 
+
+      else {
+
+        alert("Invalid input")
       }
     },
 
@@ -82,27 +89,23 @@ export const useTodoStore = defineStore("todoStore", {
     },
 
     validateTask(task) {
-
       return task.length > 0;
     },
 
     validateDate(date) {
-
       return dayjs(date).isValid();
     },
 
     removeTasks(data) {
-
       this.tasks.splice(data.index, 1);
     },
 
     markDone(index) {
-
       this.tasks[index].status = !this.tasks[index].status;
     },
 
     editTask(task) {
-      
+
       this.tasks[task.index].name = task.name;
       this.tasks[task.index].date = task.date;
     },

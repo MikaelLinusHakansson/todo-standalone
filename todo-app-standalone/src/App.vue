@@ -61,6 +61,7 @@ export default {
 
   data() {
     return {
+
       newTaskName: '',
       newTaskDate: '',
       isVisable: true,
@@ -85,22 +86,20 @@ export default {
   },
 
   methods: {
-
     ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
 
-    addNewTask(newTaskData) {
+    // addNewTask(newTaskData) {
 
-      if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
+    //   if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
 
-        this.newTaskName = ''
-        this.newTaskDate = ''
-      } 
+    //     this.newTaskName = ''
+    //     this.newTaskDate = ''
+    //   } 
       
-      else {
-
-        alert("Invalid input")
-      }
-    },
+    //   else {
+    //     alert("Invalid input")
+    //   }
+    // },
 
     saveEdits(data) {
 
@@ -112,7 +111,7 @@ export default {
       }
 
       if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
-      
+
         this.editTask(configureTask)
       
         this.editName = ''
@@ -120,7 +119,7 @@ export default {
       } 
       
       else {
-        
+
          alert("Invalid input")
         }
     },
