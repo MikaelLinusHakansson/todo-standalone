@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { fetchWrapperDelete } from "@/stores/ApiWrapper.js";
+import { fetchWrapperDelete, fetchWrapperPost, fetchWrapperGetAll } from "@/stores/ApiWrapper.js";
 import { defineStore } from "pinia";
 
 
@@ -29,17 +29,9 @@ export const useTodoStore = defineStore("todoStore", {
             completed: false,
           };
 
-          const response = await fetch("http://localhost:8080/add", {
-            method: "POST",
+          fetchWrapperPost("http://localhost:8080/add", data)
 
-            headers: {
-              "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify(data),
-          });
-
-          this.tasks.unshift(data);
+          // this.tasks.unshift(data);
 
           return true;
         } 
@@ -68,15 +60,10 @@ export const useTodoStore = defineStore("todoStore", {
 
     async fetchData() {
       try {
-        const response = await fetch("http://localhost:8080/getall");
 
-        if (!response.ok) {
-          throw new Error(`Error error ${response.status}`);
-        }
+        const data = await fetchWrapperGetAll("http://localhost:8080/getall")
 
-        const data = await response.json();
-
-        this.tasks = data;
+        this.tasks = data
       } 
       
       catch (Error) {
@@ -96,36 +83,12 @@ export const useTodoStore = defineStore("todoStore", {
     },
 
     async removeTasks(taskData) {  // Uppdatera UI efter borttagning
-
-      const data = `http://localhost:8080/delete/${taskData.index}`
-      
-      // const options = {
-
-      //   method: "DELETE",
-
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "http://localhost:5174",
-      //   }
-      // }
-
       try {
-        
+        const data = `http://localhost:8080/delete/${taskData.index}`
+
         fetchWrapperDelete(data)
 
-        // const response = await fetch(`http://localhost:8080/delete/${taskData.index}`, {
-
-        //   method: "DELETE",
-
-        //   headers: {
-
-        //     "Access-Control-Allow-Origin": "http://localhost:5173",
-        //   },
-        // });
-
-        // if (!response.ok) {
-
-        //   throw new Error(`Error error ${response.status}`);
-        // }
+        alert("Item was removed")
       } 
       
       catch (Error) {
