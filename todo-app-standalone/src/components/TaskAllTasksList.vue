@@ -22,9 +22,11 @@
                 </div>
                 <task-editor 
                 :hidden="isVisable"
+                :currentIndex="index"
                 :edit-name="editName"
                 :edit-date="editDate"
                 :task-index="task.id"
+                :index-editor="index"
                 @edit-name-sender="saveEdits"
                 @delete-task-sender="removeTask">
             </task-editor>
@@ -35,7 +37,7 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
-import { useTodoStore } from '../stores/TodoStore'
+import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
 
 export default {
@@ -62,10 +64,14 @@ export default {
         ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
 
         saveEdits(data) {
-            this.editTask(data)
+            
             if (this.validateTask(data.name) && this.validateDate(data.date)) {
+                
                 this.editTask(data)
-            } else {
+            } 
+            
+            else {
+
                 alert("Invalid input")
             }
         },

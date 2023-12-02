@@ -13,7 +13,11 @@ export function fetchWrapperDelete(url) {
         if (!response.ok) {
 
             throw new Error(`Network Response was not ok ${response.status}`)
+            
+            return false
         }
+
+        return true
     })
 
     .catch(error => {

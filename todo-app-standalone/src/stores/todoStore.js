@@ -31,7 +31,7 @@ export const useTodoStore = defineStore("todoStore", {
 
           fetchWrapperPost("http://localhost:8080/add", data)
 
-          // this.tasks.unshift(data);
+          this.tasks.unshift(data);
 
           return true;
         } 
@@ -82,13 +82,14 @@ export const useTodoStore = defineStore("todoStore", {
       return dayjs(date).isValid();
     },
 
-    async removeTasks(taskData) {  // Uppdatera UI efter borttagning
+    async removeTasks(taskData) {
       try {
+
         const data = `http://localhost:8080/delete/${taskData.index}`
-
+        
         fetchWrapperDelete(data)
-
-        alert("Item was removed")
+        
+        this.tasks.splice(taskData.indexSomething, 1)
       } 
       
       catch (Error) {
@@ -104,8 +105,8 @@ export const useTodoStore = defineStore("todoStore", {
 
     editTask(task) {
 
-      this.tasks[task.index].name = task.name;
-      this.tasks[task.index].date = task.date;
+      this.tasks[task.indexFromTasks].name = task.name;
+      this.tasks[task.indexFromTasks].date = task.date;
     },
   },
 });

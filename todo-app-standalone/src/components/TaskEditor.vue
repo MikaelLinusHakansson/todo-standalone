@@ -38,25 +38,28 @@ export default {
     emits: ['edit-name-sender', 'delete-task-sender'],
 
     props: {
-        taskIndex: Number,
-        taskName: String,
+        taskIndex : Number,
+        taskName : String,
+        currentIndexTasks : Number,
+        currentIndex : Number
     },
 
     data() {
         return {
-            editName: '',
-            editDate: ''
+
+            editName : '',
+            editDate : ''
         }
     },
 
     methods: {
         editNameSender() {
-
             this.$emit('edit-name-sender', {
 
-                index: this.taskIndex,
-                name: this.editName,
-                date: this.editDate
+                indexFromTasks : this.currentIndex,
+                index : this.taskIndex,
+                name : this.editName,
+                date : this.editDate
             })
 
             this.editName = ''
@@ -64,10 +67,10 @@ export default {
         },
 
         deleteTaskSender() {
-
             this.$emit('delete-task-sender', {
 
-                index: this.taskIndex
+                indexFromTasks : this.currentIndexTasks,
+                index : this.taskIndex
             })
         }
     }
