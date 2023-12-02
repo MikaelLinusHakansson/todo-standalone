@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
+import { fetchWrapperDelete } from "@/stores/ApiWrapper.js";
 import { defineStore } from "pinia";
+
 
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
@@ -15,7 +17,6 @@ export const useTodoStore = defineStore("todoStore", {
 
   actions: {
     async createNewTask(newTask) {
-
       if (this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
 
         try {
@@ -49,20 +50,12 @@ export const useTodoStore = defineStore("todoStore", {
         }
       } 
       
-      else if (
-
-        !this.validateDate(newTask.date) &&
-        this.validateTask(newTask.name)
-      ) {
+      else if (!this.validateDate(newTask.date) && this.validateTask(newTask.name)) {
 
         alert("Wrong date format");
       } 
       
-      else if (
-
-        !this.validateTask(newTask.name) &&
-        this.validateDate(newTask.date)
-      ) {
+      else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
 
         alert("Invalid name input");
       } 
@@ -103,32 +96,46 @@ export const useTodoStore = defineStore("todoStore", {
     },
 
     async removeTasks(taskData) {  // Uppdatera UI efter borttagning
+
+      const data = `http://localhost:8080/delete/${taskData.index}`
+      
+      // const options = {
+
+      //   method: "DELETE",
+
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "http://localhost:5174",
+      //   }
+      // }
+
       try {
+        
+        fetchWrapperDelete(data)
 
-        const response = await fetch(`http://localhost:8080/delete/${taskData.index}`, {
+        // const response = await fetch(`http://localhost:8080/delete/${taskData.index}`, {
 
-          method: "DELETE",
+        //   method: "DELETE",
 
-          headers: {
+        //   headers: {
 
-            "Access-Control-Allow-Origin": "http://localhost:5174",
-          },
-        });
+        //     "Access-Control-Allow-Origin": "http://localhost:5173",
+        //   },
+        // });
 
-        if (!response.ok) {
+        // if (!response.ok) {
 
-          throw new Error(`Error error ${response.status}`);
-        }
-
-
-      } catch (Error) {
+        //   throw new Error(`Error error ${response.status}`);
+        // }
+      } 
+      
+      catch (Error) {
 
         console.log(Error);
       }
     },
 
     markDone(index) {
-
+      
       this.tasks[index].status = !this.tasks[index].status;
     },
 
