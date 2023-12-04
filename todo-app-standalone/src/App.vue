@@ -23,17 +23,19 @@
 
     <button @click="fetchData" class="btn btn-secondary">Refresh</button>
     
-    <div class="mb-3" :hidden="visableAllTasks">
+    <div 
+      class="mb-3" 
+      :hidden="visableAllTasks">
 
         <task-all-tasks-list
-        class="list-group d-flex" 
-        :task="task"
-        :index="index"
-        :isVisable="isVisable"
-        :edit-name="editName"
-        :edit-date="editDate"
-        @edit-name-sender="saveEdits"
-        @delete-task-sender="removeTasks">
+          class="list-group d-flex" 
+          :task="task"
+          :index="index"
+          :isVisable="isVisable"
+          :edit-name="editName"
+          :edit-date="editDate"
+          @edit-name-sender="saveEdits"
+          @delete-task-sender="removeTasks">
         </task-all-tasks-list>
 
     </div>
@@ -47,12 +49,12 @@
 import { mapState, mapActions, mapWritableState } from "pinia"
 import { useTodoStore } from "@/stores/TodoStore";
 
-import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
+import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
 import TaskForm from "@/components/taskForm.vue";
-import TaskControls from "./components/TaskControls.vue";
+import TaskControls from "@/components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
-import TaskCompletedList from "./components/TaskCompletedList.vue";
+import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
 export default {

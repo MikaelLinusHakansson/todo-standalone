@@ -6,6 +6,7 @@
       <div>
 
         <input
+            :disabled="this.completed"
             maxlength="50"
             type="text"
             id="editTask"
@@ -14,6 +15,7 @@
             class="form-control me-2">
 
         <input
+            :disabled="this.completed"
             maxlength="10"
             type="text"
             id="editDate"
@@ -23,11 +25,12 @@
             
       </div>
 
-      <button
-        @click="editNameSender"
-        :hidden="isVisable" 
-        class="btn btn-success me-2 m-1">
-            {{ $t('save') }}
+        <button
+            :disabled="this.completed"
+            @click="editNameSender"
+            :hidden="isVisable"
+            class="btn btn-success me-2 m-1">
+                {{ $t('save') }}
         </button>
 
         <button 

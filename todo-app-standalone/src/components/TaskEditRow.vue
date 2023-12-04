@@ -1,10 +1,10 @@
 <template>
     <div>
-      <label for="editTask">
-      </label>
-      <label for="editDate">
-      </label>
+      <label for="editTask" />
+      <label for="editDate" />
+
       <div>
+
         <input
             maxlength="50"
             type="text"
@@ -12,6 +12,7 @@
             placeholder="Edit task:"
             v-model.trim="editName"
             class="form-control me-2">
+
         <input
             maxlength="10"
             type="text"
@@ -20,6 +21,7 @@
             v-model.trim="editDate"
             class="form-control me-2">
       </div>
+
     </div>
 </template>
 
