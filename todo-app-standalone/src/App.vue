@@ -38,11 +38,11 @@
 
 <script>
 import { mapState, mapActions, mapWritableState } from "pinia"
-import { useTodoStore } from "./stores/TodoStore";
+import { useTodoStore } from "@/stores/TodoStore";
 
 import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
-import TaskForm from "./components/taskForm.vue";
+import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "./components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "./components/TaskCompletedList.vue";

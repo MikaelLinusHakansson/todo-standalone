@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
-import { fetchWrapperDelete, fetchWrapperPost, fetchWrapperGetAll } from "@/stores/ApiWrapper.js";
+import { fetchWrapperDelete, fetchWrapperPost, fetchWrapperGetAll, fetchWrapperPut } from "@/stores/ApiWrapper.js";
 import { defineStore } from "pinia";
 
-
+// TODO: findOneById, updateTaskCompleted
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
@@ -12,11 +12,11 @@ export const useTodoStore = defineStore("todoStore", {
   },
 
   getters: {
-    completedTasks: (state) => state.tasks.filter((task) => task.status),
+    completedTasks: (state) => state.tasks.filter((task) => task.completed),
   },
 
   actions: {
-    async createNewTask(newTask) {
+    createNewTask(newTask) {
       if (this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
 
         try {
@@ -82,9 +82,39 @@ export const useTodoStore = defineStore("todoStore", {
       return dayjs(date).isValid();
     },
 
-    async removeTasks(taskData) {
+    markDone(task, index) {
+      const tempTask = {
+        
+        id : task.id,
+        name : task.name,
+        date : task.date,
+        completed : !task.completed,
+      }
+      
       try {
 
+        const url = `http://localhost:8080/update/${task.id}`
+        
+        fetchWrapperPut(url, tempTask)
+        
+        this.tasks[index].completed = !tempTask.completed
+      }
+      
+      catch(Error) {
+
+        console.log(Error)
+      }
+    },
+
+    editTask(task) {
+
+      this.tasks[task.indexFromTasks].name = task.name;
+      this.tasks[task.indexFromTasks].date = task.date;
+    },
+
+    removeTasks(taskData) {
+      try {
+    
         const data = `http://localhost:8080/delete/${taskData.index}`
         
         fetchWrapperDelete(data)
@@ -92,21 +122,10 @@ export const useTodoStore = defineStore("todoStore", {
         this.tasks.splice(taskData.indexSomething, 1)
       } 
       
-      catch (Error) {
-
+      catch(Error) {
+    
         console.log(Error);
       }
-    },
-
-    markDone(index) {
-      
-      this.tasks[index].status = !this.tasks[index].status;
-    },
-
-    editTask(task) {
-
-      this.tasks[task.indexFromTasks].name = task.name;
-      this.tasks[task.indexFromTasks].date = task.date;
     },
   },
 });

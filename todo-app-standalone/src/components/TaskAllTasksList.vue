@@ -7,8 +7,8 @@
             :key="task.id">
             <input 
                 type="checkbox" 
-                v-model="task.status" 
-                @click="markDoneSender(index)" 
+                @click="markDoneSender(task, index)"
+                v-model="task.completed" 
                 class="form-check-input me-3">
                 <div class="flex-grow-1">
                     <div >
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+// TODO: send entire object instead of just index of object.
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
@@ -56,8 +57,7 @@ export default {
     },
 
     data() {
-        return {
-        };
+        return {};
     },
 
     methods: {
@@ -76,8 +76,8 @@ export default {
             }
         },
 
-        markDoneSender(index) {
-            this.markDone(index)
+        markDoneSender(task, index) {
+            this.markDone(task, index)
         },
 
         removeTask(data) {

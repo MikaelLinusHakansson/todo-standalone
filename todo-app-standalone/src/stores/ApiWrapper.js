@@ -12,7 +12,7 @@ export function fetchWrapperDelete(url) {
 
         if (!response.ok) {
 
-            throw new Error(`Network Response was not ok ${response.status}`)
+            throw new Error(`Network Response DELETE was not ok ${response.status}`)
             
             return false
         }
@@ -34,6 +34,7 @@ export function fetchWrapperPost(url, data) {
         method: "POST",
 
         headers: {
+
             "Content-Type": "application/json",
         },
 
@@ -44,7 +45,7 @@ export function fetchWrapperPost(url, data) {
 
         if (!response.ok) {
 
-            throw new Error(`Network Response was not ok ${response.status}`)
+            throw new Error(`Network Response POST was not ok ${response.status}`)
         }
     })
 
@@ -56,6 +57,36 @@ export function fetchWrapperPost(url, data) {
     })
 }
 
+export function fetchWrapperPut(url, data) {
+    const options = {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(data)
+    }
+
+    return fetch(url, options)
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(`Network Response PUT was not ok ${response.status}`)
+        }
+    })
+
+    .catch(error => {
+
+        console.log('Fetch error:', error)
+
+        throw error
+    }) 
+}
+
 export async function fetchWrapperGetAll(url) {
     try {
         
@@ -63,7 +94,7 @@ export async function fetchWrapperGetAll(url) {
         
         if (!response.ok) {
 
-            throw new Error (`Network Response was not ok ${response.status}`)
+            throw new Error (`Network Response GET was not ok ${response.status}`)
         }
 
         const data = await response.json()
