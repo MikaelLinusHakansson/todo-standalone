@@ -4,10 +4,10 @@
 
             <li 
                 class="
-                list-group-item 
-                d-flex 
-                justify-content-between 
-                align-items-center"
+                    list-group-item 
+                    d-flex 
+                    justify-content-between 
+                    align-items-center"
                 
                 :style="{ 
                     backgroundColor: task.completed ? '#c8e6c9' : '#FFFFFF', 
