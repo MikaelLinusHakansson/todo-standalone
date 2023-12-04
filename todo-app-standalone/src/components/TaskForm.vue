@@ -1,10 +1,12 @@
 <template>
     <div class="mb-3">
+
         <label 
             :for="taskNameId"
             class="form-label">
                 {{ $t('task') }}
         </label>
+
         <input
             maxlength="50"
             type="text"
@@ -18,6 +20,7 @@
             class="form-label">
                 {{ $t('date') }}
         </label>
+
         <input
             maxlength="10"
             type="text"
@@ -33,6 +36,7 @@
                 {{ $t('add') }} 
                 <!-- https://gitbrent.github.io/bootstrap-switch-button/ -->
         </button>
+        
     </div>
 </template>
 

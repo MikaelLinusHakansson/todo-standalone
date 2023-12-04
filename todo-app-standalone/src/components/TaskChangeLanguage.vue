@@ -1,5 +1,6 @@
 <template>
     <div class="mb-3">
+
         <button 
             @click="changeTheLanguage('en')"
             class="btn btn-primary m-1">
@@ -11,6 +12,7 @@
             class="btn btn-primary m-1">
                 Swedish
         </button>
+        
     </div>
 </template>
 

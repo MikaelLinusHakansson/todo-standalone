@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import { fetchWrapperDelete, fetchWrapperPost, fetchWrapperGetAll, fetchWrapperPut } from "@/stores/ApiWrapper.js";
 import { defineStore } from "pinia";
 
-// TODO: findOneById, updateTaskCompleted
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
@@ -31,13 +30,12 @@ export const useTodoStore = defineStore("todoStore", {
 
           fetchWrapperPost("http://localhost:8080/add", data)
 
-          this.tasks.unshift(data);
+          this.tasks.push(data);
 
           return true;
         } 
         
         catch (Error) {
-
           console.log(Error);
         }
       } 
@@ -53,7 +51,7 @@ export const useTodoStore = defineStore("todoStore", {
       } 
       
       else {
-
+        
         alert("Invalid input");
       }
     },
@@ -67,24 +65,20 @@ export const useTodoStore = defineStore("todoStore", {
       } 
       
       catch (Error) {
-
         console.log(Error);
       }
     },
 
     validateTask(task) {
-
       return task.length > 0;
     },
 
     validateDate(date) {
-
       return dayjs(date).isValid();
     },
 
     markDone(task, index) {
       const tempTask = {
-        
         id : task.id,
         name : task.name,
         date : task.date,
@@ -101,15 +95,23 @@ export const useTodoStore = defineStore("todoStore", {
       }
       
       catch(Error) {
-
         console.log(Error)
       }
     },
 
-    editTask(task) {
+    editTask(data) {
+      const tempTask = {
+        id : data.index,
+        name : data.name,
+        date : data.date,
+        completed : this.tasks[data.indexFromTasks].completed
+      }
 
-      this.tasks[task.indexFromTasks].name = task.name;
-      this.tasks[task.indexFromTasks].date = task.date;
+      fetchWrapperPut(`http://localhost:8080/update/${data.index}`, tempTask)
+
+      this.tasks[data.indexFromTasks].name = data.name;
+      this.tasks[data.indexFromTasks].date = data.date;
+      this.tasks[data.indexFromTasks].completed = data.completed
     },
 
     removeTasks(taskData) {
@@ -123,7 +125,6 @@ export const useTodoStore = defineStore("todoStore", {
       } 
       
       catch(Error) {
-    
         console.log(Error);
       }
     },

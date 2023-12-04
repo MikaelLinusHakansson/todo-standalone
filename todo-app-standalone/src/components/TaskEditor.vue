@@ -2,7 +2,9 @@
     <div>
       <label for="editTask" />
       <label for="editDate" />
+
       <div>
+
         <input
             maxlength="50"
             type="text"
@@ -10,6 +12,7 @@
             placeholder="Edit task:"
             v-model.trim="editName"
             class="form-control me-2">
+
         <input
             maxlength="10"
             type="text"
@@ -17,19 +20,23 @@
             placeholder="Edit date: YYYY-MM-DD"
             v-model.trim="editDate"
             class="form-control me-2">
+            
       </div>
+
       <button
         @click="editNameSender"
         :hidden="isVisable" 
         class="btn btn-success me-2 m-1">
             {{ $t('save') }}
         </button>
+
         <button 
               @click="deleteTaskSender" 
               :hidden="isVisable" 
               class="btn btn-danger m-1">
                 {{ $t('delete') }}
-            </button>
+        </button>
+        
     </div>
 </template>
 
@@ -41,12 +48,12 @@ export default {
         taskIndex : Number,
         taskName : String,
         currentIndexTasks : Number,
-        currentIndex : Number
+        currentIndex : Number,
+        completed: Boolean,
     },
 
     data() {
         return {
-
             editName : '',
             editDate : ''
         }
@@ -55,11 +62,11 @@ export default {
     methods: {
         editNameSender() {
             this.$emit('edit-name-sender', {
-
                 indexFromTasks : this.currentIndex,
                 index : this.taskIndex,
                 name : this.editName,
-                date : this.editDate
+                date : this.editDate,
+                completed : this.completed
             })
 
             this.editName = ''
@@ -68,7 +75,6 @@ export default {
 
         deleteTaskSender() {
             this.$emit('delete-task-sender', {
-
                 indexFromTasks : this.currentIndexTasks,
                 index : this.taskIndex
             })

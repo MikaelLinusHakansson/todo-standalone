@@ -1,15 +1,29 @@
 <template>
     <div class="mb-3">
         <ul class="list-group d-flex">
+
             <li 
-            class="list-group-item d-flex justify-content-between align-items-center"
+            class="
+            list-group-item 
+            d-flex 
+            justify-content-between 
+            align-items-center"
+            
+            :style="{ 
+                backgroundColor: task.completed ? '#c8e6c9' : '#FFFFFF', 
+                textDecoration: task.completed ? 'line-through' :  'none'
+            }"
+
             v-for="(task, index) in tasks" 
             :key="task.id">
+
             <input 
                 type="checkbox" 
                 @click="markDoneSender(task, index)"
                 v-model="task.completed" 
                 class="form-check-input me-3">
+            
+                
                 <div class="flex-grow-1">
                     <div >
                         <div>
@@ -20,8 +34,10 @@
                         </div>
                     </div>
                 </div>
+
                 <task-editor 
                 :hidden="isVisable"
+                :completed="isVisable"
                 :currentIndex="index"
                 :edit-name="editName"
                 :edit-date="editDate"
@@ -29,8 +45,10 @@
                 :index-editor="index"
                 @edit-name-sender="saveEdits"
                 @delete-task-sender="removeTask">
-            </task-editor>
+                </task-editor>
+
             </li>
+
         </ul>
     </div>
 </template>
@@ -51,9 +69,10 @@ export default {
     props: {
         task: Object,
         index: Number,
-        isVisable: Boolean,
         editName: String,
-        editDate: String
+        editDate: String,
+
+        isVisable: Boolean,
     },
 
     data() {
@@ -64,7 +83,6 @@ export default {
         ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
 
         saveEdits(data) {
-            
             if (this.validateTask(data.name) && this.validateDate(data.date)) {
                 
                 this.editTask(data)

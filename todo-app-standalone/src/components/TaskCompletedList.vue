@@ -1,11 +1,14 @@
 <template>
     <table>
+
         <div :hidden="this.visableCompleted">
+
             <span class="text-primary fw-bold">
                 <Strong>
                     {{ $t('done') }}:
                 </Strong>
             </span>
+
             <ul
                 class="list-group">
                 <li
@@ -16,6 +19,7 @@
                         {{ completedTasks.date }}
                 </li>
             </ul>
+
         </div>
     </table>
     
@@ -23,7 +27,7 @@
 
 <script>
 import { mapState } from 'pinia'
-import { useTodoStore } from '../stores/TodoStore'
+import { useTodoStore } from '@/stores/TodoStore'
 
 export default {
     computed: {

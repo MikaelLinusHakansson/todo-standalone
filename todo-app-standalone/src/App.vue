@@ -2,13 +2,17 @@
   <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
     <table>
+
       <task-title-header />
+
       <task-change-language />
+
       <task-form
           :taskNameId="'taskname'" 
           :taskDateId="'taskdate'" 
           @submit-new-task="createNewTask">
       </task-form>
+
     </table>
 
     <task-controls 
@@ -20,6 +24,7 @@
     <button @click="fetchData" class="btn btn-secondary">Refresh</button>
     
     <div class="mb-3" :hidden="visableAllTasks">
+
         <task-all-tasks-list
         class="list-group d-flex" 
         :task="task"
@@ -30,9 +35,11 @@
         @edit-name-sender="saveEdits"
         @delete-task-sender="removeTasks">
         </task-all-tasks-list>
+
     </div>
 
     <task-completed-list :hidden="this.visableCompleted" />
+
   </div>
 </template>
 
@@ -50,7 +57,6 @@ import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
 export default {
   components: {
-
     TaskChangeLanguage,
     TaskTitleHeader,
     TaskForm,
@@ -62,7 +68,6 @@ export default {
 
   data() {
     return {
-
       newTaskName: '',
       newTaskDate: '',
       isVisable: true,
@@ -76,7 +81,6 @@ export default {
 
   provide() {
     return {
-
       i18n: this.$i18n
     }
   },
@@ -90,9 +94,7 @@ export default {
     ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
 
     saveEdits(data) {
-
       const configureTask = {
-      
         index: data.index,
         name: data.name,
         date: data.date
@@ -113,22 +115,18 @@ export default {
     },
 
     toggleCompleted() {
-
       this.visableCompleted = !this.visableCompleted
     },
 
     toggleAll() {
-
       this.visableAllTasks = !this.visableAllTasks
     },
     
     ToggleEdit() {
-
         this.isVisable = !this.isVisable
     },
 
     changeTheLanguage(locale) {
-
       this.$i18n.locale = locale
     }
   }
