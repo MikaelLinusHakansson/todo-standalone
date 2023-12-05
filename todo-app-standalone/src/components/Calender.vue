@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <div class="flex-auto">
                 <prime-calender
@@ -7,7 +7,8 @@
                     v-model="datetime24h" 
                     showTime hourFormat="24" 
                     manual-input="false" 
-                    showButtonBar />
+                    showButtonBar
+                    />
             </div>
         </div>
     </div>
@@ -15,6 +16,7 @@
 
 <script>
 import PrimeCalender from "primevue/calendar";
+import 'primeicons/primeicons.css'
 
 export default {
     components: {
