@@ -37,11 +37,11 @@
           @edit-name-sender="saveEdits"
           @delete-task-sender="removeTasks">
         </task-all-tasks-list>
-
     </div>
 
     <task-completed-list :hidden="this.visableCompleted" />
 
+    <Calender></Calender>
   </div>
 </template>
 
@@ -56,6 +56,8 @@ import TaskControls from "@/components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
+import Calender from "./components/Calender.vue";
+
 
 export default {
   components: {
@@ -66,7 +68,8 @@ export default {
     TaskEditor,
     TaskCompletedList,
     TaskAllTasksList,
-  },
+    Calender
+},
 
   data() {
     return {
@@ -77,7 +80,7 @@ export default {
       visableAllTasks: true,
       editName: '',
       editDate: '',
-      todoEntity: []
+      todoEntity: [],
     }
   },
 
@@ -130,7 +133,7 @@ export default {
 
     changeTheLanguage(locale) {
       this.$i18n.locale = locale
-    }
+    },
   }
 }
 </script>
