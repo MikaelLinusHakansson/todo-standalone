@@ -41,7 +41,6 @@
 
     <task-completed-list :hidden="this.visableCompleted" />
 
-    <Calender></Calender>
   </div>
 </template>
 
@@ -56,7 +55,8 @@ import TaskControls from "@/components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
-import Calender from "./components/Calender.vue";
+
+import Bbutton from "primevue/button";
 
 
 export default {
@@ -68,7 +68,7 @@ export default {
     TaskEditor,
     TaskCompletedList,
     TaskAllTasksList,
-    Calender
+    Bbutton,
 },
 
   data() {

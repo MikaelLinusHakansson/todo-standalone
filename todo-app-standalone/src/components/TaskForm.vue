@@ -1,48 +1,71 @@
 <template>
     <div class="mb-3">
+        <div>
+            <!-- <label 
+                :for="taskNameId"
+                class="form-label">
+                    {{ $t('task') }}
+            </label> -->
+    
+            <!-- <input
+                maxlength="50"
+                type="text"
+                :id="taskNameId"
+                :name="taskNameId"
+                v-model="taskName"
+                class="form-control mb-2"> -->
 
-        <label 
-            :for="taskNameId"
-            class="form-label">
-                {{ $t('task') }}
-        </label>
+                <InputText
+                    :id="taskNameId"
+                    :name="taskNameId" 
+                    v-model="taskName" 
+                    class="mb-2" 
+                    placeholder="Task">
+                </InputText>
+            </div>
 
-        <input
-            maxlength="50"
-            type="text"
-            :id="taskNameId"
-            :name="taskNameId"
-            v-model="taskName"
-            class="form-control mb-2">
+            <Calender @date-time="submitNewTask"></Calender>
+        
+            
 
-        <label
+
+        <!-- <label
             :for="taskDateId"
             class="form-label">
                 {{ $t('date') }}
-        </label>
+        </label> -->
 
-        <input
+        <!-- <input
             maxlength="10"
             type="text"
             :name="taskDateId"
             :id="taskDateId"
             v-model="taskDate"
             placeholder="YYYY-MM-DD"
-            class="form-control mb-2">
+            class="form-control mb-2"> -->
 
-        <button
+
+        <!-- <button
             @click="submitNewTask"
             class="btn btn-primary"> 
                 {{ $t('add') }} 
-                <!-- https://gitbrent.github.io/bootstrap-switch-button/ -->
-        </button>
+                 https://gitbrent.github.io/bootstrap-switch-button/ 
+        </button> -->
         
     </div>
 </template>
 
 <script>
+import Calender from "@/components/Calender.vue"
+import InputText from 'primevue/inputtext'
+
     export default {
         inject: ['i18n'],
+
+        components: {
+            Calender,
+            InputText,
+        },
 
         props: {
             taskNameId: String,
@@ -57,15 +80,20 @@
         },
 
         methods: {
-            submitNewTask() {
+            submitNewTask(dateFromBelow) {
+                console.log(dateFromBelow)
                 this.$emit('submit-new-task', {
                     id: this.taskName.length + 1,
                     name: this.taskName,
-                    date: this.taskDate
+                    date: dateFromBelow.name
                 })
 
                 this.taskName = ''
                 this.taskDate = ''
+            },
+
+            addDateFromCalenderComp(dateFromBelow) {
+                this.taskDate = dateFromBelow.name
             }
         },
     }

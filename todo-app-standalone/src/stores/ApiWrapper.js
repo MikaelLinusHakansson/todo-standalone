@@ -1,4 +1,6 @@
 export function fetchWrapperPost(url, data) {
+    data.date = data.date.toString()
+
     const options = {
         method: "POST",
 
