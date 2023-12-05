@@ -1,11 +1,11 @@
 <template>
     <div>
 
-        <div class="mb-3">
+        <div class="mb-2">
 
             <button 
                 @click="toggleAll"
-                class="btn btn-secondary m-1">
+                class="btn btn-secondary">
                     {{ $t('showAll') }}
             </button>
 

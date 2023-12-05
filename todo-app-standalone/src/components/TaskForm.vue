@@ -13,7 +13,7 @@
             :id="taskNameId"
             :name="taskNameId"
             v-model="taskName"
-            class="form-control">
+            class="form-control mb-2">
 
         <label
             :for="taskDateId"
@@ -28,11 +28,11 @@
             :id="taskDateId"
             v-model="taskDate"
             placeholder="YYYY-MM-DD"
-            class="form-control">
+            class="form-control mb-2">
 
         <button
             @click="submitNewTask"
-            class="btn btn-primary m-1"> 
+            class="btn btn-primary"> 
                 {{ $t('add') }} 
                 <!-- https://gitbrent.github.io/bootstrap-switch-button/ -->
         </button>

@@ -21,7 +21,7 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
-    <button @click="fetchData" class="btn btn-secondary">Refresh</button>
+    <button @click="fetchData" class="btn btn-secondary mb-3">Refresh</button>
     
     <div 
       class="mb-3" 
@@ -65,7 +65,7 @@ export default {
     TaskControls,
     TaskEditor,
     TaskCompletedList,
-    TaskAllTasksList
+    TaskAllTasksList,
   },
 
   data() {

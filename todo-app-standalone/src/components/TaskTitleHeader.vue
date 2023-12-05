@@ -1,6 +1,6 @@
 <template>
 
-    <div class="mb-3">
+    <div class="m-1">
         <h2>{{ $t('todo') }}</h2>
     </div>
     
