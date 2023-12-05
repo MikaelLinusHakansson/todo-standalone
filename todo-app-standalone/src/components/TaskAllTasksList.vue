@@ -9,7 +9,8 @@
                     justify-content-between 
                     align-items-center"
                 
-                :style="{ 
+                :style=
+                "{ 
                     backgroundColor: task.completed ? '#c8e6c9' : '#FFFFFF', 
                     textDecoration: task.completed ? 'line-through' :  'none'
                 }"
