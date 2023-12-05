@@ -1,26 +1,29 @@
 <template>
-    <div class="card flex flex-wrap gap-3 p-fluid">
+    <div>
         <div class="flex-auto">
             <div class="flex-auto">
-                <prime-calender
+                <PrimeCalender
+                    class="custom-calendar"
                     showIcon id="calendar-24h" 
                     v-model="datetime24h" 
-                    showTime hourFormat="24" 
+                    showTime hourFormat="24"
                     manual-input="false" 
-                    showButtonBar
-                    />
+                    showButtonBar 
+                />
             </div>
+            <Button label="Submit" icon="pi pi-check" iconPos="right" />
         </div>
     </div>
 </template>
 
 <script>
 import PrimeCalender from "primevue/calendar";
-import 'primeicons/primeicons.css'
+import Button from "primevue/button";
 
 export default {
     components: {
-        PrimeCalender
+        PrimeCalender,
+        Button
     },
 
     data() {
