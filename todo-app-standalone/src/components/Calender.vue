@@ -1,36 +1,52 @@
 <template>
-    <div class="card flex flex-wrap gap-3 p-fluid">
+    <div>
         <div class="flex-auto">
             <div class="flex-auto">
                 <PrimeCalender
+                    placeholder="Date"
                     showIcon id="calendar-24h" 
                     v-model="datetime24h" 
-                    showTime hourFormat="24" 
+                    showTime hourFormat="24"
                     manual-input="false" 
                     showButtonBar
-                    />
+                    date-format="yy/mm/dd"
+                    touchUI
+                />
             </div>
+            <Button label="Submit" icon="pi pi-check" iconPos="right" @click="sendDate" class="mt-2" />
         </div>
     </div>
 </template>
 
 <script>
 import PrimeCalender from "primevue/calendar";
-import 'primeicons/primeicons.css'
+import Button from "primevue/button";
 
 
 export default {
     components: {
-        PrimeCalender
+        PrimeCalender,
+        Button
     },
 
     data() {
         return {
-            datetime24h: new Date(),
+            datetime24h: '',
             buttondisplay: null,
             icondisplay: null,
             templatedisplay: null,
         }
     },
+
+    methods: {
+        sendDate() {
+            console.log(this.datetime24h)
+            this.$emit('date-time', {
+                name: this.datetime24h
+            })
+
+            this.datetime24h = ''
+        }
+    }
 }
 </script>
