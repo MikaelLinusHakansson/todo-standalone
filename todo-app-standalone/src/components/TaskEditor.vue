@@ -4,7 +4,6 @@
       <label for="editDate" />
 
       <div>
-
         <input
             :disabled="this.completed"
             maxlength="50"
@@ -79,6 +78,8 @@ export default {
 
             this.editName = ''
             this.editDate = ''
+
+            this.fetchData()
         },
 
         deleteTaskSender() {
