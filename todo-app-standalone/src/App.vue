@@ -1,30 +1,15 @@
 <template>
   <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
-    <div class="row d-flex align-items-center">
-      <div class="col-md-8">
-        <table>
-          <task-title-header />
+    <task-title-header />
 
-          <task-change-language />
+    <task-change-language />
 
-          <task-form
-            :taskNameId="'taskname'" 
-            :taskDateId="'taskdate'" 
-            @submit-new-task="createNewTask">
-          </task-form>
-        </table>
-      </div>
-
-    </div>
-
-        <div class="col-md-4">
-          <Bbutton 
-            @click="fetchData" 
-            icon="pi pi-refresh" 
-            text raised>
-          </Bbutton>
-        </div>
+    <task-form
+      :taskNameId="'taskname'" 
+      :taskDateId="'taskdate'" 
+      @submit-new-task="createNewTask">
+    </task-form>
 
     <task-controls 
       :toggle-all="toggleAll"
@@ -64,9 +49,6 @@ import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 
-import Bbutton from "primevue/button";
-
-
 export default {
   components: {
     TaskChangeLanguage,
@@ -76,7 +58,6 @@ export default {
     TaskEditor,
     TaskCompletedList,
     TaskAllTasksList,
-    Bbutton,
 },
 
   data() {
@@ -103,10 +84,6 @@ export default {
     ...mapWritableState(useTodoStore, ['tasks']),
   },
 
-  created() {
-    this.fetchData()
-  },
-
   methods: {
     ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
 
@@ -118,7 +95,6 @@ export default {
       }
 
       if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
-
         this.editTask(configureTask)
       
         this.editName = ''
@@ -126,7 +102,6 @@ export default {
       } 
       
       else {
-
          alert("Invalid input")
         }
     },

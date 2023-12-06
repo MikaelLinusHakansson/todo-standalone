@@ -42,7 +42,6 @@ import InputText from 'primevue/inputtext'
 
         methods: {
             submitNewTask(dateFromBelow) {
-                console.log(dateFromBelow)
                 this.$emit('submit-new-task', {
                     id: this.taskName.length + 1,
                     name: this.taskName,

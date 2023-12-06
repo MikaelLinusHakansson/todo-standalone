@@ -74,7 +74,6 @@ export const useTodoStore = defineStore("todoStore", {
 
     async fetchData() {
       const data = await fetchWrapperGetAll("http://localhost:8080/getall")
-
       this.tasks = data
     },
     

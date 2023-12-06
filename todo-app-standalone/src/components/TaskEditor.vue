@@ -44,6 +44,9 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useTodoStore } from "@/stores/TodoStore"
+
 export default {
     emits: ['edit-name-sender', 'delete-task-sender'],
 
@@ -63,6 +66,8 @@ export default {
     },
 
     methods: {
+        ...mapActions(useTodoStore, ['fetchData']),
+
         editNameSender() {
             this.$emit('edit-name-sender', {
                 indexFromTasks : this.currentIndex,
@@ -81,6 +86,8 @@ export default {
                 indexFromTasks : this.currentIndexTasks,
                 index : this.taskIndex
             })
+
+            this.fetchData()
         }
     }
 }

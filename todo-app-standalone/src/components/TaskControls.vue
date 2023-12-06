@@ -32,8 +32,8 @@
                         input-id="checkedCompleted" 
                         v-model="checkedCompleted" 
                         @click="callOnToggleCompleted">
-                            <span i
-                                d="checkedCompleted">
+                            <span 
+                                id="checkedCompleted">
                             </span>
                     </InputSwitch>
                 </div>
@@ -77,6 +77,10 @@ export default {
             checkedCompleted: false,
             checkedToggleEdit: false,
         }
+    },
+
+    created() {
+        this.callOnToggleAll()
     },
 
     methods: {
