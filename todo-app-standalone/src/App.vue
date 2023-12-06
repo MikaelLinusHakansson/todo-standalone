@@ -17,7 +17,7 @@
       </div>
 
     </div>
-    
+
         <div class="col-md-4">
           <Bbutton 
             @click="fetchData" 
@@ -101,6 +101,10 @@ export default {
   computed: {
     ...mapState(useTodoStore, ['tasks']),
     ...mapWritableState(useTodoStore, ['tasks']),
+  },
+
+  created() {
+    this.fetchData()
   },
 
   methods: {
