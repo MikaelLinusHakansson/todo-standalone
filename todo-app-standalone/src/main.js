@@ -7,6 +7,7 @@ import primevue from 'primevue/config'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'primeicons/primeicons.css'
 
 const pinia = createPinia();
 const app = createApp(App);

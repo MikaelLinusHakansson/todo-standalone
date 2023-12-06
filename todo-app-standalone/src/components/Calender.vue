@@ -2,7 +2,7 @@
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <div class="flex-auto">
-                <prime-calender
+                <PrimeCalender
                     showIcon id="calendar-24h" 
                     v-model="datetime24h" 
                     showTime hourFormat="24" 
@@ -17,6 +17,7 @@
 <script>
 import PrimeCalender from "primevue/calendar";
 import 'primeicons/primeicons.css'
+
 
 export default {
     components: {
