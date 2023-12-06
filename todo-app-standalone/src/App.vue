@@ -21,7 +21,13 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
-    <button @click="fetchData" class="btn btn-secondary mb-3">Refresh</button>
+    <!-- <button @click="fetchData" class="btn btn-secondary mb-3">Refresh</button> -->
+    <Bbutton 
+      @click="fetchData" 
+      icon="pi pi-refresh" 
+      text raised>
+    </Bbutton>
+    
     
     <div 
       class="mb-3" 

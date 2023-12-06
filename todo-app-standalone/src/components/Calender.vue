@@ -13,7 +13,16 @@
                     touchUI
                 />
             </div>
-            <Button label="Submit" icon="pi pi-check" iconPos="right" @click="sendDate" class="mt-2" />
+            
+            <Button
+                severity="primary"
+                icon="pi pi-check" 
+                text 
+                raised
+                iconPos="right" 
+                @click="sendDate" 
+                class="mt-2"> 
+            </Button> 
         </div>
     </div>
 </template>

@@ -13,7 +13,8 @@ const translations = {
         task: 'Task',
         showCompleted: 'Completed tasks',
         done: 'Done',
-        showAll: 'Show all tasks'
+        showAll: 'Show all tasks',
+        refresh: 'Refresh list'
     },
 
     sv: {
@@ -27,7 +28,8 @@ const translations = {
         task: 'Uppgift',
         showCompleted: 'Visa utförda uppgifter',
         done: 'Klara',
-        showAll: 'Visa alla uppgifter'
+        showAll: 'Visa alla uppgifter',
+        refresh: 'Uppdatera lista'
     }
 };
 
