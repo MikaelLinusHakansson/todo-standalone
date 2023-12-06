@@ -70,6 +70,8 @@ export const useTodoStore = defineStore("todoStore", {
       fetchWrapperPut(url, tempTask)
         
       this.tasks[index].completed = !tempTask.completed
+
+      this.fetchData()
     },
 
     async fetchData() {
@@ -82,6 +84,8 @@ export const useTodoStore = defineStore("todoStore", {
       fetchWrapperDelete(data)
         
       this.tasks.splice(taskData.indexSomething, 1)
+
+      this.fetchData()
     },
 
     validateTask(task) {

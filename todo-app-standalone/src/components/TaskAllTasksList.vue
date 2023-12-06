@@ -79,7 +79,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
+        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask', 'fetchData']),
 
         saveEdits(data) {
             if (this.validateTask(data.name) && this.validateDate(data.date)) {
@@ -95,6 +95,7 @@ export default {
 
         markDoneSender(task, index) {
             this.markDone(task, index)
+            this.fetchData()
         },
 
         removeTask(data) {
