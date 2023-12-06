@@ -1,57 +1,18 @@
 <template>
     <div class="mb-3">
         <div>
-            <!-- <label 
-                :for="taskNameId"
-                class="form-label">
-                    {{ $t('task') }}
-            </label> -->
-    
-            <!-- <input
-                maxlength="50"
-                type="text"
+            <InputText
                 :id="taskNameId"
-                :name="taskNameId"
-                v-model="taskName"
-                class="form-control mb-2"> -->
+                :name="taskNameId" 
+                v-model="taskName" 
+                class="mb-2" 
+                placeholder="Task">
+            </InputText>
+        </div>
 
-                <InputText
-                    :id="taskNameId"
-                    :name="taskNameId" 
-                    v-model="taskName" 
-                    class="mb-2" 
-                    placeholder="Task">
-                </InputText>
-            </div>
-
-            <Calender @date-time="submitNewTask"></Calender>
-        
-            
-
-
-        <!-- <label
-            :for="taskDateId"
-            class="form-label">
-                {{ $t('date') }}
-        </label> -->
-
-        <!-- <input
-            maxlength="10"
-            type="text"
-            :name="taskDateId"
-            :id="taskDateId"
-            v-model="taskDate"
-            placeholder="YYYY-MM-DD"
-            class="form-control mb-2"> -->
-
-
-        <!-- <button
-            @click="submitNewTask"
-            class="btn btn-primary"> 
-                {{ $t('add') }} 
-                 https://gitbrent.github.io/bootstrap-switch-button/ 
-        </button> -->
-        
+        <Calender 
+            @date-time="submitNewTask">
+        </Calender>
     </div>
 </template>
 

@@ -1,35 +1,68 @@
 <template>
-    <div>
-
+    <div class="d-flex">
         <div class="mb-2">
+            <div class="d-flex flex-column">
+                <div class="d-flex">
+                    <label
+                        class="mr-2"
+                        for="checkedAll">
+                            {{ $t('showAll') }}
+                    </label>
 
-            <button 
-                @click="toggleAll"
-                class="btn btn-secondary">
-                    {{ $t('showAll') }}
-            </button>
+                    <InputSwitch
+                        class="m-1"
+                        input-id="checkedAll"
+                        v-model="checkedToggleAll" 
+                        @click="callOnToggleAll" >
+                            <span 
+                                id="checkedAll">
+                            </span>
+                    </InputSwitch>
+                </div>
 
-            <button
-                @click="toggleCompleted"
-                class="btn btn-secondary m-1">
-                    {{ $t('showDone') }}
-            </button>
+                <div class="d-flex">
+                    <label 
+                        class="mr-2"
+                        for="checkedComplated"> 
+                            {{ $t('showDone') }}
+                    </label>
 
-            <button
-                @click="toggleEdit"
-                class="btn btn-info m-1">
-                    {{ $t('edit') }}
-            </button>
-            
+                    <InputSwitch 
+                        class="m-1"
+                        input-id="checkedCompleted" 
+                        v-model="checkedCompleted" 
+                        @click="callOnToggleCompleted">
+                            <span i
+                                d="checkedCompleted">
+                            </span>
+                    </InputSwitch>
+                </div>
+
+                <div class="d-flex m-1">
+                    <label
+                        class="mr-2"
+                        for="checkedEdit">
+                            {{ $t('edit') }}
+                    </label>
+
+                    <InputSwitch
+                        class="m-1"
+                        input-id="checkedEdit"
+                        v-model="checkedToggleEdit"
+                        @click="callOnToggleEdit">
+                    </InputSwitch>
+                </div>
+            </div>
         </div> 
-
     </div>
 </template>
 
 <script>
+import InputSwitch from 'primevue/inputswitch';
+
 export default {
-    data() {
-        return {}
+    components: {
+        InputSwitch,
     },
 
     props: {
@@ -37,5 +70,30 @@ export default {
         toggleCompleted: Function,
         toggleEdit: Function
     },
+
+    data() {
+        return {
+            checkedToggleAll: false,
+            checkedCompleted: false,
+            checkedToggleEdit: false,
+        }
+    },
+
+    methods: {
+        callOnToggleAll() {
+            this.toggleAll()
+            this.checkedToggleAll = !this.checkedToggleAll
+        },
+
+        callOnToggleCompleted() {
+            this.toggleCompleted()
+            this.checkedCompleted = !this.checkedCompleted
+        },
+
+        callOnToggleEdit() {
+            this.toggleEdit()
+            this.checkedToggleEdit = !this.checkedToggleEdit
+        }
+    }
 }
 </script>
