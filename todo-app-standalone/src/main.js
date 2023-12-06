@@ -7,8 +7,8 @@ import App from "./App.vue"
 import primevue from "primevue/config"
 
 import "primeicons/primeicons.css"
-import "primevue/resources/themes/nano/theme.css"
-// import "primevue/resources/primevue.min.css"
+import "primevue/resources/themes/viva-light/theme.css"
+import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 
 import "bootstrap/dist/css/bootstrap.css"
