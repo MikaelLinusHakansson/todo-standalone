@@ -1,19 +1,30 @@
 <template>
   <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
-    <table>
+    <div class="row d-flex align-items-center">
+      <div class="col-md-8">
+        <table>
+          <task-title-header />
 
-      <task-title-header />
+          <task-change-language />
 
-      <task-change-language />
+          <task-form
+            :taskNameId="'taskname'" 
+            :taskDateId="'taskdate'" 
+            @submit-new-task="createNewTask">
+          </task-form>
+        </table>
+      </div>
 
-      <task-form
-          :taskNameId="'taskname'" 
-          :taskDateId="'taskdate'" 
-          @submit-new-task="createNewTask">
-      </task-form>
-
-    </table>
+    </div>
+    
+        <div class="col-md-4">
+          <Bbutton 
+            @click="fetchData" 
+            icon="pi pi-refresh" 
+            text raised>
+          </Bbutton>
+        </div>
 
     <task-controls 
       :toggle-all="toggleAll"
@@ -21,14 +32,6 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
-    <!-- <button @click="fetchData" class="btn btn-secondary mb-3">Refresh</button> -->
-    <Bbutton 
-      @click="fetchData" 
-      icon="pi pi-refresh" 
-      text raised>
-    </Bbutton>
-    
-    
     <div 
       class="mb-3" 
       :hidden="visableAllTasks">
@@ -46,7 +49,6 @@
     </div>
 
     <task-completed-list :hidden="this.visableCompleted" />
-
   </div>
 </template>
 
