@@ -2,13 +2,17 @@
   <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
     <table>
+
       <task-title-header />
+
       <task-change-language />
+
       <task-form
           :taskNameId="'taskname'" 
           :taskDateId="'taskdate'" 
-          @submit-new-task="addNewTask">
+          @submit-new-task="createNewTask">
       </task-form>
+
     </table>
 
     <task-controls 
@@ -17,34 +21,43 @@
       :toggle-edit="ToggleEdit">
     </task-controls>
 
-    <div class="mb-3" :hidden="visableAllTasks">
+    <button @click="fetchData" class="btn btn-secondary mb-3">Refresh</button>
+    
+    <div 
+      class="mb-3" 
+      :hidden="visableAllTasks">
+
         <task-all-tasks-list
-        class="list-group d-flex" 
-        :task="task"
-        :index="index"
-        :isVisable="isVisable"
-        :edit-name="editName"
-        :edit-date="editDate"
-        @edit-name-sender="saveEdits"
-        @delete-task-sender="removeTasks">
+          class="list-group d-flex" 
+          :task="task"
+          :index="index"
+          :isVisable="isVisable"
+          :edit-name="editName"
+          :edit-date="editDate"
+          @edit-name-sender="saveEdits"
+          @delete-task-sender="removeTasks">
         </task-all-tasks-list>
     </div>
 
     <task-completed-list :hidden="this.visableCompleted" />
+
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "pinia"
-import { useTodoStore } from "./stores/TodoStore";
+import { mapState, mapActions, mapWritableState } from "pinia"
+import { useTodoStore } from "@/stores/TodoStore";
 
-import TaskChangeLanguage from "./components/TaskChangeLanguage.vue";
+import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
-import TaskForm from "./components/taskForm.vue";
-import TaskControls from "./components/TaskControls.vue";
+import TaskForm from "@/components/taskForm.vue";
+import TaskControls from "@/components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
-import TaskCompletedList from "./components/TaskCompletedList.vue";
+import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
+
+import Bbutton from "primevue/button";
+
 
 export default {
   components: {
@@ -54,8 +67,9 @@ export default {
     TaskControls,
     TaskEditor,
     TaskCompletedList,
-    TaskAllTasksList
-  },
+    TaskAllTasksList,
+    Bbutton,
+},
 
   data() {
     return {
@@ -66,6 +80,7 @@ export default {
       visableAllTasks: true,
       editName: '',
       editDate: '',
+      todoEntity: [],
     }
   },
 
@@ -77,19 +92,11 @@ export default {
 
   computed: {
     ...mapState(useTodoStore, ['tasks']),
+    ...mapWritableState(useTodoStore, ['tasks']),
   },
 
   methods: {
-    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate']),
-
-    addNewTask(newTaskData) {
-      if (this.createNewTask({ name: newTaskData.name, date: newTaskData.date })) {
-        this.newTaskName = ''
-        this.newTaskDate = ''
-      } else {
-        alert("Invalid input")
-      }
-    },
+    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
 
     saveEdits(data) {
       const configureTask = {
@@ -99,10 +106,15 @@ export default {
       }
 
       if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
+
         this.editTask(configureTask)
+      
         this.editName = ''
         this.editDate = ''
-      } else {
+      } 
+      
+      else {
+
          alert("Invalid input")
         }
     },
@@ -121,7 +133,7 @@ export default {
 
     changeTheLanguage(locale) {
       this.$i18n.locale = locale
-    }
+    },
   }
 }
 </script>

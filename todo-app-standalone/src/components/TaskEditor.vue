@@ -2,34 +2,44 @@
     <div>
       <label for="editTask" />
       <label for="editDate" />
+
       <div>
+
         <input
+            :disabled="this.completed"
             maxlength="50"
             type="text"
             id="editTask"
             placeholder="Edit task:"
             v-model.trim="editName"
             class="form-control me-2">
+
         <input
+            :disabled="this.completed"
             maxlength="10"
             type="text"
             id="editDate"
             placeholder="Edit date: YYYY-MM-DD"
             v-model.trim="editDate"
             class="form-control me-2">
+            
       </div>
-      <button
-        @click="editNameSender"
-        :hidden="isVisable" 
-        class="btn btn-success me-2 m-1">
-            {{ $t('save') }}
+
+        <button
+            :disabled="this.completed"
+            @click="editNameSender"
+            :hidden="isVisable"
+            class="btn btn-success me-2 m-1">
+                {{ $t('save') }}
         </button>
+
         <button 
               @click="deleteTaskSender" 
               :hidden="isVisable" 
               class="btn btn-danger m-1">
                 {{ $t('delete') }}
-            </button>
+        </button>
+        
     </div>
 </template>
 
@@ -38,22 +48,28 @@ export default {
     emits: ['edit-name-sender', 'delete-task-sender'],
 
     props: {
-        taskIndex: Number,
+        taskIndex : Number,
+        taskName : String,
+        currentIndexTasks : Number,
+        currentIndex : Number,
+        completed: Boolean,
     },
 
     data() {
         return {
-            editName: '',
-            editDate: ''
+            editName : '',
+            editDate : ''
         }
     },
 
     methods: {
         editNameSender() {
             this.$emit('edit-name-sender', {
-                index: this.taskIndex,
-                name: this.editName,
-                date: this.editDate
+                indexFromTasks : this.currentIndex,
+                index : this.taskIndex,
+                name : this.editName,
+                date : this.editDate,
+                completed : this.completed
             })
 
             this.editName = ''
@@ -62,7 +78,8 @@ export default {
 
         deleteTaskSender() {
             this.$emit('delete-task-sender', {
-                index: this.taskIndex
+                indexFromTasks : this.currentIndexTasks,
+                index : this.taskIndex
             })
         }
     }
