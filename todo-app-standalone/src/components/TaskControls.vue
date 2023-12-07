@@ -40,9 +40,23 @@
 
                 <div class="d-flex m-1">
                     <label
+                        class="mr-2" 
+                        for="checkDataTable">
+                        {{ $t('showDataTable') }}
+                    </label>
+                    <InputSwitch 
+                        class="m-1" 
+                        input-id="checkDataTable" 
+                        v-model="checkedDataTable" 
+                        @click="callOnCheckedDataTable">
+                    </InputSwitch>
+                </div>
+
+                <div class="d-flex m-1">
+                    <label
                         class="mr-2"
                         for="checkedEdit">
-                            {{ $t('edit') }}
+                        {{ $t('edit') }}
                     </label>
 
                     <InputSwitch
@@ -64,13 +78,14 @@ import PrimeCalender from "primevue/calendar";
 export default {
     components: {
         InputSwitch,
-        PrimeCalender
+        PrimeCalender,
     },
 
     props: {
         toggleAll: Function,
         toggleCompleted: Function,
-        toggleEdit: Function
+        toggleEdit: Function,
+        toggleDataTable: Function
     },
 
     data() {
@@ -78,6 +93,7 @@ export default {
             checkedToggleAll: false,
             checkedCompleted: false,
             checkedToggleEdit: false,
+            checkedDataTable: false,
         }
     },
 
@@ -99,6 +115,11 @@ export default {
         callOnToggleEdit() {
             this.toggleEdit()
             this.checkedToggleEdit = !this.checkedToggleEdit
+        },
+
+        callOnCheckedDataTable() {
+            this.toggleDataTable()
+            this.checkedDataTable = !this.checkedDataTable
         }
     }
 }

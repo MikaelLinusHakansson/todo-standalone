@@ -6,21 +6,36 @@
       <div>
             <div class="flex flex-column gap-2">
                 <span class="p-float-label">
-                    <InputText v-model.trim="editName" aria-describedby="editTask-help"  id="editTask"></InputText>
-                    <label for="editTask"> {{$t('task')}} </label>
+                    <InlineMessage 
+                        severity="info"> 
+                            {{ $t('task') }}
+                    </InlineMessage>
+                    
+                    <InputText 
+                        v-model.trim="editName" 
+                        aria-describedby="editTask-help"  
+                        id="editTask">
+                    </InputText>
+                    <!-- <label for="editTask"> {{$t('task')}} </label> -->
                 </span>
             </div>
             
             <div class="flex flex-column gap-2">
-                <span>
+                <span class="p-float-label">
+                    <InlineMessage 
+                        severity="info"> 
+                            {{ $t('date') }}
+                    </InlineMessage>
+
                     <PrimeCalendar
-                    showIcon id="calendar-24h" 
-                    v-model="editDate" 
-                    showTime hourFormat="24"
-                    manual-input="false" 
-                    showButtonBar
-                    date-format="yy/mm/dd"
-                    touchUI />
+                        showIcon id="calendar-24h" 
+                        v-model="editDate" 
+                        showTime hourFormat="24"
+                        manual-input="false" 
+                        showButtonBar
+                        date-format="yy/mm/dd"
+                        touchUI /> 
+                    <!-- <label for="editDate"> {{$t('date')}} </label> -->
                 </span>
             </div>
 
@@ -37,11 +52,11 @@
         </Bbutton>
 
         <Bbutton
-        @click="deleteTaskSender"    
-        :hidden="isVisable"
-        class="me-2 m-1"
-        severity="danger"
-        icon="pi pi-trash">
+            @click="deleteTaskSender"    
+            :hidden="isVisable"
+            class="me-2 m-1"
+            severity="danger"
+            icon="pi pi-trash">
         </Bbutton>
     </div>
 </template>
@@ -53,6 +68,7 @@ import { useTodoStore } from "@/stores/TodoStore"
 import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
+import InlineMessage from 'primevue/inlinemessage';
 
 export default {
     emits: ['edit-name-sender', 'delete-task-sender'],
@@ -61,6 +77,7 @@ export default {
         PrimeCalendar,
         InputText,
         Bbutton,
+        InlineMessage,
     },
 
     props: {

@@ -8,8 +8,7 @@
                     justify-content-between 
                     align-items-center"
                 
-                :style=
-                "{ 
+                :style="{ 
                     backgroundColor: task.completed ? '#c8e6c9' : '#FFFFFF', 
                     textDecoration: task.completed ? 'line-through' :  'none'
                 }"
@@ -17,37 +16,36 @@
                 v-for="(task, index) in tasks" 
                 :key="task.id">
 
-                <Checkbox 
-                    v-model="task.completed" 
-                    :binary="true" 
-                    @click="markDoneSender(task, index)" 
-                    class="me-3"></Checkbox>
-                
-                <div class="flex-grow-1">
-                    <div >
-                        <div>
-                            {{ task.name }}
-                        </div>
-                        <div>
-                            {{ task.date }}
+                    <Checkbox 
+                        v-model="task.completed" 
+                        :binary="true" 
+                        @click="markDoneSender(task, index)" 
+                        class="me-3">
+                    </Checkbox>
+                    
+                    <div class="flex-grow-1">
+                        <div >
+                            <div>
+                                {{ task.name }}
+                            </div>
+                            <div>
+                                {{ task.date }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <task-editor
-                    :hidden="isVisable"
-                    :completed="task.completed"
-                    :currentIndex="index"
-                    :edit-name="editName"
-                    :edit-date="editDate"
-                    :task-index="task.id"
-                    :index-editor="index"
-                    @edit-name-sender="saveEdits"
-                    @delete-task-sender="removeTask">
-                </task-editor>
-
+                    <task-editor
+                        :hidden="isVisable"
+                        :completed="task.completed"
+                        :currentIndex="index"
+                        :edit-name="editName"
+                        :edit-date="editDate"
+                        :task-index="task.id"
+                        :index-editor="index"
+                        @edit-name-sender="saveEdits"
+                        @delete-task-sender="removeTask">
+                    </task-editor>
             </li>
-
         </ul>
     </div>
 </template>
@@ -56,11 +54,10 @@
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
-import checkbox from 'primevue/checkbox';
 import Checkbox from 'primevue/checkbox';
 
 export default {
-    components: { TaskEditor, Checkbox }, checkbox,
+    components: { TaskEditor, Checkbox},
 
     computed: {
         ...mapState(useTodoStore, ["tasks"])
@@ -73,6 +70,7 @@ export default {
         editDate: String,
 
         isVisable: Boolean,
+        showDataTable: Boolean,
     },
 
     data() {

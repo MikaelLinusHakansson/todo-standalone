@@ -1,9 +1,8 @@
 <template>
-  <!-- swtich button in bootstrap or toggle button, bootstrap table radio-button -->
   <div class="container mt-4">
-    <task-title-header />
+      <task-title-header />
 
-    <task-change-language />
+      <task-change-language />
 
     <task-form
       :taskNameId="'taskname'" 
@@ -14,7 +13,8 @@
     <task-controls 
       :toggle-all="toggleAll"
       :toggle-completed="toggleCompleted"
-      :toggle-edit="ToggleEdit">
+      :toggle-edit="ToggleEdit"
+      :toggleDataTable="toggleDataTable">
     </task-controls>
 
     <div 
@@ -33,6 +33,10 @@
         </task-all-tasks-list>
     </div>
 
+    <task-data-table 
+      :hidden="visableDataTable">
+    </task-data-table>
+
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
 </template>
@@ -48,6 +52,7 @@ import TaskControls from "@/components/TaskControls.vue";
 import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
+import TaskDataTable from "./components/TaskDataTable.vue";
 
 export default {
   components: {
@@ -58,6 +63,7 @@ export default {
     TaskEditor,
     TaskCompletedList,
     TaskAllTasksList,
+    TaskDataTable,
 },
 
   data() {
@@ -67,6 +73,7 @@ export default {
       isVisable: true,
       visableCompleted: true,
       visableAllTasks: true,
+      visableDataTable: true,
       editName: '',
       editDate: '',
       todoEntity: [],
@@ -112,6 +119,10 @@ export default {
 
     toggleAll() {
       this.visableAllTasks = !this.visableAllTasks
+    },
+
+    toggleDataTable() {
+      this.visableDataTable = !this.visableDataTable
     },
     
     ToggleEdit() {
