@@ -1,7 +1,6 @@
 <template>
     <div class="mb-3">
         <ul class="list-group d-flex">
-
             <li 
                 class="
                     list-group-item 
@@ -18,11 +17,11 @@
                 v-for="(task, index) in tasks" 
                 :key="task.id">
 
-            <input 
-                type="checkbox" 
-                @click="markDoneSender(task, index)"
-                v-model="task.completed"
-                class="form-check-input me-3">
+                <Checkbox 
+                    v-model="task.completed" 
+                    :binary="true" 
+                    @click="markDoneSender(task, index)" 
+                    class="me-3"></Checkbox>
                 
                 <div class="flex-grow-1">
                     <div >
@@ -57,9 +56,11 @@
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
+import checkbox from 'primevue/checkbox';
+import Checkbox from 'primevue/checkbox';
 
 export default {
-    components: { TaskEditor },
+    components: { TaskEditor, Checkbox }, checkbox,
 
     computed: {
         ...mapState(useTodoStore, ["tasks"])
