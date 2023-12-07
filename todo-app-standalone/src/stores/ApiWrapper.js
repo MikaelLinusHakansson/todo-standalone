@@ -44,6 +44,8 @@ export async function fetchWrapperGetAll(url) {
 }
 
 export function fetchWrapperPut(url, data) {
+    data.date = data.date.toString()
+
     const options = {
         method: "PUT",
 

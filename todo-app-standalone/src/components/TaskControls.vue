@@ -59,10 +59,12 @@
 
 <script>
 import InputSwitch from 'primevue/inputswitch';
+import PrimeCalender from "primevue/calendar";
 
 export default {
     components: {
         InputSwitch,
+        PrimeCalender
     },
 
     props: {

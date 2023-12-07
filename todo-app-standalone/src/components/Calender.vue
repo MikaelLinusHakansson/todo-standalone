@@ -16,12 +16,11 @@
             <Button
                 class="m-1"
                 severity="primary"
-                icon="pi pi-plus" 
+                icon="pi pi-arrow-up" 
                 text 
                 raised
                 iconPos="right" 
-                @click="sendDate" 
-                > 
+                @click="sendDate"> 
             </Button> 
 
             <Button
@@ -64,7 +63,6 @@ export default {
         ...mapActions(useTodoStore, ['fetchData']),
 
         sendDate() {
-            console.log(this.datetime24h)
             this.$emit('date-time', {
                 name: this.datetime24h
             })

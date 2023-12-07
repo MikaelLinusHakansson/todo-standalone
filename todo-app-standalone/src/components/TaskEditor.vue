@@ -1,44 +1,48 @@
 <template>
     <div>
-      <label for="editTask" />
+      <label for="editTask" /> 
       <label for="editDate" />
 
       <div>
-        <input
-            :disabled="this.completed"
-            maxlength="50"
-            type="text"
-            id="editTask"
-            placeholder="Edit task:"
-            v-model.trim="editName"
-            class="form-control me-2">
-
-        <input
-            :disabled="this.completed"
-            maxlength="10"
-            type="text"
-            id="editDate"
-            placeholder="Edit date: YYYY-MM-DD"
-            v-model.trim="editDate"
-            class="form-control me-2">
+            <div class="flex flex-column gap-2">
+                <span class="p-float-label">
+                    <InputText v-model.trim="editName" aria-describedby="editTask-help"  id="editTask"></InputText>
+                    <label for="editTask"> {{$t('task')}} </label>
+                </span>
+            </div>
             
+            <div class="flex flex-column gap-2">
+                <span>
+                    <PrimeCalendar
+                    showIcon id="calendar-24h" 
+                    v-model="editDate" 
+                    showTime hourFormat="24"
+                    manual-input="false" 
+                    showButtonBar
+                    date-format="yy/mm/dd"
+                    touchUI />
+                </span>
+            </div>
+
       </div>
-
-        <button
-            :disabled="this.completed"
+        <Bbutton
             @click="editNameSender"
+            :disabled="this.completed"
             :hidden="isVisable"
-            class="btn btn-success me-2 m-1">
-                {{ $t('save') }}
-        </button>
+            class="me-2 m-1"
+            severity="primary"
+            icon="pi pi-check"
+            text
+            raised>
+        </Bbutton>
 
-        <button 
-              @click="deleteTaskSender" 
-              :hidden="isVisable" 
-              class="btn btn-danger m-1">
-                {{ $t('delete') }}
-        </button>
-        
+        <Bbutton
+        @click="deleteTaskSender"    
+        :hidden="isVisable"
+        class="me-2 m-1"
+        severity="danger"
+        icon="pi pi-trash">
+        </Bbutton>
     </div>
 </template>
 
@@ -46,8 +50,18 @@
 import { mapActions } from "pinia";
 import { useTodoStore } from "@/stores/TodoStore"
 
+import PrimeCalendar from "primevue/calendar"
+import InputText from "primevue/inputtext"
+import Bbutton from "primevue/button"
+
 export default {
     emits: ['edit-name-sender', 'delete-task-sender'],
+
+    components: {
+        PrimeCalendar,
+        InputText,
+        Bbutton,
+    },
 
     props: {
         taskIndex : Number,
