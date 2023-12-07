@@ -20,7 +20,7 @@
                     </InputSwitch>
                 </div>
 
-                <div class="d-flex">
+                <div class="d-flex mt-1">
                     <label 
                         class="mr-2"
                         for="checkedComplated"> 
@@ -38,7 +38,7 @@
                     </InputSwitch>
                 </div>
 
-                <div class="d-flex m-1">
+                <div class="d-flex mt-1">
                     <label
                         class="mr-2" 
                         for="checkDataTable">
@@ -52,7 +52,7 @@
                     </InputSwitch>
                 </div>
 
-                <div class="d-flex m-1">
+                <div class="d-flex mt-1">
                     <label
                         class="mr-2"
                         for="checkedEdit">
