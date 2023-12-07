@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-4">
-      <task-title-header />
+    <task-title-header />
 
-      <task-change-language />
+    <task-change-language />
 
     <task-form
       :taskNameId="'taskname'" 
@@ -33,9 +33,7 @@
         </task-all-tasks-list>
     </div>
 
-    <task-data-table 
-      :hidden="visableDataTable">
-    </task-data-table>
+    <task-data-table :hidden="visableDataTable" />
 
     <task-completed-list :hidden="this.visableCompleted" />
   </div>
