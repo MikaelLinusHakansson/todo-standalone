@@ -101,7 +101,6 @@ export default {
 
         markDoneSender(task, index) {
             this.markDone(task, index)
-            this.fetchData()
         },
 
         removeTask(data) {

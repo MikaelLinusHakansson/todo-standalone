@@ -109,8 +109,6 @@ export default {
 
             this.editName = ''
             this.editDate = ''
-
-            this.fetchData()
         },
 
         deleteTaskSender() {
@@ -118,8 +116,6 @@ export default {
                 indexFromTasks : this.currentIndexTasks,
                 index : this.taskIndex
             })
-
-            this.fetchData()
         }
     }
 }
