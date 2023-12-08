@@ -52,7 +52,7 @@
                     </InputSwitch>
                 </div>
 
-                <div class="d-flex mt-1">
+                <!-- <div class="d-flex mt-1">
                     <label
                         class="mr-2"
                         for="checkedEdit">
@@ -65,7 +65,7 @@
                         v-model="checkedToggleEdit"
                         @click="callOnToggleEdit">
                     </InputSwitch>
-                </div>
+                </div> -->
             </div>
         </div> 
     </div>
