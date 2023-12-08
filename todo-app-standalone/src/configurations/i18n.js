@@ -15,7 +15,7 @@ const translations = {
         done: 'Done',
         showAll: 'Show all tasks',
         refresh: 'Refresh list',
-        showDataTable: 'Show Data Table',
+        showDataTable: 'Show Table View',
     },
 
     sv: {
@@ -31,7 +31,7 @@ const translations = {
         done: 'Klara',
         showAll: 'Visa alla uppgifter',
         refresh: 'Uppdatera lista',
-        showDataTable: 'Visa Data Bord'
+        showDataTable: 'Visa Bords vy'
     }
 };
 
