@@ -63,7 +63,7 @@ export default {
     computed: {
         ...mapState(useTodoStore, ["tasks"])
     },
-
+    
     props: {
         task: Object,
         index: Number,
@@ -97,10 +97,6 @@ export default {
 
         startEditing(index) {
             this.editIndex = index
-        },
-
-        stopEditing() {
-            this.editIndex = null
         },
 
         markDoneSender(task, index) {
