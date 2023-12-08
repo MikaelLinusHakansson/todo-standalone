@@ -26,7 +26,7 @@ export const useTodoStore = defineStore("todoStore", {
 
         fetchWrapperPost("http://localhost:8080/add", data)
         this.tasks.push(data);
-
+        
         return true;
       } 
       
@@ -53,9 +53,12 @@ export const useTodoStore = defineStore("todoStore", {
 
       fetchWrapperPut(`http://localhost:8080/update/${data.index}`, tempTask)
 
-      this.tasks[data.indexFromTasks].name = data.name;
-      this.tasks[data.indexFromTasks].date = data.date;
-      this.tasks[data.indexFromTasks].completed = data.completed
+      // TODO this might not be needed because of fetch data
+      // this.tasks[data.indexFromTasks].name = data.name;
+      // this.tasks[data.indexFromTasks].date = data.date;
+      // this.tasks[data.indexFromTasks].completed = data.completed
+
+      this.fetchData()
     },
 
     markDone(task, index) {
@@ -68,13 +71,15 @@ export const useTodoStore = defineStore("todoStore", {
       
       const url = `http://localhost:8080/update/${task.id}`
       fetchWrapperPut(url, tempTask)
-        
-      this.tasks[index].completed = !tempTask.completed
+      
+      // TODO same as above, might not be needed to manually change the locally stored list because of this.fetchData().
+      // this.tasks[index].completed = !tempTask.completed
+
+      this.fetchData()
     },
 
     async fetchData() {
       const data = await fetchWrapperGetAll("http://localhost:8080/getall")
-
       this.tasks = data
     },
     
@@ -82,7 +87,9 @@ export const useTodoStore = defineStore("todoStore", {
       const data = `http://localhost:8080/delete/${taskData.index}`
       fetchWrapperDelete(data)
         
-      this.tasks.splice(taskData.indexSomething, 1)
+      // this.tasks.splice(taskData.indexSomething, 1)
+
+      this.fetchData()
     },
 
     validateTask(task) {

@@ -1,7 +1,6 @@
 <template>
     <div class="mb-3">
         <ul class="list-group d-flex">
-
             <li 
                 class="
                     list-group-item 
@@ -9,46 +8,45 @@
                     justify-content-between 
                     align-items-center"
                 
-                :style=
-                "{ 
+                :style="{ 
                     backgroundColor: task.completed ? '#c8e6c9' : '#FFFFFF', 
                     textDecoration: task.completed ? 'line-through' :  'none'
                 }"
 
                 v-for="(task, index) in tasks" 
-                :key="task.id">
+                :key="task.id"
+                @click="startEditing(index)">
 
-            <input 
-                type="checkbox" 
-                @click="markDoneSender(task, index)"
-                v-model="task.completed"
-                class="form-check-input me-3">
-                
-                <div class="flex-grow-1">
-                    <div >
+                    <Checkbox 
+                        v-model="task.completed" 
+                        :binary="true" 
+                        @click="markDoneSender(task, index)" 
+                        class="me-3">
+                    </Checkbox>
+                    
+                    <div class="flex-grow-1">
                         <div>
-                            {{ task.name }}
-                        </div>
-                        <div>
-                            {{ task.date }}
+                            <div>
+                                {{ task.name }}
+                            </div>
+                            <div>
+                                {{ task.date }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <task-editor
-                    :hidden="isVisable"
-                    :completed="task.completed"
-                    :currentIndex="index"
-                    :edit-name="editName"
-                    :edit-date="editDate"
-                    :task-index="task.id"
-                    :index-editor="index"
-                    @edit-name-sender="saveEdits"
-                    @delete-task-sender="removeTask">
-                </task-editor>
-
+                    <task-editor
+                        :hidden="editIndex !== index"
+                        :completed="task.completed"
+                        :currentIndex="index"
+                        :edit-name="editName"
+                        :edit-date="editDate"
+                        :task-index="task.id"
+                        :index-editor="index"
+                        @edit-name-sender="saveEdits"
+                        @delete-task-sender="removeTask">
+                    </task-editor>
             </li>
-
         </ul>
     </div>
 </template>
@@ -57,14 +55,15 @@
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
+import Checkbox from 'primevue/checkbox';
 
 export default {
-    components: { TaskEditor },
+    components: { TaskEditor, Checkbox},
 
     computed: {
         ...mapState(useTodoStore, ["tasks"])
     },
-
+    
     props: {
         task: Object,
         index: Number,
@@ -72,14 +71,17 @@ export default {
         editDate: String,
 
         isVisable: Boolean,
+        showDataTable: Boolean,
     },
 
     data() {
-        return {};
+        return {
+            editIndex: null,
+        };
     },
 
     methods: {
-        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask']),
+        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask', 'fetchData']),
 
         saveEdits(data) {
             if (this.validateTask(data.name) && this.validateDate(data.date)) {
@@ -93,13 +95,18 @@ export default {
             }
         },
 
+        startEditing(index) {
+            this.editIndex = index
+        },
+
         markDoneSender(task, index) {
             this.markDone(task, index)
+            this.fetchData()
         },
 
         removeTask(data) {
             this.removeTasks(data)
-        }
+        },
     },
 }
 </script>

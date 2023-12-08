@@ -10,10 +10,25 @@
                     manual-input="false" 
                     showButtonBar
                     date-format="yy/mm/dd"
-                    touchUI
-                />
+                    touchUI />
             </div>
-            <Button label="Submit" icon="pi pi-check" iconPos="right" @click="sendDate" class="mt-2" />
+            
+            <Button
+                class="m-1"
+                severity="primary"
+                icon="pi pi-arrow-up" 
+                text 
+                raised
+                iconPos="right" 
+                @click="sendDate"> 
+            </Button> 
+
+            <Button
+                class="m-1"
+                @click="fetchData" 
+                icon="pi pi-refresh" 
+                text raised>
+            </Button>
         </div>
     </div>
 </template>
@@ -22,6 +37,8 @@
 import PrimeCalender from "primevue/calendar";
 import Button from "primevue/button";
 
+import { mapActions } from "pinia";
+import { useTodoStore } from "@/stores/TodoStore"
 
 export default {
     components: {
@@ -38,9 +55,14 @@ export default {
         }
     },
 
+    created() {
+        this.fetchData()
+    },
+
     methods: {
+        ...mapActions(useTodoStore, ['fetchData']),
+
         sendDate() {
-            console.log(this.datetime24h)
             this.$emit('date-time', {
                 name: this.datetime24h
             })

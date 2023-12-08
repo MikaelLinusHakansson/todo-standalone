@@ -1,24 +1,28 @@
 <template>
     <div class="mb-2">
+        <Button 
+            label="English" 
+            @click="changeTheLanguage('en')" 
+            class="m-1">
+        </Button>
 
-        <button 
-            @click="changeTheLanguage('en')"
-            class="btn btn-primary m-1">
-                English
-        </button>
-
-        <button
+        <Button 
+            label="Svenska"
             @click="changeTheLanguage('sv')"
-            class="btn btn-primary m-1">
-                Swedish
-        </button>
-        
+            class="m-1">
+        </Button>
     </div>
 </template>
 
 <script>
+import Button from "primevue/button";
+
 export default {
     inject: ['i18n'],
+
+    components: {
+        Button,
+    },
 
     data() {
         return {};

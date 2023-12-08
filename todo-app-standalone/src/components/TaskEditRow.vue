@@ -27,7 +27,7 @@
 
 <script>
 export default {
-    emits: ['end-edited-data'],
+    emits: ['send-edited-data'],
 
     data() {
         return {
