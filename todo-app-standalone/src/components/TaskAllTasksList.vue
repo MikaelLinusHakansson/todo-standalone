@@ -14,7 +14,8 @@
                 }"
 
                 v-for="(task, index) in tasks" 
-                :key="task.id">
+                :key="task.id"
+                @click="startEditing(index)">
 
                     <Checkbox 
                         v-model="task.completed" 
@@ -24,7 +25,7 @@
                     </Checkbox>
                     
                     <div class="flex-grow-1">
-                        <div >
+                        <div @click="startEditing(index)">
                             <div>
                                 {{ task.name }}
                             </div>
@@ -35,7 +36,7 @@
                     </div>
 
                     <task-editor
-                        :hidden="isVisable"
+                        :hidden="editIndex !== index"
                         :completed="task.completed"
                         :currentIndex="index"
                         :edit-name="editName"
@@ -44,6 +45,7 @@
                         :index-editor="index"
                         @edit-name-sender="saveEdits"
                         @delete-task-sender="removeTask">
+                        <!-- @click.away="stopEditing()"> -->
                     </task-editor>
             </li>
         </ul>
@@ -56,11 +58,17 @@ import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
 import Checkbox from 'primevue/checkbox';
 
+import VueClickAway from 'v-click-outside';
+
 export default {
     components: { TaskEditor, Checkbox},
 
     computed: {
         ...mapState(useTodoStore, ["tasks"])
+    },
+
+    directives: {
+        'click-outside': VueClickAway.directive,
     },
 
     props: {
@@ -74,7 +82,9 @@ export default {
     },
 
     data() {
-        return {};
+        return {
+            editIndex: null,
+        };
     },
 
     methods: {
@@ -99,6 +109,14 @@ export default {
 
         removeTask(data) {
             this.removeTasks(data)
+        },
+
+        startEditing(index) {
+            this.editIndex = index
+        },
+
+        stopEditing() {
+            this.editIndex = null
         }
     },
 }
