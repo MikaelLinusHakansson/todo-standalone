@@ -69,6 +69,7 @@ import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
+import VueClickAway from 'v-click-outside';
 
 export default {
     emits: ['edit-name-sender', 'delete-task-sender'],

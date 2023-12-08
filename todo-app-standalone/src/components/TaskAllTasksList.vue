@@ -25,7 +25,7 @@
                     </Checkbox>
                     
                     <div class="flex-grow-1">
-                        <div @click="startEditing(index)">
+                        <div>
                             <div>
                                 {{ task.name }}
                             </div>
@@ -45,7 +45,6 @@
                         :index-editor="index"
                         @edit-name-sender="saveEdits"
                         @delete-task-sender="removeTask">
-                        <!-- @click.away="stopEditing()"> -->
                     </task-editor>
             </li>
         </ul>
@@ -58,17 +57,11 @@ import { useTodoStore } from '@/stores/todoStore.js'
 import TaskEditor from './TaskEditor.vue';
 import Checkbox from 'primevue/checkbox';
 
-import VueClickAway from 'v-click-outside';
-
 export default {
     components: { TaskEditor, Checkbox},
 
     computed: {
         ...mapState(useTodoStore, ["tasks"])
-    },
-
-    directives: {
-        'click-outside': VueClickAway.directive,
     },
 
     props: {
@@ -102,6 +95,14 @@ export default {
             }
         },
 
+        startEditing(index) {
+            this.editIndex = index
+        },
+
+        stopEditing() {
+            this.editIndex = null
+        },
+
         markDoneSender(task, index) {
             this.markDone(task, index)
             this.fetchData()
@@ -110,14 +111,6 @@ export default {
         removeTask(data) {
             this.removeTasks(data)
         },
-
-        startEditing(index) {
-            this.editIndex = index
-        },
-
-        stopEditing() {
-            this.editIndex = null
-        }
     },
 }
 </script>
