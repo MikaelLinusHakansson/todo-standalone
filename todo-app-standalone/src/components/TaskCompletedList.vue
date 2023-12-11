@@ -1,28 +1,24 @@
 <template>
     <table>
-
-        <div :hidden="this.visableCompleted">
+        <div>
 
             <span class="text-primary fw-bold">
-                <Strong>
                     {{ $t('done') }}:
-                </Strong>
             </span>
 
             <ul
                 class="list-group">
                 <li
-                    v-for="(completedTasks) in this.completedTasks" 
-                    :key="completedTasks.id" 
+                    v-for="(completedTask) in this.completedTasks" 
+                    :key="completedTask.id" 
                     class="list-group-item">
-                        {{ completedTasks.name }}
-                        {{ completedTasks.date }}
+                        {{ completedTask.name }}
+                        {{ completedTask.date }}
                 </li>
             </ul>
 
         </div>
     </table>
-    
 </template>
 
 <script>
@@ -33,5 +29,10 @@ export default {
     computed: {
         ...mapState(useTodoStore, ['completedTasks'])
     },
+
+    data() {
+        return {
+        }
+    }
 }
 </script>

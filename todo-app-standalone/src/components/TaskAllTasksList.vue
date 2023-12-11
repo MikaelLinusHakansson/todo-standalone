@@ -54,7 +54,8 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
-import TaskEditor from './TaskEditor.vue';
+
+import TaskEditor from '@/components/TaskEditor.vue';
 import Checkbox from 'primevue/checkbox';
 
 export default {
@@ -65,13 +66,10 @@ export default {
     },
     
     props: {
-        task: Object,
+        task: Boolean,
         index: Number,
         editName: String,
         editDate: String,
-
-        isVisable: Boolean,
-        showDataTable: Boolean,
     },
 
     data() {
@@ -81,7 +79,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask', 'fetchData']),
+        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask', 'getData']),
 
         saveEdits(data) {
             if (this.validateTask(data.name) && this.validateDate(data.date)) {

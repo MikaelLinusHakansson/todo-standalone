@@ -41,19 +41,19 @@ import InputText from 'primevue/inputtext'
         },
 
         methods: {
-            submitNewTask(dateFromBelow) {
+            submitNewTask(data) {
                 this.$emit('submit-new-task', {
                     id: this.taskName.length + 1,
                     name: this.taskName,
-                    date: dateFromBelow.name
+                    date: data.date
                 })
 
                 this.taskName = ''
                 this.taskDate = ''
             },
 
-            addDateFromCalenderComp(dateFromBelow) {
-                this.taskDate = dateFromBelow.name
+            addDateFromCalenderComp(data) {
+                this.taskDate = data.name
             }
         },
     }

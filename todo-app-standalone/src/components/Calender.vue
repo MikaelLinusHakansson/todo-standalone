@@ -4,10 +4,11 @@
             <div class="flex-auto">
                 <PrimeCalender
                     placeholder="Date"
-                    showIcon id="calendar-24h" 
-                    v-model="datetime24h" 
+                    showIcon 
+                    id="calendar-24h" 
+                    v-model="datetime24h"
                     showTime hourFormat="24"
-                    manual-input="false" 
+                    :manual-input=false
                     showButtonBar
                     date-format="yy/mm/dd"
                     touchUI />
@@ -25,7 +26,7 @@
 
             <Button
                 class="m-1"
-                @click="fetchData" 
+                @click="this.getData()" 
                 icon="pi pi-refresh" 
                 text raised>
             </Button>
@@ -50,21 +51,19 @@ export default {
         return {
             datetime24h: '',
             buttondisplay: null,
-            icondisplay: null,
-            templatedisplay: null,
         }
     },
 
     created() {
-        this.fetchData()
+        this.getData()
     },
 
     methods: {
-        ...mapActions(useTodoStore, ['fetchData']),
+        ...mapActions(useTodoStore, ['getData']),
 
         sendDate() {
             this.$emit('date-time', {
-                name: this.datetime24h
+                date: this.datetime24h
             })
 
             this.datetime24h = ''

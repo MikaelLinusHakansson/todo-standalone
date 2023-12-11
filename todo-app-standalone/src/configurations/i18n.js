@@ -8,7 +8,6 @@ const translations = {
         showDone: 'Show done tasks',
         edit: 'Edit',
         add: 'Add task',
-        delete: 'Delete task',
         date: 'Date',
         task: 'Task',
         showCompleted: 'Completed tasks',

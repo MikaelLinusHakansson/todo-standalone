@@ -20,11 +20,8 @@
     <div 
       class="mb-3" 
       :hidden="visableAllTasks">
-
         <task-all-tasks-list
           class="list-group d-flex" 
-          :task="task"
-          :index="index"
           :isVisable="isVisable"
           :edit-name="editName"
           :edit-date="editDate"
@@ -90,7 +87,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'fetchData']),
+    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'getData']),
 
     saveEdits(data) {
       const configureTask = {

@@ -2,13 +2,13 @@
     <div class="mb-2">
         <Button 
             label="English" 
-            @click="changeTheLanguage('en')" 
+            @click="changeLanguage('en')" 
             class="m-1">
         </Button>
 
         <Button 
             label="Svenska"
-            @click="changeTheLanguage('sv')"
+            @click="changeLanguage('sv')"
             class="m-1">
         </Button>
     </div>
@@ -29,7 +29,7 @@ export default {
     },
 
     methods: {
-        changeTheLanguage(locale) {
+        changeLanguage(locale) {
             this.$i18n.locale = locale
         },
     }

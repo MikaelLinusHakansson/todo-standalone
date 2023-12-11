@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { fetchWrapperDelete, fetchWrapperPost, fetchWrapperGetAll, fetchWrapperPut } from "@/stores/ApiWrapper.js";
+import { apiDelete, apiPost, apiGetAll, apiPut } from "@/api/ApiWrapper.js";
 import { defineStore } from "pinia";
 
 export const useTodoStore = defineStore("todoStore", {
@@ -11,7 +11,7 @@ export const useTodoStore = defineStore("todoStore", {
   },
 
   getters: {
-    completedTasks: (state) => state.tasks.filter((task) => task.completed),
+    completedTasksGetters: (state) => state.tasks.filter((task) => task.completed),
   },
 
   actions: {
@@ -23,7 +23,7 @@ export const useTodoStore = defineStore("todoStore", {
           completed: false,
         };
 
-        await fetchWrapperPost("http://localhost:8080/add", data)
+        await apiPost("http://localhost:8080/add", data)
       } 
       
       else if (!this.validateDate(newTask.date) && this.validateTask(newTask.name)) {
@@ -38,7 +38,7 @@ export const useTodoStore = defineStore("todoStore", {
         alert("Invalid input");
       }
 
-      await this.fetchData()
+      await this.getData()
 
       return true;
     },
@@ -51,9 +51,9 @@ export const useTodoStore = defineStore("todoStore", {
         completed : this.tasks[data.indexFromTasks].completed
       }
 
-      await fetchWrapperPut(`http://localhost:8080/update/${data.index}`, tempTask)
+      await apiPut(`http://localhost:8080/update/${data.index}`, tempTask)
       
-      await this.fetchData()
+      await this.getData()
     },
 
     async markDone(task, index) {
@@ -65,21 +65,21 @@ export const useTodoStore = defineStore("todoStore", {
       }
       
       const url = `http://localhost:8080/update/${task.id}`
-      await fetchWrapperPut(url, tempTask)
+      await apiPut(url, tempTask)
       
-      await this.fetchData()
+      await this.getData()
     },
 
-    async fetchData() {
-      const data = await fetchWrapperGetAll("http://localhost:8080/getall")
+    async getData() {
+      const data = await apiGetAll("http://localhost:8080/getall")
       this.tasks = data
     },
     
     async removeTasks(taskData) {
       const data = `http://localhost:8080/delete/${taskData.index}`
-      await fetchWrapperDelete(data)
+      await apiDelete(data)
      
-      await this.fetchData()
+      await this.getData()
     },
 
     validateTask(task) {

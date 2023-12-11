@@ -51,21 +51,6 @@
                         @click="callOnCheckedDataTable">
                     </InputSwitch>
                 </div>
-
-                <!-- <div class="d-flex mt-1">
-                    <label
-                        class="mr-2"
-                        for="checkedEdit">
-                        {{ $t('edit') }}
-                    </label>
-
-                    <InputSwitch
-                        class="m-1"
-                        input-id="checkedEdit"
-                        v-model="checkedToggleEdit"
-                        @click="callOnToggleEdit">
-                    </InputSwitch>
-                </div> -->
             </div>
         </div> 
     </div>

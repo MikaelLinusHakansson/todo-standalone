@@ -1,4 +1,4 @@
-export function fetchWrapperPost(url, data) {
+export function apiPost(url, data) {
     data.date = data.date.toString()
 
     const options = {
@@ -25,7 +25,7 @@ export function fetchWrapperPost(url, data) {
     })
 }
 
-export async function fetchWrapperGetAll(url) {
+export async function apiGetAll(url) {
     try {
         const response = await fetch(url)
         
@@ -43,7 +43,7 @@ export async function fetchWrapperGetAll(url) {
       }
 }
 
-export function fetchWrapperPut(url, data) {
+export function apiPut(url, data) {
     data.date = data.date.toString()
 
     const options = {
@@ -70,7 +70,7 @@ export function fetchWrapperPut(url, data) {
     }) 
 }
 
-export function fetchWrapperDelete(url) {
+export function apiDelete(url) {
     const options = {
         method: "DELETE",
     

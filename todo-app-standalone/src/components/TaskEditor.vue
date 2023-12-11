@@ -16,7 +16,6 @@
                         aria-describedby="editTask-help"  
                         id="editTask">
                     </InputText>
-                    <!-- <label for="editTask"> {{$t('task')}} </label> -->
                 </span>
             </div>
             
@@ -31,19 +30,17 @@
                         showIcon id="calendar-24h" 
                         v-model="editDate" 
                         showTime hourFormat="24"
-                        manual-input="false" 
+                        :manual-input=false
                         showButtonBar
                         date-format="yy/mm/dd"
                         touchUI /> 
-                    <!-- <label for="editDate"> {{$t('date')}} </label> -->
                 </span>
             </div>
-
       </div>
+      
         <Bbutton
             @click="editNameSender"
             :disabled="this.completed"
-            :hidden="isVisable"
             class="me-2 m-1"
             severity="primary"
             icon="pi pi-check"
@@ -53,7 +50,6 @@
 
         <Bbutton
             @click="deleteTaskSender"    
-            :hidden="isVisable"
             class="me-2 m-1"
             severity="danger"
             icon="pi pi-trash">
@@ -96,7 +92,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useTodoStore, ['fetchData']),
+        ...mapActions(useTodoStore, ['getData']),
 
         editNameSender() {
             this.$emit('edit-name-sender', {
