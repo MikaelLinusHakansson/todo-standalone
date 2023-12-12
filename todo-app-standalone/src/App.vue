@@ -39,7 +39,7 @@ import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "@/components/TaskControls.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
-import TaskDataTable from "./components/TaskDataTable.vue";
+import TaskDataTable from "@/components/TaskDataTable.vue";
 
 export default {
   components: {
