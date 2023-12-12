@@ -12,7 +12,8 @@
                 <Column 
                     field="completed" 
                     header="Completed" 
-                    sortable style="width: 25%">
+                    sortable
+                    style="width: 25%">
                 </Column>
             
                 <Column

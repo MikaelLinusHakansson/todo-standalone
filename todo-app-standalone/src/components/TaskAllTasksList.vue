@@ -18,7 +18,7 @@
                 @click="startEditing(index)">
 
                     <Checkbox 
-                        v-model="task.completed" 
+                        v-model="task.completed"
                         :binary="true" 
                         @click="markDoneSender(task, index)" 
                         class="me-3">
@@ -37,14 +37,10 @@
 
                     <task-editor
                         :hidden="editIndex !== index"
-                        :completed="task.completed"
                         :currentIndex="index"
-                        :edit-name="editName"
-                        :edit-date="editDate"
-                        :task-index="task.id"
+                        :task-id="task.id"
                         :index-editor="index"
-                        @edit-name-sender="saveEdits"
-                        @delete-task-sender="removeTask">
+                        :completed-task="task">
                     </task-editor>
             </li>
         </ul>
@@ -64,13 +60,6 @@ export default {
     computed: {
         ...mapState(useTodoStore, ["tasks"])
     },
-    
-    props: {
-        task: Boolean,
-        index: Number,
-        editName: String,
-        editDate: String,
-    },
 
     data() {
         return {
@@ -79,19 +68,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useTodoStore, ["markDone", 'editTask', 'removeTasks', 'validateDate', 'validateTask', 'getData']),
-
-        saveEdits(data) {
-            if (this.validateTask(data.name) && this.validateDate(data.date)) {
-                
-                this.editTask(data)
-            } 
-            
-            else {
-
-                alert("Invalid input")
-            }
-        },
+        ...mapActions(useTodoStore, ["markDone"]),
 
         startEditing(index) {
             this.editIndex = index
@@ -99,10 +76,6 @@ export default {
 
         markDoneSender(task, index) {
             this.markDone(task, index)
-        },
-
-        removeTask(data) {
-            this.removeTasks(data)
         },
     },
 }

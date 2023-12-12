@@ -51,9 +51,14 @@ export const useTodoStore = defineStore("todoStore", {
         completed : this.tasks[data.indexFromTasks].completed
       }
 
-      await apiPut(`http://localhost:8080/update/${data.index}`, tempTask)
-      
-      await this.getData()
+      if (!this.validateTask(tempTask.name)) {
+        alert("Task can't be empty")
+      }
+
+      else {
+        await apiPut(`http://localhost:8080/update/${data.index}`, tempTask)
+        await this.getData()
+      }
     },
 
     async markDone(task, index) {

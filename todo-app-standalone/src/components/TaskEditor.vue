@@ -39,8 +39,8 @@
       </div>
       
         <Bbutton
-            @click="editNameSender"
-            :disabled="this.completed"
+            :disabled="this.completedTask.completed"
+            @click="editNameCall"
             class="me-2 m-1"
             severity="primary"
             icon="pi pi-check"
@@ -49,7 +49,7 @@
         </Bbutton>
 
         <Bbutton
-            @click="deleteTaskSender"    
+            @click="deleteTasks"
             class="me-2 m-1"
             severity="danger"
             icon="pi pi-trash">
@@ -67,8 +67,6 @@ import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
 
 export default {
-    emits: ['edit-name-sender', 'delete-task-sender'],
-
     components: {
         PrimeCalendar,
         InputText,
@@ -77,42 +75,42 @@ export default {
     },
 
     props: {
-        taskIndex : Number,
+        taskId : Number,
         taskName : String,
         currentIndexTasks : Number,
         currentIndex : Number,
-        completed: Boolean,
+        completedTask: Object,
+        markDoneSender: Function
     },
 
     data() {
         return {
-            editName : '',
-            editDate : ''
+            editName: '',
+            editDate: '',
         }
     },
 
     methods: {
-        ...mapActions(useTodoStore, ['getData']),
+        ...mapActions(useTodoStore, ['editTask', 'removeTasks']),
 
-        editNameSender() {
-            this.$emit('edit-name-sender', {
-                indexFromTasks : this.currentIndex,
-                index : this.taskIndex,
-                name : this.editName,
-                date : this.editDate,
-                completed : this.completed
+        editNameCall() {
+            this.editTask({
+                indexFromTasks: this.currentIndex,
+                index: this.taskId,
+                name: this.editName,
+                date: this.editDate,
             })
 
-            this.editName = ''
-            this.editDate = ''
+            this.editName = ""
+            this.editDate = ""
         },
 
-        deleteTaskSender() {
-            this.$emit('delete-task-sender', {
-                indexFromTasks : this.currentIndexTasks,
-                index : this.taskIndex
+        deleteTasks() {
+            this.removeTasks({
+                indexFromTasks: this.currentIndexTasks,
+                index: this.taskId
             })
-        }
-    }
+        },
+    },
 }
 </script>

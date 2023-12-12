@@ -17,58 +17,45 @@
       :hidden="visableAllTasks">
         <task-all-tasks-list
           class="list-group d-flex" 
-          :isVisable="isVisable"
-          :edit-name="editName"
-          :edit-date="editDate"
-          @edit-name-sender="saveEdits"
-          @delete-task-sender="removeTasks">
+          :isVisable="isVisable">
         </task-all-tasks-list>
     </div>
 
     <task-data-table :hidden="visableDataTable" />
 
-    <div :hidden="this.visableCompleted">
-      <task-completed-list />
+    <div 
+      :hidden="this.visableCompleted">
+        <task-completed-list />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapWritableState } from "pinia"
-import { useTodoStore } from "@/stores/TodoStore";
-
 import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
 import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "@/components/TaskControls.vue";
-import TaskEditor from "./components/TaskEditor.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "./components/TaskAllTasksList.vue";
 import TaskDataTable from "./components/TaskDataTable.vue";
 
 export default {
   components: {
-    TaskChangeLanguage,
     TaskTitleHeader,
+    TaskChangeLanguage,
     TaskForm,
     TaskControls,
-    TaskEditor,
-    TaskCompletedList,
     TaskAllTasksList,
     TaskDataTable,
+    TaskCompletedList,
 },
 
   data() {
     return {
-      newTaskName: '',
-      newTaskDate: '',
       isVisable: true,
       visableCompleted: true,
       visableAllTasks: false,
       visableDataTable: true,
-      editName: '',
-      editDate: '',
-      todoEntity: [],
     }
   },
 
@@ -78,33 +65,9 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(useTodoStore, ['tasks']),
-    ...mapWritableState(useTodoStore, ['tasks']),
-  },
+  computed: {},
 
   methods: {
-    ...mapActions(useTodoStore, ['createNewTask', 'removeTasks', 'markDone', 'editTask', 'validateTask', 'validateDate', 'getData']),
-
-    saveEdits(data) {
-      const configureTask = {
-        index: data.index,
-        name: data.name,
-        date: data.date
-      }
-
-      if (this.validateTask(configureTask.name) && this.validateDate(configureTask.date)) {
-        this.editTask(configureTask)
-      
-        this.editName = ''
-        this.editDate = ''
-      } 
-      
-      else {
-         alert("Invalid input")
-        }
-    },
-
     toggleCompleted() {
       this.visableCompleted = !this.visableCompleted
     },
