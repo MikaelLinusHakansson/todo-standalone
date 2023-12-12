@@ -31,6 +31,8 @@
 </template>
 
 <script>
+// TODO 1. Skapa ny komponent som blir blir nya App.vue, med andra ord byt namn på denna App.vue till ett annat passande namn. Skapa en ny komponent som kommer att importera denna komponenten och visa den i sin template.
+// TODO 2. I storen se till att byta ut getData() anropen som görs överallt till att lokalt manipulera listan med tasks för att undvika onödiga API anrop. 
 import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
 import TaskTitleHeader from "./components/TaskTitleHeader.vue";
 import TaskForm from "@/components/taskForm.vue";
