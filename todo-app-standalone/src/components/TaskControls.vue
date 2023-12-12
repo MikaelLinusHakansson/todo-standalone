@@ -13,7 +13,7 @@
                         class="m-1"
                         input-id="checkedAll"
                         v-model="checkedToggleAll" 
-                        @click="callOnToggleAll" >
+                        @click="toggleAll()" >
                             <span 
                                 id="checkedAll">
                             </span>
@@ -31,7 +31,7 @@
                         class="m-1"
                         input-id="checkedCompleted" 
                         v-model="checkedCompleted" 
-                        @click="callOnToggleCompleted">
+                        @click="toggleCompleted()">
                             <span 
                                 id="checkedCompleted">
                             </span>
@@ -48,7 +48,7 @@
                         class="m-1" 
                         input-id="checkDataTable" 
                         v-model="checkedDataTable" 
-                        @click="callOnCheckedDataTable">
+                        @click="toggleDataTable()">
                     </InputSwitch>
                 </div>
             </div>
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { mapState, mapWritableState, mapActions } from "pinia";
+import { useTodoStore } from "@/stores/todoStore.js"
 import InputSwitch from 'primevue/inputswitch';
 import PrimeCalender from "primevue/calendar";
 
@@ -73,9 +75,14 @@ export default {
         toggleDataTable: Function
     },
 
+    computed: {
+        ...mapState(useTodoStore, ["tasks"]),
+        ...mapWritableState(useTodoStore, ["tasks"]),
+    },
+
     data() {
         return {
-            checkedToggleAll: false,
+            checkedToggleAll: true,
             checkedCompleted: false,
             checkedToggleEdit: false,
             checkedDataTable: false,
@@ -83,27 +90,21 @@ export default {
     },
 
     created() {
-        this.callOnToggleAll()
+        this.toggleAll;
     },
 
     methods: {
+        ...mapActions(useTodoStore, ["markDone"]),
+
         callOnToggleAll() {
-            this.toggleAll()
             this.checkedToggleAll = !this.checkedToggleAll
         },
 
         callOnToggleCompleted() {
-            this.toggleCompleted()
             this.checkedCompleted = !this.checkedCompleted
         },
 
-        callOnToggleEdit() {
-            this.toggleEdit()
-            this.checkedToggleEdit = !this.checkedToggleEdit
-        },
-
         callOnCheckedDataTable() {
-            this.toggleDataTable()
             this.checkedDataTable = !this.checkedDataTable
         }
     }

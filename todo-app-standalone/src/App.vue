@@ -9,8 +9,7 @@
     <task-controls 
       :toggle-all="toggleAll"
       :toggle-completed="toggleCompleted"
-      :toggle-edit="ToggleEdit"
-      :toggleDataTable="toggleDataTable">
+      :toggle-data-table="toggleDataTable">
     </task-controls>
 
     <div 
@@ -28,7 +27,9 @@
 
     <task-data-table :hidden="visableDataTable" />
 
-    <task-completed-list :hidden="this.visableCompleted" />
+    <div :hidden="this.visableCompleted">
+      <task-completed-list />
+    </div>
   </div>
 </template>
 
@@ -63,7 +64,7 @@ export default {
       newTaskDate: '',
       isVisable: true,
       visableCompleted: true,
-      visableAllTasks: true,
+      visableAllTasks: false,
       visableDataTable: true,
       editName: '',
       editDate: '',

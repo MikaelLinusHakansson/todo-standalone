@@ -24,7 +24,7 @@
                         class="me-3">
                     </Checkbox>
                     
-                    <div class="flex-grow-1">
+                    <div class="flex-grow-1" >
                         <div>
                             <div>
                                 {{ task.name }}

@@ -68,6 +68,7 @@ export const useTodoStore = defineStore("todoStore", {
       await apiPut(url, tempTask)
       
       await this.getData()
+      
     },
 
     async getData() {
