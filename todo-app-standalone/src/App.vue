@@ -4,11 +4,7 @@
 
     <task-change-language />
 
-    <task-form
-      :taskNameId="'taskname'" 
-      :taskDateId="'taskdate'" 
-      @submit-new-task="createNewTask">
-    </task-form>
+    <task-form />
 
     <task-controls 
       :toggle-all="toggleAll"

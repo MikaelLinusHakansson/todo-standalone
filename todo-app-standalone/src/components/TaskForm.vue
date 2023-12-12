@@ -2,8 +2,6 @@
     <div class="mb-3">
         <div>
             <InputText
-                :id="taskNameId"
-                :name="taskNameId" 
                 v-model="taskName" 
                 class="mb-2" 
                 placeholder="Task">
@@ -19,6 +17,9 @@
 <script>
 import Calender from "@/components/Calender.vue"
 import InputText from 'primevue/inputtext'
+
+import { mapState, mapActions, mapWritableState } from "pinia"
+import { useTodoStore } from "@/stores/todoStore.js"
 
     export default {
         inject: ['i18n'],
@@ -40,16 +41,23 @@ import InputText from 'primevue/inputtext'
             }
         },
 
+        computed: {
+            ...mapState(useTodoStore, ["tasks"]),
+            ...mapWritableState(useTodoStore, ["tasks"]),
+            
+        },
+
         methods: {
+            ...mapActions(useTodoStore, ["createNewTask", "validateTask", "validateDate"]),
+
             submitNewTask(data) {
-                this.$emit('submit-new-task', {
-                    id: this.taskName.length + 1,
+                this.createNewTask({
                     name: this.taskName,
                     date: data.date
                 })
 
-                this.taskName = ''
-                this.taskDate = ''
+                this.taskName = ""
+                this.taskDate = ""
             },
 
             addDateFromCalenderComp(data) {
