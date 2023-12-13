@@ -1,7 +1,9 @@
 import dayjs, { Dayjs } from "dayjs";
 import { apiDelete, apiPost, apiGetAll, apiPut, getById } from "@/api/ApiWrapper.js";
 import { defineStore } from "pinia";
+import TodoService from "../api/services/todoService";
 
+const todoService = new TodoService()
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
@@ -27,8 +29,11 @@ export const useTodoStore = defineStore("todoStore", {
           completed: false,
         };
 
-        const createdTask = await apiPost("http://localhost:8080/add", data)
-        this.tasks.push(createdTask)
+        // const createdTask = await apiPost("http://localhost:8080/add", data)
+        
+       const newData = await todoService.post(data)
+        
+        this.tasks.push(newData)
       } 
       
       else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
