@@ -2,7 +2,7 @@ import ApiService from "./apiService"
 
 const TODO_API_BASE_URL = "http://localhost:8080"
 
-export default class TodoService extends ApiService {
+class TodoService extends ApiService {
     constructor() {
         super(TODO_API_BASE_URL)
     }
@@ -17,3 +17,5 @@ export default class TodoService extends ApiService {
         return await this.makeRequest('POST', '/add', newTodo)
     }
 }
+
+export default new TodoService();

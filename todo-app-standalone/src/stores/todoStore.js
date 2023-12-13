@@ -3,7 +3,7 @@ import { apiDelete, apiPost, apiGetAll, apiPut, getById } from "@/api/ApiWrapper
 import { defineStore } from "pinia";
 import TodoService from "../api/services/todoService";
 
-const todoService = new TodoService()
+// const todoService = new TodoService()
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
@@ -31,8 +31,7 @@ export const useTodoStore = defineStore("todoStore", {
 
         // const createdTask = await apiPost("http://localhost:8080/add", data)
         
-       const newData = await todoService.post(data)
-        
+       const newData = await TodoService.post(data)
         this.tasks.push(newData)
       } 
       
