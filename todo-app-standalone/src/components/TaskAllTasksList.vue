@@ -58,7 +58,7 @@ export default {
     components: { TaskEditor, Checkbox},
 
     computed: {
-        ...mapState(useTodoStore, ["tasks"])
+        ...mapState(useTodoStore, ["tasks", "getData"])
     },
 
     data() {

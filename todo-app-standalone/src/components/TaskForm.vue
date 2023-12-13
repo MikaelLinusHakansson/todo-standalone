@@ -29,11 +29,6 @@ import { useTodoStore } from "@/stores/todoStore.js"
             InputText,
         },
 
-        props: {
-            taskNameId: String,
-            taskDateId: String,
-        },
-
         data () {
             return {
                 taskName: '',
@@ -48,7 +43,7 @@ import { useTodoStore } from "@/stores/todoStore.js"
         },
 
         methods: {
-            ...mapActions(useTodoStore, ["createNewTask", "validateTask", "validateDate"]),
+            ...mapActions(useTodoStore, ["createNewTask"]),
 
             submitNewTask(data) {
                 this.createNewTask({

@@ -65,6 +65,7 @@ import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
+import dayjs from 'dayjs';
 
 export default {
     components: {
@@ -91,12 +92,16 @@ export default {
     },
 
     methods: {
-        ...mapActions(useTodoStore, ['editTask', 'removeTasks']),
+        ...mapActions(useTodoStore, ['editTask', 'removeTasks', 'getData']),
 
         editNameCall() {
+            if (this.editDate.length < 1) {
+                this.editDate = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+            }
+
             this.editTask({
                 indexFromTasks: this.currentIndex,
-                index: this.taskId,
+                id: this.taskId,
                 name: this.editName,
                 date: this.editDate,
             })
@@ -107,7 +112,7 @@ export default {
 
         deleteTasks() {
             this.removeTasks({
-                indexFromTasks: this.currentIndexTasks,
+                indexFromTasks: this.currentIndex,
                 index: this.taskId
             })
         },

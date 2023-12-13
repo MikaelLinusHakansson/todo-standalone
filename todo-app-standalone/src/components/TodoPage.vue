@@ -39,6 +39,9 @@ import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
 
+import { useTodoStore } from "../stores/todoStore";
+import { mapActions } from "pinia";
+
 export default {
     components: {
         TaskTitleHeader,
@@ -66,6 +69,8 @@ export default {
     },
 
     methods: {
+        ...mapActions(useTodoStore, ['getData']),
+
         toggleCompleted() {
             this.visableCompleted = !this.visableCompleted
         },
@@ -85,6 +90,10 @@ export default {
         changeTheLanguage(locale) {
         this.$i18n.locale = locale
         },
+    },
+
+    created() {
+        this.getData()
     }
 }
 </script>

@@ -89,10 +89,6 @@ export default {
         }
     },
 
-    created() {
-        this.toggleAll;
-    },
-
     methods: {
         ...mapActions(useTodoStore, ["markDone"]),
 

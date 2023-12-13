@@ -40,6 +40,7 @@ import Button from "primevue/button";
 
 import { mapActions } from "pinia";
 import { useTodoStore } from "@/stores/TodoStore"
+import dayjs from 'dayjs';
 
 export default {
     components: {
@@ -54,16 +55,12 @@ export default {
         }
     },
 
-    created() {
-        this.getData()
-    },
-
     methods: {
         ...mapActions(useTodoStore, ['getData']),
 
         sendDate() {
             this.$emit('date-time', {
-                date: this.datetime24h
+                date: dayjs(this.datetime24h).format('ddd, DD MMM YYYY HH:mm:ss [GMT]') 
             })
 
             this.datetime24h = ''
