@@ -68,7 +68,7 @@ export default {
     methods: {
         toggleCompleted() {
             this.visableCompleted = !this.visableCompleted
-    },
+        },
 
         toggleAll() {
             this.visableAllTasks = !this.visableAllTasks
