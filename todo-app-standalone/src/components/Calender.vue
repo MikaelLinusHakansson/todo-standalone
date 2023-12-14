@@ -60,7 +60,7 @@ export default {
 
         sendDate() {
             this.$emit('date-time', {
-                date: dayjs(this.datetime24h).format('ddd, MMM DD HH:mm:ss [CET] YYYY') 
+                date: dayjs(this.datetime24h)
             })
 
             this.datetime24h = ''

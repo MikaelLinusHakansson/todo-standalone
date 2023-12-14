@@ -95,10 +95,6 @@ export default {
         ...mapActions(useTodoStore, ['editTask', 'removeTasks', 'getData']),
 
         editNameCall() {
-            if (this.editDate.length < 1) {
-                this.editDate = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
-            }
-
             this.editTask({
                 indexFromTasks: this.currentIndex,
                 id: this.taskId,

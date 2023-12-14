@@ -18,8 +18,8 @@ export const useTodoStore = defineStore("todoStore", {
   actions: {
     async createNewTask(newTask) {
       if (this.validateTask(newTask.name)) {
-        if (!this.validateDate(newTask.date)) {
-          newTask.date = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
+        if (this.validateDate(newTask.date)) {
+          newTask.date = dayjs(newTask.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
         const newData = await TodoService.post(newTask)
@@ -33,6 +33,7 @@ export const useTodoStore = defineStore("todoStore", {
       else {
         alert("Invalid input");
       }
+      
       return true;
     },
 
@@ -40,14 +41,12 @@ export const useTodoStore = defineStore("todoStore", {
       if (!this.validateTask(data.name)) {
         alert("Task can't be empty")
       }
-
+      
       else {
-        if (data.date.length < 1) {
-          data.date = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
+        if (this.validateDate(data.date)) {
+          data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
-
         const updatedTask = await todoService.put(data.id, data)
         this.tasks[data.indexFromTasks] = updatedTask
       }
