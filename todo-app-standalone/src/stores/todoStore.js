@@ -1,10 +1,8 @@
 import dayjs, { Dayjs } from "dayjs";
-import { apiDelete, apiPost, apiGetAll, apiPut, getById } from "@/api/ApiWrapper.js";
 import { defineStore } from "pinia";
-import TodoService from "../api/services/todoService";
-import todoService from "../api/services/todoService";
+import TodoService from "../api/services/_TodoService";
+import todoService from "../api/services/_TodoService";
 
-// const todoService = new TodoService()
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
@@ -49,7 +47,7 @@ export const useTodoStore = defineStore("todoStore", {
         }
         
         data.date = dayjs(data.date).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
-        
+
         const updatedTask = await todoService.put(data.id, data)
         this.tasks[data.indexFromTasks] = updatedTask
       }
