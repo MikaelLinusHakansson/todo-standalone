@@ -16,6 +16,18 @@ class TodoService extends ApiService {
 
         return await this.makeRequest('POST', '/add', newTodo)
     }
+
+    async put(id, data) {
+        return await this.makeRequest('PUT', `/update/${id}`, data)
+    }
+
+    async getAll() {
+        return await this.makeRequest('GET', '/getall')
+    }
+
+    async delete(data){
+        await this.makeRequest('DELETE', `/delete/${data}`)
+    }
 }
 
 export default new TodoService();

@@ -2,6 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { apiDelete, apiPost, apiGetAll, apiPut, getById } from "@/api/ApiWrapper.js";
 import { defineStore } from "pinia";
 import TodoService from "../api/services/todoService";
+import todoService from "../api/services/todoService";
 
 // const todoService = new TodoService()
 export const useTodoStore = defineStore("todoStore", {
@@ -22,16 +23,8 @@ export const useTodoStore = defineStore("todoStore", {
         if (!this.validateDate(newTask.date)) {
           newTask.date = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
         }
-
-        let data = {
-          name: newTask.name,
-          date: newTask.date,
-          completed: false,
-        };
-
-        // const createdTask = await apiPost("http://localhost:8080/add", data)
         
-       const newData = await TodoService.post(data)
+        const newData = await TodoService.post(newTask)
         this.tasks.push(newData)
       } 
       
@@ -46,24 +39,19 @@ export const useTodoStore = defineStore("todoStore", {
     },
 
     async editTask(data) {
-      const tempTask = {
-        id : data.id,
-        name : data.name,
-        date : dayjs(data.date).format('ddd, DD MMM YYYY HH:mm:ss [GMT]'),
-        completed : this.tasks[data.indexFromTasks].completed
-      }
-      
-      if (!this.validateTask(tempTask.name)) {
+      if (!this.validateTask(data.name)) {
         alert("Task can't be empty")
       }
 
       else {
-        if (tempTask.date.length < 1) {
-          tempTask.date = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+        if (data.date.length < 1) {
+          data.date = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
         }
-
-        const editedTask = await apiPut(`http://localhost:8080/update/${data.id}`, tempTask)
-        this.tasks[data.indexFromTasks] = editedTask
+        
+        data.date = dayjs(data.date).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+        
+        const updatedTask = await todoService.put(data.id, data)
+        this.tasks[data.indexFromTasks] = updatedTask
       }
     },
 
@@ -74,20 +62,17 @@ export const useTodoStore = defineStore("todoStore", {
         date : task.date,
         completed : !task.completed,
       }
-
-      const url = `http://localhost:8080/update/${task.id}`
-      const markedAsDone = await apiPut(url, tempTask)
+      
+      const markedAsDone = await todoService.put(task.id, tempTask)
       this.tasks[index] = markedAsDone
     },
 
     async getData() {
-      const data = await apiGetAll("http://localhost:8080/getall")
-      this.tasks = data
+      this.tasks = await todoService.getAll();
     },
     
     async removeTasks(taskData) {
-      const data = `http://localhost:8080/delete/${taskData.index}`
-      await apiDelete(data)
+      await todoService.delete(taskData.index)
       this.tasks.splice(taskData.indexFromTasks, 1)
     },
 

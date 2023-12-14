@@ -18,20 +18,24 @@ export default class ApiService {
         if (data) {
             config.body = JSON.stringify(data)
         }
-
+        
         try {
-            const response = await fetch(url, config)
-
-            if (!response.ok) {
-                throw new Error (`HTTP error! Status: ${response.status}`)
+                const response = await fetch(url, config)
+            
+                if (!response.ok) {
+                    throw new Error (`HTTP error! Status: ${response.status}`)
+                }
+                
+                if (method === 'DELETE') {
+                    return null
+                }
+                
+                return returnFullResponse ? response : await response.json()
             }
-
-            return returnFullResponse ? response : await response.json()
-        } 
-
-        catch (error) {
-            console.error(`Error making ${method} request to ${url}`, error.message)
-            throw error
-        }
+            
+            catch (error) {
+                console.error(`Error making ${method} request to ${url}`, error.message)
+                throw error
+            }
     }
 }
