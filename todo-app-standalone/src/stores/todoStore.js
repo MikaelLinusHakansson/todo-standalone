@@ -19,7 +19,7 @@ export const useTodoStore = defineStore("todoStore", {
     async createNewTask(newTask) {
       if (this.validateTask(newTask.name)) {
         if (!this.validateDate(newTask.date)) {
-          newTask.date = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+          newTask.date = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
         const newData = await TodoService.post(newTask)
@@ -43,10 +43,10 @@ export const useTodoStore = defineStore("todoStore", {
 
       else {
         if (data.date.length < 1) {
-          data.date = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+          data.date = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        data.date = dayjs(data.date).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+        data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
 
         const updatedTask = await todoService.put(data.id, data)
         this.tasks[data.indexFromTasks] = updatedTask

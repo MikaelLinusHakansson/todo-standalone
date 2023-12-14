@@ -96,7 +96,7 @@ export default {
 
         editNameCall() {
             if (this.editDate.length < 1) {
-                this.editDate = dayjs(new Date()).format('ddd, DD MMM YYYY HH:mm:ss [GMT]')
+                this.editDate = dayjs(new Date()).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
             }
 
             this.editTask({
