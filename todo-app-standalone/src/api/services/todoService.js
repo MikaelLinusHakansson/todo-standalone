@@ -1,6 +1,6 @@
 import ApiService from "./apiService"
 
-const TODO_API_BASE_URL = "http://localhost:8080"
+const TODO_API_BASE_URL = "http://localhost:8080/api/todo"
 
 class TodoService extends ApiService {
     constructor() {
