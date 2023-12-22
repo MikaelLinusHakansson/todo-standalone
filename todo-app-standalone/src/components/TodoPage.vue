@@ -27,6 +27,8 @@
       :hidden="this.visableCompleted">
         <task-completed-list />
     </div>
+
+    <login-page></login-page>
   </div>
 </template>
 
@@ -38,6 +40,7 @@ import TaskControls from "@/components/TaskControls.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
+import LoginPage from "./LoginPage.vue";
 
 import { useTodoStore } from "../stores/todoStore";
 import { mapActions } from "pinia";
@@ -51,6 +54,7 @@ export default {
         TaskAllTasksList,
         TaskDataTable,
         TaskCompletedList,
+        LoginPage
     },
         
     data() {
