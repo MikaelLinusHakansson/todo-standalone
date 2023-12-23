@@ -3,11 +3,14 @@ export default class ApiService {
         this.baseURL = baseURL
     }
 
-    async makeRequest(method, endpoint, data = null, returnFullResponse = null) {
+    async makeRequest(method, endpoint, data = null, accessToken = null , returnFullResponse = null) {
         const url = `${this.baseURL}${endpoint}`
-
         const headers = {
             'Content-Type': 'application/json',
+        }
+
+        if (accessToken) {
+            headers['Authorization'] = `Bearer ${accessToken}`
         }
 
         const config = {

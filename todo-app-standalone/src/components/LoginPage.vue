@@ -10,15 +10,17 @@
             <Password v-model="password" :feedback="false" toggleMask></Password>
             <Button @click="login">Login</Button>
         </div>
+        <button @click="getAccessToken">Press me </button>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import { userStore } from '../stores/userStore';
+
 import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-
-
 
 export default {
     components: {
@@ -36,8 +38,16 @@ export default {
     },
 
     methods: {
+        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout']),
+
         login() {
-            console.log(this.password, this.username)
+            const user = {
+                username: this.username,
+                password: this.password,
+            }
+            
+            this.setUser(user)
+
             this.username = ''
             this.password = ''
         }

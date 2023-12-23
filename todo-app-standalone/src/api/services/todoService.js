@@ -1,5 +1,6 @@
 import ApiService from "./apiService"
-
+// import { userStore } from "@/stores/userStore"
+import { userStore } from "../../stores/userStore"
 const TODO_API_BASE_URL = "http://localhost:8080/api/todo"
 
 class TodoService extends ApiService {
@@ -21,8 +22,10 @@ class TodoService extends ApiService {
         return await this.makeRequest('PUT', `/update/${id}`, data)
     }
 
-    async getAll() {
-        return await this.makeRequest('GET', '/getall')
+    async getAll(accessToken) {
+        console.log(accessToken, "form todoService")
+        console.log(userStore.accessToken, "from user store")
+        return await this.makeRequest('GET', '/getall', null, accessToken, null)
     }
 
     async delete(data){

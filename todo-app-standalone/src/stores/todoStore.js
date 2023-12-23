@@ -1,6 +1,6 @@
-import dayjs, { Dayjs } from "dayjs";
 import { defineStore } from "pinia";
-import TodoService from "../api/services/todoService";
+
+import dayjs from "dayjs";
 import todoService from "../api/services/todoService";
 
 export const useTodoStore = defineStore("todoStore", {
@@ -22,7 +22,7 @@ export const useTodoStore = defineStore("todoStore", {
           newTask.date = dayjs(newTask.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        const newData = await TodoService.post(newTask)
+        const newData = await todoService.post(newTask)
         this.tasks.push(newData)
       } 
       
@@ -64,8 +64,8 @@ export const useTodoStore = defineStore("todoStore", {
       this.tasks[index] = markedAsDone
     },
 
-    async getData() {
-      this.tasks = await todoService.getAll();
+    async getData(accessToken) {
+      this.tasks = await todoService.getAll(accessToken);
     },
     
     async removeTasks(taskData) {
