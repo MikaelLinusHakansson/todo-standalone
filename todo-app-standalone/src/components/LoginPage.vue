@@ -37,13 +37,9 @@ export default {
             bearerToken: "",
         }
     },
-
-    computed: {
-        ...mapState(userStore, ["user", "accessToken"]),
-    },
-
+    
     methods: {
-        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout']),
+        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens']),
 
         async login() {
             const user = {
@@ -52,7 +48,7 @@ export default {
             }
             
             await this.setUser(user)
-            this.bearerToken = this.accessToken
+            this.bearerToken = this.getAccessTokens()
             this.$router.push('/todo')
             
             this.username = ''

@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-
 import UserApiService from "../api/services/UserApiService";
 
 export const userStore = defineStore("userStore", {
@@ -8,9 +7,16 @@ export const userStore = defineStore("userStore", {
         user: null,
     }),
 
+    getters: {
+        getAccessToken() {
+            return this.$cookies.get('accessToken')
+        },
+    },
+
     actions: {
         setBearerToken(BearerToken) {
             this.accessToken = BearerToken;
+            
         },
 
         async setUser(user) {
@@ -18,7 +24,12 @@ export const userStore = defineStore("userStore", {
 
             this.user = user;
             this.accessToken = response.accessToken
-            console.log(this.accessToken, "from user store")
+
+            $cookies.set('accessToken', this.accessToken)
+        },
+
+        getAccessTokens() {
+            return $cookies.get('accessToken')
         },
 
         logout() {

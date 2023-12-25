@@ -92,34 +92,27 @@ export default {
         }
     },
 
-    computed: {
-        ...mapState(userStore, ['accessToken'])
-    },
-
     methods: {
+        ...mapActions(userStore, ["getAccessTokens"]),
         ...mapActions(useTodoStore, ['editTask', 'removeTasks', 'getData']),
 
-        async editNameCall() {
-            const accessToken = await this.accessToken;
-            console.log(this.accessToken, "from taskEditor editNameCall")
-
+        editNameCall() {
             this.editTask({
                 indexFromTasks: this.currentIndex,
                 id: this.taskId,
                 name: this.editName,
                 date: this.editDate,
-            }, accessToken)
+            }, this.getAccessTokens())
 
             this.editName = ""
             this.editDate = ""
         },
 
         deleteTasks() {
-            const accessToken = this.accessToken
             this.removeTasks({
                 indexFromTasks: this.currentIndex,
                 index: this.taskId
-            }, accessToken)
+            }, this.getAccessTokens())
         },
     },
 }

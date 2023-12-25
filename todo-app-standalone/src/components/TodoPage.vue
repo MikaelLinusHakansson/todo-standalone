@@ -41,8 +41,9 @@ import TaskDataTable from "@/components/TaskDataTable.vue";
 import LoginPage from "./LoginPage.vue";
 
 import { useTodoStore } from "../stores/todoStore";
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState} from "pinia";
 import { userStore } from "../stores/userStore";
+
 
 export default {
     components: {
@@ -54,10 +55,6 @@ export default {
         TaskDataTable,
         TaskCompletedList,
         LoginPage
-    },
-
-    computed: {
-        ...mapState(userStore, ["user", "accessToken"]),
     },
         
     data() {
@@ -76,8 +73,8 @@ export default {
     },
 
     methods: {
+        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens']),
         ...mapActions(useTodoStore, ['getData']),
-        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout']),
 
         toggleCompleted() {
             this.visableCompleted = !this.visableCompleted
@@ -98,15 +95,10 @@ export default {
         changeTheLanguage(locale) {
         this.$i18n.locale = locale
         },
-
-        sendAccessToken() {
-            console.log(this.accessToken)
-            this.getData(this.accessToken)
-        },
     },
 
     created() {
-        this.getData(this.accessToken)
+        this.getData(this.getAccessTokens())
     }
 }
 </script>

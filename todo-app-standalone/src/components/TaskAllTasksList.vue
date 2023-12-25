@@ -59,7 +59,6 @@ export default {
     components: { TaskEditor, Checkbox},
 
     computed: {
-        ...mapState(userStore, ['accessToken']),
         ...mapState(useTodoStore, ["tasks", "getData"])
     },
 
@@ -70,6 +69,7 @@ export default {
     },
 
     methods: {
+        ...mapActions(userStore, ['getAccessTokens']),
         ...mapActions(useTodoStore, ["markDone"]),
 
         startEditing(index) {
@@ -77,7 +77,7 @@ export default {
         },
 
         markDoneSender(task, index) {
-            this.markDone(task, index, this.accessToken)
+            this.markDone(task, index, this.getAccessTokens())
         },
     },
 }

@@ -18,7 +18,6 @@ class TodoService extends ApiService {
     }
 
     async put(id, data, accessToken) {
-        console.log(accessToken, "todo service")
         return await this.makeRequest('PUT', `/update/${id}`, data, accessToken, null)
     }
     
@@ -28,7 +27,6 @@ class TodoService extends ApiService {
     
     // async makeRequest(method, endpoint, data = null, accessToken = null , returnFullResponse = null)
     async delete(data, accessToken){
-        console.log(data, accessToken, "from delete service")
         await this.makeRequest('DELETE', `/delete/${data}`, null, accessToken, null)
     }
 }

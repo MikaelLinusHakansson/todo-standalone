@@ -56,11 +56,8 @@ export default {
         }
     },
 
-    computed: {
-        ...mapState(userStore, ['accessToken'])
-    },
-
     methods: {
+        ...mapActions(userStore, ['getAccessTokens']),
         ...mapActions(useTodoStore, ['getData']),
 
         sendDate() {

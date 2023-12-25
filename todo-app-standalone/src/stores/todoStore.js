@@ -47,7 +47,6 @@ export const useTodoStore = defineStore("todoStore", {
           data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        console.log(accessToken)
         const updatedTask = await todoService.put(data.id, data, accessToken)
         this.tasks[data.indexFromTasks] = updatedTask
       }
@@ -70,7 +69,6 @@ export const useTodoStore = defineStore("todoStore", {
     },
     
     async removeTasks(taskData, accessToken) {
-      console.log(accessToken, "from todoStore remove tasks")
       await todoService.delete(taskData.index, accessToken)
       this.tasks.splice(taskData.indexFromTasks, 1)
     },

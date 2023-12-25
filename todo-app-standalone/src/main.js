@@ -1,5 +1,6 @@
 import { createApp } from "vue"
 import { createPinia } from "pinia"
+import { VueCookies } from "vue-cookies"
 
 import i18n from "./configurations/i18n.js"
 import router from "@/router.js"
@@ -17,6 +18,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css"
 const app = createApp(App);
 const pinia = createPinia();
 
+app.use(VueCookies);
 app.use(pinia);
 app.use(router);
 app.use(primevue);

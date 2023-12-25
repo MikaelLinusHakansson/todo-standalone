@@ -39,19 +39,19 @@ import { userStore } from '../stores/userStore'
 
         computed: {
             ...mapState(useTodoStore, ["tasks"]),
-            ...mapState(userStore, ["accessToken"]),
             ...mapWritableState(useTodoStore, ["tasks"]),
             
         },
 
         methods: {
+            ...mapActions(userStore, ['getAccessTokens']),
             ...mapActions(useTodoStore, ["createNewTask"]),
 
             submitNewTask(data) {
                 this.createNewTask({
                     name: this.taskName,
                     date: data.date
-                }, this.accessToken)
+                }, this.getAccessTokens())
 
                 this.taskName = ""
                 this.taskDate = ""
