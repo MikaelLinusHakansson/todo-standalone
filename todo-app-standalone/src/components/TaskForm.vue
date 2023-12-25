@@ -20,6 +20,7 @@ import InputText from 'primevue/inputtext'
 
 import { mapState, mapActions, mapWritableState } from "pinia"
 import { useTodoStore } from "@/stores/todoStore.js"
+import { userStore } from '../stores/userStore'
 
     export default {
         inject: ['i18n'],
@@ -38,6 +39,7 @@ import { useTodoStore } from "@/stores/todoStore.js"
 
         computed: {
             ...mapState(useTodoStore, ["tasks"]),
+            ...mapState(userStore, ["accessToken"]),
             ...mapWritableState(useTodoStore, ["tasks"]),
             
         },
@@ -49,7 +51,7 @@ import { useTodoStore } from "@/stores/todoStore.js"
                 this.createNewTask({
                     name: this.taskName,
                     date: data.date
-                })
+                }, this.accessToken)
 
                 this.taskName = ""
                 this.taskDate = ""

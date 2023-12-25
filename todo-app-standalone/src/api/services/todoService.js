@@ -1,6 +1,6 @@
 import ApiService from "./apiService"
 // import { userStore } from "@/stores/userStore"
-import { userStore } from "../../stores/userStore"
+// import { userStore } from "../../stores/userStore"
 const TODO_API_BASE_URL = "http://localhost:8080/api/todo"
 
 class TodoService extends ApiService {
@@ -8,28 +8,28 @@ class TodoService extends ApiService {
         super(TODO_API_BASE_URL)
     }
 
-    async post(data) {
+    async post(data, accessToken) {
         const newTodo = {
             name: data.name,
             date: data.date,
             completed: false
         }
-
-        return await this.makeRequest('POST', '/add', newTodo)
+        return await this.makeRequest('POST', '/add', newTodo, accessToken, null)
     }
 
-    async put(id, data) {
-        return await this.makeRequest('PUT', `/update/${id}`, data)
+    async put(id, data, accessToken) {
+        console.log(accessToken, "todo service")
+        return await this.makeRequest('PUT', `/update/${id}`, data, accessToken, null)
     }
-
+    
     async getAll(accessToken) {
-        console.log(accessToken, "form todoService")
-        console.log(userStore.accessToken, "from user store")
         return await this.makeRequest('GET', '/getall', null, accessToken, null)
     }
-
-    async delete(data){
-        await this.makeRequest('DELETE', `/delete/${data}`)
+    
+    // async makeRequest(method, endpoint, data = null, accessToken = null , returnFullResponse = null)
+    async delete(data, accessToken){
+        console.log(data, accessToken, "from delete service")
+        await this.makeRequest('DELETE', `/delete/${data}`, null, accessToken, null)
     }
 }
 

@@ -26,7 +26,7 @@
 
             <Button
                 class="m-1"
-                @click="this.getData()" 
+                @click="this.getData(this.accessToken)" 
                 icon="pi pi-refresh" 
                 text raised>
             </Button>
@@ -38,9 +38,10 @@
 import PrimeCalender from "primevue/calendar";
 import Button from "primevue/button";
 
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useTodoStore } from "@/stores/TodoStore"
 import dayjs from 'dayjs';
+import { userStore } from '../stores/userStore';
 
 export default {
     components: {
@@ -53,6 +54,10 @@ export default {
             datetime24h: '',
             buttondisplay: null,
         }
+    },
+
+    computed: {
+        ...mapState(userStore, ['accessToken'])
     },
 
     methods: {

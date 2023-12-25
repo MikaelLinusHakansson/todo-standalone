@@ -53,11 +53,13 @@ import { useTodoStore } from '@/stores/todoStore.js'
 
 import TaskEditor from '@/components/TaskEditor.vue';
 import Checkbox from 'primevue/checkbox';
+import { userStore } from '../stores/userStore';
 
 export default {
     components: { TaskEditor, Checkbox},
 
     computed: {
+        ...mapState(userStore, ['accessToken']),
         ...mapState(useTodoStore, ["tasks", "getData"])
     },
 
@@ -75,7 +77,7 @@ export default {
         },
 
         markDoneSender(task, index) {
-            this.markDone(task, index)
+            this.markDone(task, index, this.accessToken)
         },
     },
 }

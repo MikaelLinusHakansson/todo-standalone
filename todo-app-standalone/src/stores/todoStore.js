@@ -16,13 +16,13 @@ export const useTodoStore = defineStore("todoStore", {
   },
 
   actions: {
-    async createNewTask(newTask) {
+    async createNewTask(newTask, accessToken) {
       if (this.validateTask(newTask.name)) {
         if (this.validateDate(newTask.date)) {
           newTask.date = dayjs(newTask.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        const newData = await todoService.post(newTask)
+        const newData = await todoService.post(newTask, accessToken)
         this.tasks.push(newData)
       } 
       
@@ -37,7 +37,7 @@ export const useTodoStore = defineStore("todoStore", {
       return true;
     },
 
-    async editTask(data) {
+    async editTask(data, accessToken) {
       if (!this.validateTask(data.name)) {
         alert("Task can't be empty")
       }
@@ -47,12 +47,13 @@ export const useTodoStore = defineStore("todoStore", {
           data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
         
-        const updatedTask = await todoService.put(data.id, data)
+        console.log(accessToken)
+        const updatedTask = await todoService.put(data.id, data, accessToken)
         this.tasks[data.indexFromTasks] = updatedTask
       }
     },
 
-    async markDone(task, index) {
+    async markDone(task, index, accessToken) {
       const tempTask = {
         id : task.id,
         name : task.name,
@@ -60,7 +61,7 @@ export const useTodoStore = defineStore("todoStore", {
         completed : !task.completed,
       }
       
-      const markedAsDone = await todoService.put(task.id, tempTask)
+      const markedAsDone = await todoService.put(task.id, tempTask, accessToken)
       this.tasks[index] = markedAsDone
     },
 
@@ -68,8 +69,9 @@ export const useTodoStore = defineStore("todoStore", {
       this.tasks = await todoService.getAll(accessToken);
     },
     
-    async removeTasks(taskData) {
-      await todoService.delete(taskData.index)
+    async removeTasks(taskData, accessToken) {
+      console.log(accessToken, "from todoStore remove tasks")
+      await todoService.delete(taskData.index, accessToken)
       this.tasks.splice(taskData.indexFromTasks, 1)
     },
 

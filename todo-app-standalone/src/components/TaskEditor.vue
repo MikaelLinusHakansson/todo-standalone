@@ -58,8 +58,9 @@
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useTodoStore } from "@/stores/TodoStore"
+import { userStore } from '../stores/userStore';
 
 import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
@@ -91,26 +92,34 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState(userStore, ['accessToken'])
+    },
+
     methods: {
         ...mapActions(useTodoStore, ['editTask', 'removeTasks', 'getData']),
 
-        editNameCall() {
+        async editNameCall() {
+            const accessToken = await this.accessToken;
+            console.log(this.accessToken, "from taskEditor editNameCall")
+
             this.editTask({
                 indexFromTasks: this.currentIndex,
                 id: this.taskId,
                 name: this.editName,
                 date: this.editDate,
-            })
+            }, accessToken)
 
             this.editName = ""
             this.editDate = ""
         },
 
         deleteTasks() {
+            const accessToken = this.accessToken
             this.removeTasks({
                 indexFromTasks: this.currentIndex,
                 index: this.taskId
-            })
+            }, accessToken)
         },
     },
 }
