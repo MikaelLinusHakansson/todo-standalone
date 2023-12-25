@@ -15,9 +15,10 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { userStore } from '../stores/userStore';
 
+import router from '../router';
 import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
@@ -37,17 +38,23 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState(userStore, ["user", "accessToken"]),
+    },
+
     methods: {
         ...mapActions(userStore, ['setUser','setBearerToken' , 'logout']),
 
-        login() {
+        async login() {
             const user = {
                 username: this.username,
                 password: this.password,
             }
             
-            this.setUser(user)
-
+            await this.setUser(user)
+            this.bearerToken = this.accessToken
+            this.$router.push('/todo')
+            
             this.username = ''
             this.password = ''
         }

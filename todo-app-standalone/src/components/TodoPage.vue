@@ -27,9 +27,6 @@
       :hidden="this.visableCompleted">
         <task-completed-list />
     </div>
-
-    <login-page></login-page>
-    <button @click="kuk">Kuk</button>
   </div>
 </template>
 
@@ -102,16 +99,14 @@ export default {
         this.$i18n.locale = locale
         },
 
-        kuk() {
+        sendAccessToken() {
             console.log(this.accessToken)
             this.getData(this.accessToken)
         },
     },
 
-    
-
     created() {
-        this.getData()
+        this.getData(this.accessToken)
     }
 }
 </script>
