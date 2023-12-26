@@ -16,5 +16,15 @@ class UserApiService extends ApiService {
         const response = await this.makeRequest('POST', '/login', newUser)
         return response 
     }
+
+    async register(data) {
+        const newUser = {
+            username: data.username,
+            password: data.password
+        }
+        
+        const response = await this.makeRequest('POST', '/register', newUser)
+        return response
+    }
 }
 export default new UserApiService();

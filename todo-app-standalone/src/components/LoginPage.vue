@@ -2,6 +2,8 @@
     <Card style="25em" class="d-flex flex-column align-items-center">
         <template #title>Login</template>
         <template #content>
+            <InputText v-model="regUsername">username</InputText>
+            <Password v-model="regPassword" toggleMask>password</Password>
             <div>
                 <div class="mb-2">
                         <label for="username" id="username">Username</label>
@@ -23,9 +25,10 @@
             <div >
                 <div class="btn-group">
                     <Button @click="login" style="margin-right: 5px;">Login</Button>
-                    <Button>Register</Button>
+                    <Button @click="registerUser">Register</Button>
                 </div>
             </div>
+        
         </template>
     </Card>
 </template>
@@ -40,8 +43,10 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 
 export default { 
-    // TODO remove inline styling, probably not an issue when i build my own css lib?
     // TODO add register page. Do we just hide the page or build another component with route?
+    // TODO register logic is done and works, need to add another card or view / route for register page
+    
+    // TODO remove inline styling, probably not an issue when i build my own css lib?
     // TODO add a logout button that resets the baerer token and translations! Test
     components: {
         Password,
@@ -55,11 +60,13 @@ export default {
             username: "",
             password: "",
             bearerToken: "",
+            regUsername: "",
+            regPassword: "",
         }
     },
     
     methods: {
-        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens']),
+        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'register']),
 
         async login() {
             const user = {
@@ -73,6 +80,17 @@ export default {
             
             this.username = ''
             this.password = ''
+        },
+
+        async registerUser() {
+            const user = {
+                username: this.regUsername,
+                password: this.regPassword,
+            }
+            this.register(user)
+
+            this.regUsername = ''
+            this.regPassword = ''
         }
     },
 }

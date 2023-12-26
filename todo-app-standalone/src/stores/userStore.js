@@ -28,6 +28,11 @@ export const userStore = defineStore("userStore", {
             $cookies.set('accessToken', this.accessToken)
         },
 
+        async register(user) {
+            const response = await UserApiService.register(user)
+            return response
+        },
+
         getAccessTokens() {
             return $cookies.get('accessToken')
         },
