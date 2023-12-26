@@ -42,7 +42,7 @@ import Card from 'primevue/card';
 export default { 
     // TODO remove inline styling, probably not an issue when i build my own css lib?
     // TODO add register page. Do we just hide the page or build another component with route?
-    // TODO add a logout button that resets the baerer token and translations!
+    // TODO add a logout button that resets the baerer token and translations! Test
     components: {
         Password,
         InputText,
