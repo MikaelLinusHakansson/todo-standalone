@@ -47,7 +47,7 @@ export default {
     // TODO register logic is done and works, need to add another card or view / route for register page
     
     // TODO remove inline styling, probably not an issue when i build my own css lib?
-    // TODO add a logout button that resets the baerer token and translations! Test
+    // TODO add a logout button that resets the baerer token and translations!
     components: {
         Password,
         InputText,
