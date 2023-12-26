@@ -10,12 +10,12 @@ const router = createRouter({
     },
     {
       path: "/login",
-      name: "login",
+      name: "login.auth",
       component: () => import ("@/components/LoginPage.vue"),
     },
     {
       path: "/todo",
-      name: "todo",
+      name: "todo.list",
       component: () => import("@/components/TodoPage.vue"),
     },
   ],
