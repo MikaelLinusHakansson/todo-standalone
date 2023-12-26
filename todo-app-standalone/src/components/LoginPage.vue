@@ -39,7 +39,9 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 
-export default {
+export default { 
+    // TODO remove inline styling, probably not an issue when i build my own css lib?
+    // TODO add register page. Do we just hide the page or build another component with route?
     components: {
         Password,
         InputText,
