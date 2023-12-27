@@ -18,9 +18,9 @@ import "bootstrap-vue/dist/bootstrap-vue.css"
 const app = createApp(App);
 const pinia = createPinia();
 
+app.use(i18n);
 app.use(VueCookies);
 app.use(pinia);
 app.use(router);
 app.use(primevue);
-app.use(i18n);
 app.mount('#app');

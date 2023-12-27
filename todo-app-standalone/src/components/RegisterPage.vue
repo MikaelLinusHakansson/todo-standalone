@@ -2,6 +2,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <task-change-language />
                 <Card>
                     <template #title></template>
                         <h2 class="text-center">Register</h2>
@@ -9,7 +10,7 @@
                             <form>
                                 <div>
                                    <div class="mb-3">
-                                        <label for="username" id="username" class="form-label">Username</label>
+                                        <label for="username" id="username" class="form-label">{{ $t('username') }}</label>
                                         <InputText v-model="username" id="username" class="form-control">username</InputText>
                                     </div>
                                     <div class="mb-3">
@@ -17,12 +18,12 @@
                                         <Password v-model="password" toggleMask promptLabel="Enter your password" weakLabel="Very Weak" mediumLabel="Medium" strongLabel="Strong">password</Password>
                                     </div> 
                                 </div>
-                                <Button @click="registerUser" class="btn btn-primary w-100">Submit</Button> 
+                                <Button @click="registerUser" class="btn btn-primary w-100">{{ $t('submit') }}</Button> 
                             </form>
                         </template>
                         <template #footer>
                             <div class="w-100">
-                                <Button label="Login" @click="$router.push('/login')" class="btn btn-outline-secondary w-100"></Button>
+                                <Button label="Login" @click="$router.push('/login')" class="btn btn-outline-secondary w-100"> {{ $t('login') }}</Button>
                             </div>
                     </template>
                 </Card>
@@ -40,6 +41,7 @@ import Card from 'primevue/card';
 import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
+import TaskChangeLanguage from './TaskChangeLanguage.vue';
 
 export default {
     components: {
@@ -47,6 +49,7 @@ export default {
         Password,
         InputText,
         Button,
+        TaskChangeLanguage,
     },
 
     data() {

@@ -2,14 +2,15 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
+            <task-change-language />
                 <Card style="25em" class="d-flex flex-column align-items-center">
                     <template #title></template>
-                    <h2 class="text-center">Login</h2>
+                    <h2 class="text-center">{{ $t('login') }}</h2>
                     <template #content>
                         <form>
                             <div>
                                 <div class="mb-3">
-                                    <label for="username" id="username" class="form-label">Username</label>
+                                    <label for="username" id="username" class="form-label">{{ $t('username') }}</label>
                                     <InputText v-model="username" id="username" class="form-control"></InputText>
                                 </div>
 
@@ -18,12 +19,12 @@
                                     <Password v-model="password" :feedback="false" toggleMask></Password>
                                 </div>
                             </div>
-                            <Button @click="login" class="btn btn-primary w-100">Login</Button>
+                            <Button @click="login" class="btn btn-primary w-100">{{ $t('login') }}</Button>
                         </form>
                     </template>
                     <template #footer>
                         <div >
-                            <Button @click="this.$router.push('/register')" class="btn btn-outline-secondary w-100">Register</Button>
+                            <Button @click="this.$router.push('/register')" class="btn btn-outline-secondary w-100">{{ $t('register') }}</Button>
                         </div>
                     </template>
                 </Card>
@@ -41,6 +42,7 @@ import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
 
 export default { 
     // TODO remove inline styling, probably not an issue when i build my own css lib?
@@ -50,8 +52,9 @@ export default {
         InputText,
         Button,
         Card,
+        TaskChangeLanguage
     },
-
+    
     data() {
         return {
             username: "",

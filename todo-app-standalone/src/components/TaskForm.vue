@@ -23,8 +23,6 @@ import { useTodoStore } from "@/stores/todoStore.js"
 import { userStore } from '../stores/userStore'
 
     export default {
-        inject: ['i18n'],
-
         components: {
             Calender,
             InputText,

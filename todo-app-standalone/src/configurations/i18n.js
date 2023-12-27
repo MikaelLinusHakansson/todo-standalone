@@ -15,6 +15,13 @@ const translations = {
         showAll: 'Show all tasks',
         refresh: 'Refresh list',
         showDataTable: 'Show Table View',
+
+        logout: 'Log out',
+        login: 'Log in',
+        register: 'Register',
+        username: 'Username',
+        password: 'Password',
+        submit: 'Submit',
     },
 
     sv: {
@@ -30,7 +37,14 @@ const translations = {
         done: 'Klara',
         showAll: 'Visa alla uppgifter',
         refresh: 'Uppdatera lista',
-        showDataTable: 'Visa Bords vy'
+        showDataTable: 'Visa Bords vy',
+
+        logout: 'Logga ut',
+        login: 'Logga in',
+        register: 'Registrera',
+        username: 'Användarnamn',
+        password: 'Lösenord',
+        submit: 'Skicka in',
     }
 };
 

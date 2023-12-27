@@ -18,8 +18,6 @@
 import Button from "primevue/button";
 
 export default {
-    inject: ['i18n'],
-
     components: {
         Button,
     },

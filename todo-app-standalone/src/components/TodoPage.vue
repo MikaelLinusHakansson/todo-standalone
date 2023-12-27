@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Button @click="logout()">Logout</Button>
+        <Button @click="logout()">{{ this.$t('logout') }}</Button>
         <div class="container mt-4">
             <task-title-header />
 
@@ -71,13 +71,7 @@ export default {
             visableDataTable: true,
         }
     },
-
-    provide() {
-        return {
-        i18n: this.$i18n
-        }
-    },
-
+    
     methods: {
         ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens']),
         ...mapActions(useTodoStore, ['getData']),
@@ -97,11 +91,7 @@ export default {
         ToggleEdit() {
             this.isVisable = !this.isVisable
         },
-
-        changeTheLanguage(locale) {
-        this.$i18n.locale = locale
-        },
-
+        
         logout() {
             $cookies.remove('accessToken')
             nextTick(() => {
