@@ -3,9 +3,7 @@
         <Button @click="logout()">{{ this.$t('logout') }}</Button>
         <div class="container mt-4">
             <task-title-header />
-
             <change-language />
-
             <task-form />
 
             <task-controls 
@@ -24,7 +22,6 @@
             </div>
 
             <task-data-table :hidden="visableDataTable" />
-
             <div 
             :hidden="this.visableCompleted">
                 <task-completed-list />
