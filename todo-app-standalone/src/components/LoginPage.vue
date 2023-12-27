@@ -43,11 +43,8 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 
 export default { 
-    // TODO add register page. Do we just hide the page or build another component with route?
-    // TODO register logic is done and works, need to add another card or view / route for register page
-    
     // TODO remove inline styling, probably not an issue when i build my own css lib?
-    // TODO add a logout button that resets the baerer token and translations!
+    // TODO add translations to all the new components. LoginPage, RegisterPage, TodoPage
     components: {
         Password,
         InputText,
