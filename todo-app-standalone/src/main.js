@@ -1,6 +1,6 @@
 import { createApp } from "vue"
 import { createPinia } from "pinia"
-import { VueCookies } from "vue-cookies"
+import  VueCookies  from "vue-cookies"
 
 import i18n from "./configurations/i18n.js"
 import router from "@/router.js"

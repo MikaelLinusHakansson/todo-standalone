@@ -1,33 +1,36 @@
 <template>
-    <div class="container mt-4">
-    <task-title-header />
+    <div>
+        <Button @click="logout()">Logout</Button>
+        <div class="container mt-4">
+            <task-title-header />
 
-    <task-change-language />
+            <task-change-language />
 
-    <task-form />
+            <task-form />
 
-    <task-controls 
-      :toggle-all="toggleAll"
-      :toggle-completed="toggleCompleted"
-      :toggle-data-table="toggleDataTable">
-    </task-controls>
+            <task-controls 
+            :toggle-all="toggleAll"
+            :toggle-completed="toggleCompleted"
+            :toggle-data-table="toggleDataTable">
+            </task-controls>
 
-    <div 
-      class="mb-3" 
-      :hidden="visableAllTasks">
-        <task-all-tasks-list
-          class="list-group d-flex" 
-          :isVisable="isVisable">
-        </task-all-tasks-list>
+            <div 
+            class="mb-3" 
+            :hidden="visableAllTasks">
+                <task-all-tasks-list
+                class="list-group d-flex" 
+                :isVisable="isVisable">
+                </task-all-tasks-list>
+            </div>
+
+            <task-data-table :hidden="visableDataTable" />
+
+            <div 
+            :hidden="this.visableCompleted">
+                <task-completed-list />
+            </div>
+        </div>
     </div>
-
-    <task-data-table :hidden="visableDataTable" />
-
-    <div 
-      :hidden="this.visableCompleted">
-        <task-completed-list />
-    </div>
-  </div>
 </template>
 
 <script>
@@ -39,9 +42,11 @@ import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
 import LoginPage from "./LoginPage.vue";
+import Button from "primevue/button";
 
+import { nextTick } from 'vue';
 import { useTodoStore } from "../stores/todoStore";
-import { mapActions, mapState} from "pinia";
+import { mapActions} from "pinia";
 import { userStore } from "../stores/userStore";
 
 
@@ -54,7 +59,8 @@ export default {
         TaskAllTasksList,
         TaskDataTable,
         TaskCompletedList,
-        LoginPage
+        LoginPage,
+        Button
     },
         
     data() {
@@ -95,6 +101,13 @@ export default {
         changeTheLanguage(locale) {
         this.$i18n.locale = locale
         },
+
+        logout() {
+            $cookies.remove('accessToken')
+            nextTick(() => {
+                this.$router.push({name: 'login.auth'})
+            })
+        }
     },
 
     created() {
