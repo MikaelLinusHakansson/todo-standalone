@@ -4,7 +4,7 @@
         <div class="container mt-4">
             <task-title-header />
 
-            <task-change-language />
+            <change-language />
 
             <task-form />
 
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
+import ChangeLanguage from "@/components/ChangeLanguage.vue";
 import TaskTitleHeader from "@/components/TaskTitleHeader.vue";
 import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "@/components/TaskControls.vue";
@@ -53,7 +53,7 @@ import { userStore } from "../stores/userStore";
 export default {
     components: {
         TaskTitleHeader,
-        TaskChangeLanguage,
+        ChangeLanguage,
         TaskForm,
         TaskControls,
         TaskAllTasksList,

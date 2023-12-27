@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <task-change-language />
+                <change-language />
                 <Card>
                     <template #title></template>
                         <h2 class="text-center">Register</h2>
@@ -41,7 +41,7 @@ import Card from 'primevue/card';
 import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import TaskChangeLanguage from './TaskChangeLanguage.vue';
+import ChangeLanguage from './ChangeLanguage.vue';
 
 export default {
     components: {
@@ -49,7 +49,7 @@ export default {
         Password,
         InputText,
         Button,
-        TaskChangeLanguage,
+        ChangeLanguage,
     },
 
     data() {

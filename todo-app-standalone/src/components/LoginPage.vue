@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-            <task-change-language />
+            <change-language />
                 <Card style="25em" class="d-flex flex-column align-items-center">
                     <template #title></template>
                     <h2 class="text-center">{{ $t('login') }}</h2>
@@ -42,7 +42,7 @@ import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
-import TaskChangeLanguage from "@/components/TaskChangeLanguage.vue";
+import ChangeLanguage from "@/components/ChangeLanguage.vue";
 
 export default { 
     // TODO remove inline styling, probably not an issue when i build my own css lib?
@@ -52,7 +52,7 @@ export default {
         InputText,
         Button,
         Card,
-        TaskChangeLanguage
+        ChangeLanguage
     },
     
     data() {
