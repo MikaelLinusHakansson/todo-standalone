@@ -1,36 +1,36 @@
 <template>
-    <Card style="25em" class="d-flex flex-column align-items-center">
-        <template #title>Login</template>
-        <template #content>
-            <InputText v-model="regUsername">username</InputText>
-            <Password v-model="regPassword" toggleMask>password</Password>
-            <div>
-                <div class="mb-2">
-                        <label for="username" id="username">Username</label>
-                    <div class="mt-1">
-                        <InputText v-model="username" id="username"></InputText>
-                    </div>
-                </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <Card style="25em" class="d-flex flex-column align-items-center">
+                    <template #title></template>
+                    <h2 class="text-center">Login</h2>
+                    <template #content>
+                        <form>
+                            <div>
+                                <div class="mb-3">
+                                    <label for="username" id="username" class="form-label">Username</label>
+                                    <InputText v-model="username" id="username" class="form-control"></InputText>
+                                </div>
 
-                <div>
-                    <label for="password" id="password">Password</label>
-                    <div class="mt-1">
-                        <Password v-model="password" :feedback="false" toggleMask></Password>
-                    </div>
-                </div>
+                                <div class="mb-3">
+                                    <!-- <label for="password" id="password" class="form-label">Password</label> -->
+                                    <Password v-model="password" :feedback="false" toggleMask></Password>
+                                </div>
+                            </div>
+                            <Button @click="login" class="btn btn-primary w-100">Login</Button>
+                        </form>
+                    </template>
+                    <template #footer>
+                        <div >
+                            <Button @click="this.$router.push('/register')" class="btn btn-outline-secondary w-100">Register</Button>
+                        </div>
+                    </template>
+                </Card>
             </div>
-        </template>
-
-        <template #footer>
-            <div >
-                <div class="btn-group">
-                    <Button @click="login" style="margin-right: 5px;">Login</Button>
-                    <Button @click="registerUser">Register</Button>
-                </div>
-            </div>
-        
-        </template>
-    </Card>
+        </div>
+    </div>
+    
 </template>
 
 <script>
@@ -60,8 +60,6 @@ export default {
             username: "",
             password: "",
             bearerToken: "",
-            regUsername: "",
-            regPassword: "",
         }
     },
     
@@ -81,17 +79,6 @@ export default {
             this.username = ''
             this.password = ''
         },
-
-        async registerUser() {
-            const user = {
-                username: this.regUsername,
-                password: this.regPassword,
-            }
-            this.register(user)
-
-            this.regUsername = ''
-            this.regPassword = ''
-        }
     },
 }
 </script>
