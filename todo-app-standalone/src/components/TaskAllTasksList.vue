@@ -13,10 +13,11 @@
                 </Checkbox>
 
                 <div class="flex-grow-1">
-                    <div @click="this.editTask(task, this.getAccessTokens())">
+                    <div>
                         <div>
                             <div>
-                                <input v-if="task.completed !== true && editIndex === index" type="text" placeholder="Task"
+                                <input @blur="this.editTask(task, this.getAccessTokens())"
+                                    v-if="task.completed !== true && editIndex === index" type="text" placeholder="Task"
                                     v-model="task.name" style="border: 0px; outline: none">
                                 <div v-else>
                                     {{ task.name }}
@@ -25,8 +26,14 @@
                         </div>
                         <div>
                             <div v-if="task.completed !== true && editIndex === index">
-                                <Calendar v-if="task.completed !== true" v-model="task.date" showTime hourFormat="24"
-                                    showButtonBar date-format="yy/mm/dd" touchUI></Calendar>
+                                <Calendar @date-select="this.editTask(task, this.getAccessTokens())"
+                                    v-if="task.completed !== true" v-model="task.date" showTime hourFormat="24"
+                                    date-format="yy/mm/dd">
+                                </Calendar>
+                                <Button
+                                    @click="clearDate(task)">{{ $t('clear') }}
+                                </Button>
+                                
                             </div>
                             <div v-else>
                                 {{ task.date }}
@@ -34,11 +41,13 @@
                         </div>
                     </div>
                 </div>
-                <Button v-if="editIndex === index" severity="danger" icon="pi pi-trash"
-                    @click.stop.prevent="deleteTasks(task, index)"></Button>
+                <Button  
+                    @click.stop.prevent="deleteTasks(task, index)"
+                    v-if="editIndex === index"
+                    severity="danger" 
+                    icon="pi pi-trash" />
             </li>
         </ul>
-
     </div>
 </template>
 
@@ -53,7 +62,7 @@ import Calendar from 'primevue/calendar';
 import Button from 'primevue/button';
 
 export default {
-    components: { TaskEditor, Checkbox, Calendar, Button },
+    components: { TaskEditor, Checkbox, Calendar, Button, },
 
     computed: {
         ...mapState(useTodoStore, ["tasks", "getData"])
@@ -75,16 +84,9 @@ export default {
             this.editIndex = index
         },
 
-        editNameCall(task, index) {  // TODO not using this anymore going through the store direclty.
-            console.log(task)
-            if (task.completed !== false) {
-                this.editTask({
-                    indexFromTasks: task.index,
-                    id: task.id,
-                    name: task.name,
-                    date: task.date,
-                }, this.getAccessTokens())
-            }
+        clearDate(task) {  // TODO not using this anymore going through the store direclty.
+            task.date = ''
+            this.editTask(task, this.getAccessTokens())
         },
 
         markDoneSender(task, index) {
