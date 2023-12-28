@@ -13,7 +13,7 @@
                     
                     <InputText 
                         v-model.trim="editName" 
-                        aria-describedby="editTask-help"  
+                        aria-describedby="editTask-help"
                         id="editTask">
                     </InputText>
                 </span>

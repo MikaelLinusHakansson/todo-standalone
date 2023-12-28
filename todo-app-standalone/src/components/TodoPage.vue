@@ -94,7 +94,7 @@ export default {
             nextTick(() => {
                 this.$router.push({name: 'login.auth'})
             })
-        }
+        },
     },
 
     created() {
