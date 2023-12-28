@@ -15,27 +15,30 @@
                 <div class="flex-grow-1">
                     <div @click="this.editTask(task, this.getAccessTokens())">
                         <div>
-                            <div :hidden="editIndex !== index">
-                                <input type="text" placeholder="Task" v-model="task.name"
-                                    style="border: 0px; outline: none">
-                            </div>
-                            <div :hidden="editIndex === index">
-                                {{ task.name }}
+                            <div>
+                                <input v-if="task.completed !== true && editIndex === index" type="text" placeholder="Task"
+                                    v-model="task.name" style="border: 0px; outline: none">
+                                <div v-else>
+                                    {{ task.name }}
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <div :hidden="editIndex !== index">
-                                <Calendar v-model="task.date" showTime hourFormat="24" showButtonBar date-format="yy/mm/dd"
-                                    touchUI></Calendar>
+                            <div v-if="task.completed !== true && editIndex === index">
+                                <Calendar v-if="task.completed !== true" v-model="task.date" showTime hourFormat="24"
+                                    showButtonBar date-format="yy/mm/dd" touchUI></Calendar>
                             </div>
-                            <div :hidden="editIndex === index">
+                            <div v-else>
                                 {{ task.date }}
                             </div>
                         </div>
                     </div>
                 </div>
+                <Button v-if="editIndex === index" severity="danger" icon="pi pi-trash"
+                    @click.stop.prevent="deleteTasks(task, index)"></Button>
             </li>
         </ul>
+
     </div>
 </template>
 
@@ -47,9 +50,10 @@ import { userStore } from '../stores/userStore';
 import TaskEditor from '@/components/TaskEditor.vue';
 import Checkbox from 'primevue/checkbox';
 import Calendar from 'primevue/calendar';
+import Button from 'primevue/button';
 
 export default {
-    components: { TaskEditor, Checkbox, Calendar },
+    components: { TaskEditor, Checkbox, Calendar, Button },
 
     computed: {
         ...mapState(useTodoStore, ["tasks", "getData"])
@@ -71,17 +75,27 @@ export default {
             this.editIndex = index
         },
 
-        editNameCall(task, index) {
-            this.editTask({
-                indexFromTasks: task.index,
-                id: task.id,
-                name: task.name,
-                date: task.date,
-            }, this.getAccessTokens())
+        editNameCall(task, index) {  // TODO not using this anymore going through the store direclty.
+            console.log(task)
+            if (task.completed !== false) {
+                this.editTask({
+                    indexFromTasks: task.index,
+                    id: task.id,
+                    name: task.name,
+                    date: task.date,
+                }, this.getAccessTokens())
+            }
         },
 
         markDoneSender(task, index) {
             this.markDone(task, index, this.getAccessTokens())
+        },
+
+        deleteTasks(task, index) {
+            this.removeTasks({
+                indexFromTasks: index,
+                taskId: task.id
+            }, this.getAccessTokens())
         },
     },
 }
