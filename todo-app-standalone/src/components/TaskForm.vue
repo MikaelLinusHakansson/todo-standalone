@@ -2,16 +2,12 @@
     <div class="mb-3">
         <div>
             <InputText
-                @blur="submitNewTask"
                 v-model="taskName" 
                 class="mb-2" 
                 placeholder="Task">
             </InputText>
         </div>
-
-        <Calender 
-            @date-time="submitNewTask">
-        </Calender>
+        <Calender @date-time="submitNewTask" />
     </div>
 </template>
 

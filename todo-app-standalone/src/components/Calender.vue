@@ -22,13 +22,6 @@
                 raised
                 iconPos="right" 
                 @click="sendDate"> 
-            </Button> 
-
-            <Button
-                class="m-1"
-                @click="this.getData(this.accessToken)" 
-                icon="pi pi-refresh" 
-                text raised>
             </Button>
         </div>
     </div>
@@ -38,8 +31,7 @@
 import PrimeCalender from "primevue/calendar";
 import Button from "primevue/button";
 
-import { mapActions, mapState } from "pinia";
-import { useTodoStore } from "@/stores/TodoStore"
+import { mapActions} from "pinia";
 import dayjs from 'dayjs';
 import { userStore } from '../stores/userStore';
 
@@ -58,7 +50,6 @@ export default {
 
     methods: {
         ...mapActions(userStore, ['getAccessTokens']),
-        ...mapActions(useTodoStore, ['getData']),
 
         sendDate() {
             this.$emit('date-time', {
