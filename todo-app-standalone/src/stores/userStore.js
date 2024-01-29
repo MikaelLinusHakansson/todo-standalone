@@ -11,6 +11,8 @@ export const userStore = defineStore("userStore", {
         getAccessToken() {
             return this.$cookies.get('accessToken')
         },
+
+        
     },
 
     actions: {
@@ -26,6 +28,7 @@ export const userStore = defineStore("userStore", {
             this.accessToken = response.accessToken
 
             $cookies.set('accessToken', this.accessToken)
+            console.log(user)
         },
 
         async register(user) {
@@ -35,6 +38,11 @@ export const userStore = defineStore("userStore", {
 
         getAccessTokens() {
             return $cookies.get('accessToken')
+        },
+
+        getUser() {
+            console.log(this.user)
+            return this.user
         },
 
         logout() {

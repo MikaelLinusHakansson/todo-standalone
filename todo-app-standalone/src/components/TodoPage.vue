@@ -27,6 +27,7 @@
                 <task-completed-list />
             </div>
         </div>
+        <Button @click="test()">Test</Button>
     </div>
 </template>
 
@@ -68,9 +69,9 @@ export default {
             visableDataTable: true,
         }
     },
-    
+
     methods: {
-        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens']),
+        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'getUser']),
         ...mapActions(useTodoStore, ['getData']),
 
         toggleCompleted() {
@@ -95,6 +96,10 @@ export default {
                 this.$router.push({name: 'login.auth'})
             })
         },
+
+        test() {
+            console.log(this.getUser())
+        }
     },
 
     created() {
