@@ -31,7 +31,6 @@ export const userStore = defineStore("userStore", {
 
             $cookies.set('accessToken', this.accessToken)
             localStorage.setItem('username', this.user.username)
-            console.log(user)
         },
 
         async register(user) {
