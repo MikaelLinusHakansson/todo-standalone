@@ -43,7 +43,6 @@ import { userStore } from '../stores/userStore'
             ...mapActions(useTodoStore, ["createNewTask"]),
 
             submitNewTask(data) {
-                console.log(this.getUser()) // TODO need to send username to match ID on backend on restApi etc.
                 this.createNewTask({
                     name: this.taskName,
                     date: data.date

@@ -9,10 +9,13 @@ class TodoService extends ApiService {
     }
 
     async post(data, accessToken) {
+        const username = localStorage.getItem('username')
+
         const newTodo = {
             name: data.name,
             date: data.date,
-            completed: false
+            completed: false,
+            username: username,
         }
         return await this.makeRequest('POST', '/add', newTodo, accessToken, null)
     }
