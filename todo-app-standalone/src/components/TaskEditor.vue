@@ -66,7 +66,6 @@ import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
-import dayjs from 'dayjs';
 
 export default {
     components: {

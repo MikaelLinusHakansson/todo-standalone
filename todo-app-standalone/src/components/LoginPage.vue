@@ -15,7 +15,6 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <!-- <label for="password" id="password" class="form-label">Password</label> -->
                                     <Password v-model="password" :feedback="false" toggleMask></Password>
                                 </div>
                             </div>
@@ -46,7 +45,6 @@ import ChangeLanguage from "@/components/ChangeLanguage.vue";
 
 export default { 
     // TODO remove inline styling, probably not an issue when i build my own css lib?
-    // TODO add translations to all the new components. LoginPage, RegisterPage, TodoPage
     components: {
         Password,
         InputText,

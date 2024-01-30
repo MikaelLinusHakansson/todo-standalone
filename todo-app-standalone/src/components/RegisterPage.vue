@@ -14,7 +14,6 @@
                                         <InputText v-model="username" id="username" class="form-control">username</InputText>
                                     </div>
                                     <div class="mb-3">
-                                <!-- <label for="password" id="password" class="form-label">Password</label> -->
                                         <Password v-model="password" toggleMask promptLabel="Enter your password" weakLabel="Very Weak" mediumLabel="Medium" strongLabel="Strong">password</Password>
                                     </div> 
                                 </div>

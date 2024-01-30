@@ -1,6 +1,4 @@
 import ApiService from "./apiService"
-// import { userStore } from "@/stores/userStore"
-// import { userStore } from "../../stores/userStore"
 const TODO_API_BASE_URL = "http://localhost:8080/api/todo"
 
 class TodoService extends ApiService {
