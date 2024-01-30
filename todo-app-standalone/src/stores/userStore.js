@@ -12,7 +12,9 @@ export const userStore = defineStore("userStore", {
             return this.$cookies.get('accessToken')
         },
 
-        
+        getUsername() {
+            return this.user ? this.user.username : localStorage.getItem('username')
+        },
     },
 
     actions: {
@@ -28,6 +30,7 @@ export const userStore = defineStore("userStore", {
             this.accessToken = response.accessToken
 
             $cookies.set('accessToken', this.accessToken)
+            localStorage.setItem('username', this.user.username)
             console.log(user)
         },
 
@@ -41,13 +44,13 @@ export const userStore = defineStore("userStore", {
         },
 
         getUser() {
-            console.log(this.user)
-            return this.user
+            return localStorage.getItem('username')
         },
 
         logout() {
             this.accessToken = ''
             this.user = null
+            localStorage.removeItem('username')
         },
     }
 });
