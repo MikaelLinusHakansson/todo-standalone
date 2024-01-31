@@ -1,31 +1,25 @@
 <template>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-            <change-language />
-                <Card style="25em" class="d-flex flex-column align-items-center">
-                    <template #title></template>
-                    <h2 class="text-center">{{ $t('login') }}</h2>
-                    <template #content>
-                        <form>
-                            <div>
-                                <div class="mb-3">
-                                    <input v-model="username" id="username" type="text" class="rounded-input" :placeholder="$t('username')">
-                                </div>
-
-                                <div class="mb-3">
-                                    <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
-                                </div>
-                            </div>
-                            <button @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
-                        </form>
-                    </template>
-                    <template #footer>
-                        <div >
-                            <button class="my-register-button" @click="this.$router.push('/register')">{{$t('register')}}</button>
+    <div class="custom-container">
+        <div class="custom-row">
+            <div class="custom-col">
+                <change-language />
+                <div class="custom-card">
+                    <h2 class="custom-card-title">{{ $t('login') }}</h2>
+                    <form class="custom-card-content">
+                        <div class="custom-form-group">
+                            <input v-model="username" id="username" type="text" class="rounded-input" :placeholder="$t('username')">
                         </div>
-                    </template>
-                </Card>
+
+                        <div class="custom-form-group">
+                            <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
+                        </div>
+
+                        <button @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
+                    </form>
+                    <div class="custom-card-footer">
+                        <button class="my-register-button" @click="$router.push('/register')">{{$t('register')}}</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,15 +30,12 @@ import { mapActions } from 'pinia';
 import { userStore } from '../stores/userStore';
 
 import Password from 'primevue/password';
-import Card from 'primevue/card';
 import ChangeLanguage from "@/components/ChangeLanguage.vue";
 
 export default { 
-    // TODO remove inline styling, probably not an issue when i build my own css lib?
     components: {
         Password,
-        Card,
-        ChangeLanguage
+        ChangeLanguage,
     },
     
     data() {
@@ -76,11 +67,57 @@ export default {
 </script>
 
 <style>
+.custome-container {
+    padding-top: 3rem;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-row {
+    display: flex;
+    justify-content: center;
+}
+
+.custom-col {
+    flex: 0 0 auto;
+    width: 50%;
+    max-width: 540px;
+}
+
+.custom-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: white;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+}
+
+.custom-card-title {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.custom-card-content {
+    width: 100%;
+}
+
+.custom-form-group {
+    margin-bottom: 1rem;
+}
+
+.custom-card-footer {
+    margin-top: 1rem;
+}
+
 .my-register-button {
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    background-color: #2CECE4;
+    background-color: #0DC0F0;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -89,14 +126,14 @@ export default {
 }
 
 .my-register-button:hover {
-    background-color:  #2DB9ED;
+    background-color:  #0C76F0;
 }
 
 .my-login-button {
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    background-color: #28ED5E;
+    background-color: #07F088;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -105,7 +142,7 @@ export default {
 }
 
 .my-login-button:hover {
-    background-color:  #2DEDA2;
+    background-color:  #0CF0D7;
 }
 
 .rounded-input {

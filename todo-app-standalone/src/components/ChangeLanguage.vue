@@ -29,7 +29,7 @@ export default {
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    background-color: #2CECE4;
+    background-color: #0DC0F0;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -37,6 +37,6 @@ export default {
 }
 
 .my-button:hover {
-    background-color: #2DB9ED;
+    background-color: #0C76F0;
 }
 </style>
