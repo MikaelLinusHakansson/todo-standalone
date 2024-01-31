@@ -1,28 +1,13 @@
 <template>
-    <div class="mb-2">
-        <Button 
-            label="English" 
-            @click="changeLanguage('en')" 
-            class="m-1">
-        </Button>
-
-        <Button 
-            label="Svenska"
-            @click="changeLanguage('sv')"
-            class="m-1">
-        </Button>
-    </div>
+    <div class="button-container">
+            <button class="my-button" @click="changeLanguage('en')">English</button>
+            <button class="my-button" @click="changeLanguage('sv')">Svenska</button>
+        </div>
 </template>
 
 <script>
-import Button from "primevue/button";
-
 export default {
-    components: {
-        Button,
-    },
-
-    data() {
+     data() {
         return {};
     },
 
@@ -33,3 +18,25 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.button-container {
+    margin-bottom: 1rem;
+}
+
+.my-button {
+    margin:0.25rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #2CECE4;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.my-button:hover {
+    background-color: #2DB9ED;
+}
+</style>
