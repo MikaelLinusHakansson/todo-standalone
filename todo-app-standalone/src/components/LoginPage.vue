@@ -10,27 +10,25 @@
                         <form>
                             <div>
                                 <div class="mb-3">
-                                    <label for="username" id="username" class="form-label">{{ $t('username') }}</label>
-                                    <InputText v-model="username" id="username" class="form-control"></InputText>
+                                    <input v-model="username" id="username" type="text" class="rounded-input" :placeholder="$t('username')">
                                 </div>
 
                                 <div class="mb-3">
-                                    <Password v-model="password" :feedback="false" toggleMask></Password>
+                                    <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
                                 </div>
                             </div>
-                            <Button @click="login" class="btn btn-primary w-100">{{ $t('login') }}</Button>
+                            <button @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
                         </form>
                     </template>
                     <template #footer>
                         <div >
-                            <Button @click="this.$router.push('/register')" class="btn btn-outline-secondary w-100">{{ $t('register') }}</Button>
+                            <button class="my-register-button" @click="this.$router.push('/register')">{{$t('register')}}</button>
                         </div>
                     </template>
                 </Card>
             </div>
         </div>
     </div>
-    
 </template>
 
 <script>
@@ -38,8 +36,6 @@ import { mapActions } from 'pinia';
 import { userStore } from '../stores/userStore';
 
 import Password from 'primevue/password';
-import InputText from 'primevue/inputtext';
-import Button from 'primevue/button';
 import Card from 'primevue/card';
 import ChangeLanguage from "@/components/ChangeLanguage.vue";
 
@@ -47,8 +43,6 @@ export default {
     // TODO remove inline styling, probably not an issue when i build my own css lib?
     components: {
         Password,
-        InputText,
-        Button,
         Card,
         ChangeLanguage
     },
@@ -80,3 +74,53 @@ export default {
     },
 }
 </script>
+
+<style>
+.my-register-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #2CECE4;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    width: 100%;
+}
+
+.my-register-button:hover {
+    background-color:  #2DB9ED;
+}
+
+.my-login-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #28ED5E;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    width: 100%;
+}
+
+.my-login-button:hover {
+    background-color:  #2DEDA2;
+}
+
+.rounded-input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.rounded-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+</style>
