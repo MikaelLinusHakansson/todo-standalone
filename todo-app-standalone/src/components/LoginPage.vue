@@ -102,7 +102,10 @@ export default {
 }
 
 .custom-card-content {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .custom-form-group {
@@ -132,17 +135,19 @@ export default {
 .my-login-button {
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
-    border-radius: 0.25rem;
-    background-color: #07F088;
-    color: white;
+    border-radius: 1.5rem;
+    background-color: white;
+    color: #0DC0F0;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.15s ease-in-out;
-    width: 100%;
+    height: 40px;
+    width: auto;
 }
 
 .my-login-button:hover {
-    background-color:  #0CF0D7;
+    background-color:  #0C76F0;
+    color: white;
 }
 
 .rounded-input {

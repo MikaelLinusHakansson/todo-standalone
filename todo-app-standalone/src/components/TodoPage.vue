@@ -1,6 +1,7 @@
 <template>
     <div>
-        <Button @click="logout()">{{ this.$t('logout') }}</Button>
+        <!-- <Button @click="logout()">{{ this.$t('logout') }}</Button> -->
+        <button @click.prevent.stop="logout()" class="my-logout-button">{{ this.$t('logout') }}</button>
         <div class="container mt-4">
             <task-title-header />
             <change-language />
@@ -102,3 +103,23 @@ export default {
     }
 }
 </script>
+
+<style>
+.my-logout-button {
+    margin:  0.25rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 1.5rem;
+    background-color:#0Dc0F0;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    height: 40px;
+    width: auto;
+}
+
+.my-logout-button:hover {
+    background-color: #0C76F0;
+}
+</style>
