@@ -7,17 +7,18 @@
         :key="task.id"
         class="list-item"
         :class="{ 'task-completed': task.completed, 'selected': editIndex === index }">
-        <!-- <Checkbox 
-          @click.prevent.stop="markDoneSender(task, index)"
-          v-model="task.completed"
-          class="checkbox"
-          :binary="true">
-        </Checkbox> -->
         <label class="custom-checkbox">
-            <input @click.prevent.stop="markDoneSender(task, index)" v-model="task.completed" class="checkbox" :binary="true" type="checkbox">
+            <input 
+                @click.prevent.stop="markDoneSender(task, index)" 
+                v-model="task.completed" 
+                class="checkbox" 
+                :binary="true" 
+                type="checkbox">
             <span class="checkmark"></span>
         </label>
-        <div v-if="!task.completed && editIndex === index" class="task-editor">
+        <div 
+            v-if="!task.completed && editIndex === index" 
+            class="task-editor">
           <input 
             @blur="editTask(task, getAccessTokens())"
             v-model="task.name" 
@@ -63,12 +64,13 @@ import { useTodoStore } from '@/stores/todoStore.js'
 import { userStore } from '../stores/userStore';
 
 import TaskEditor from '@/components/TaskEditor.vue';
-import Checkbox from 'primevue/checkbox';
 import Calendar from 'primevue/calendar';
-import Button from 'primevue/button';
 
 export default {
-    components: { TaskEditor, Checkbox, Calendar, Button, },
+    components: { 
+        TaskEditor, 
+        Calendar, 
+    },
 
     computed: {
         ...mapState(useTodoStore, ["tasks", "getData"])
