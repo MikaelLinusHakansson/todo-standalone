@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <Button @click="logout()">{{ this.$t('logout') }}</Button> -->
         <button @click.prevent.stop="logout()" class="my-logout-button">{{ this.$t('logout') }}</button>
-        <div class="container mt-4">
+        <div class="todo-page-container">
             <task-title-header />
             <change-language />
             <task-form />
@@ -14,10 +13,10 @@
             </task-controls>
 
             <div 
-            class="mb-3" 
+            class="todo-page-margin-bottom" 
             :hidden="visableAllTasks">
                 <task-all-tasks-list
-                class="list-group d-flex" 
+                class="todo-page-list-group" 
                 :isVisable="isVisable">
                 </task-all-tasks-list>
             </div>
@@ -39,8 +38,7 @@ import TaskControls from "@/components/TaskControls.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
-import LoginPage from "./LoginPage.vue";
-import Button from "primevue/button";
+import LoginPage from "@/components/LoginPage.vue";
 
 import { nextTick } from 'vue';
 import { useTodoStore } from "../stores/todoStore";
@@ -58,7 +56,6 @@ export default {
         TaskDataTable,
         TaskCompletedList,
         LoginPage,
-        Button
     },
         
     data() {
@@ -105,6 +102,23 @@ export default {
 </script>
 
 <style>
+.todo-page-container {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-top: 1.5rem;
+}
+
+.todo-page-margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.todo-page-list-group {
+    display: flex;
+}
+
 .my-logout-button {
     margin:  0.25rem;
     padding: 0.5rem 1rem;
@@ -121,5 +135,25 @@ export default {
 
 .my-logout-button:hover {
     background-color: #0C76F0;
+}
+
+@media (max-width: 992px) {
+    .todo-page-container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 768px) {
+    .todo-page-container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 576px) {
+    .todo-page-container {
+        max-width: 540px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
 }
 </style>
