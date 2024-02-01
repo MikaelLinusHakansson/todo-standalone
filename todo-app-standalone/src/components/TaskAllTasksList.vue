@@ -21,6 +21,7 @@
             class="task-editor">
           <input 
             @blur="editTask(task, getAccessTokens())"
+            @click.stop=""
             v-model="task.name" 
             placeholder="Task"
             type="text"
