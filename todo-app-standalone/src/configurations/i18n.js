@@ -14,7 +14,7 @@ const translations = {
         done: 'Done',
         showAll: 'Show all tasks',
         refresh: 'Refresh list',
-        showDataTable: 'Show Table View',
+        showDataTable: 'Show table view',
 
         logout: 'Log out',
         login: 'Log in',
@@ -38,7 +38,7 @@ const translations = {
         done: 'Klara',
         showAll: 'Visa alla uppgifter',
         refresh: 'Uppdatera lista',
-        showDataTable: 'Visa Bords vy',
+        showDataTable: 'Visa bords vy',
 
         logout: 'Logga ut',
         login: 'Logga in',
