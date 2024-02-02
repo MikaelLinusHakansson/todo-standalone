@@ -21,11 +21,12 @@
                 </task-all-tasks-list>
             </div>
 
-            <task-data-table :hidden="visableDataTable" />
             <div 
             :hidden="this.visableCompleted">
                 <task-completed-list />
             </div>
+            
+            <task-data-table :hidden="visableDataTable" />
         </div>
     </div>
 </template>
