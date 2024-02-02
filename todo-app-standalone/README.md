@@ -1,20 +1,24 @@
-# todo-app-standalone
+# Vue To-Do Application
 
-[VSCode](https://code.visualstudio.com/) 
-+ [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
-+ [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+This is a Vue.js web application for managing a personal to-do list. It allows users to register, create tasks, update task details, mark tasks as completed, and delete tasks. The application is designed with a clean and intuitive interface and uses a Java Spring Boot API for the backend.
 
-## Project Setup
-```sh
-npm install
-```
+## Features
 
-### Compile and Hot-Reload for Development
-```sh
-npm run dev
-```
+- User registration and authentication
+- Create new tasks with name and date
+- Edit existing tasks
+- Mark tasks as completed
+- Delete tasks
+- Responsive design for mobile and desktop usage
 
-### Compile and Minify for Production
-```sh
-npm run build
-```
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm (https://nodejs.org/)
+- Java Development Kit (JDK) for running the Spring Boot API
+- Maven for Java project dependency management (https://maven.apache.org/)
+
+### Setting Up the Development Environment
+
+#### Frontend
