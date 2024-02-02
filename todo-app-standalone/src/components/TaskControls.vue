@@ -1,64 +1,36 @@
 <template>
-    <div class="d-flex">
-        <div class="mb-2">
-            <div class="d-flex flex-column">
-                <div class="d-flex">
+    <div class="switch-container">
+        <div class="switch-group">
+            <label class="switch-label">
+                <input type="checkbox" v-model="checkedToggleAll" @change="toggleAll()" />
+                <span class="slider round" />
+            </label>
+            <span class="switch-text">{{ $t('showAll') }} </span>
+        </div>
 
-                    <label class="switch">
-                        <input type="checkbox" v-model="checkedToggleAll" @change="toggleAll()" />
-                        <span class="slider round" />
-                    </label>
-                        {{ $t('showAll') }}
-                </div>
-
-                <div class="d-flex mt-1">
-                    <label 
-                        class="mr-2"
-                        for="checkedComplated"> 
-                            {{ $t('showDone') }}
-                    </label>
-
-                    <InputSwitch
-                        class="m-1"
-                        input-id="checkedCompleted" 
-                        v-model="checkedCompleted" 
-                        @click="toggleCompleted()">
-                            <span 
-                                id="checkedCompleted">
-                            </span>
-                    </InputSwitch>
-                </div>
-
-                <div class="d-flex mt-1">
-                    <label
-                        class="mr-2" 
-                        for="checkDataTable">
-                        {{ $t('showDataTable') }}
-                    </label>
-                    <InputSwitch 
-                        class="m-1" 
-                        input-id="checkDataTable" 
-                        v-model="checkedDataTable" 
-                        @click="toggleDataTable()">
-                    </InputSwitch>
-                </div>
-            </div>
-        </div> 
+        <div class="switch-group">
+            <label class="switch-label">
+                <input type="checkbox" v-model="checkedCompleted" @change="toggleCompleted()" />
+                <span class="slider round" />
+            </label>
+            <span class="switch-text">{{ $t('showDone') }}</span>
+        </div>
+        
+        <div class="switch-group">
+            <label class="switch-label">
+                <input type="checkbox" v-model="checkedDataTable" @change="toggleDataTable()" />
+                <span class="slider round" />
+            </label>
+            <span class="switch-text">{{ $t('showDataTable') }}</span>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapState, mapWritableState, mapActions } from "pinia";
 import { useTodoStore } from "@/stores/todoStore.js"
-import InputSwitch from 'primevue/inputswitch';
-import PrimeCalender from "primevue/calendar";
 
 export default {
-    components: {
-        InputSwitch,
-        PrimeCalender,
-    },
-
     props: {
         toggleAll: Function,
         toggleCompleted: Function,
@@ -99,16 +71,31 @@ export default {
 </script>
 
 <style scoped>
+.switch-container {
+    display: flex;
+    flex-direction: column;
+}
 
-.switch {
+.switch-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.switch-label {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 20px;
-    margin: 1rem;
-
+    margin-right: 10px;
 }
-.switch input {
+
+.switch-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.switch-label input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -122,43 +109,39 @@ export default {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
     transition: .4s;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
-.slider:before {
-    position:absolute;
+.slider::before {
+    position: absolute;
     content: "";
     height: 16px;
     width: 16px;
     left: 2px;
     bottom: 2px;
     background-color: white;
-    -webkit-transition: .4s;
     transition: .4s;
     border-radius: 50%;
 }
 
-input:checked + .slider {
+.switch-label input:checked + .slider {
     background-color: #0DC0F0;
 }
 
-input:focus + .slider {
+.switch-label input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+.switch-label input:checked + .slider::before {
+    transform: translateX(20px);
 }
 
 .slider.round {
-    border-radius: 34px;
+    border-radius: 10px;
 }
 
-.slider.round:before {
+.slider.round::before {
     border-radius: 50%;
 }
 </style>
