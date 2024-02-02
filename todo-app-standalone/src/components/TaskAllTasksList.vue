@@ -23,17 +23,19 @@
             @blur="editTask(task, getAccessTokens())"
             @click.stop=""
             v-model="task.name" 
-            placeholder="Task"
+            :placeholder="$t('task')"
             type="text"
             class="task-input">
           <Calendar 
             @blur="editTask(task, getAccessTokens())"
             @date-select="editTask(task, getAccessTokens())"
+            @click.stop=""
             v-model="task.date" 
-            showTime 
+            showTime
             hourFormat="24"
             dateFormat="yy/mm/dd"
-            class="task-calendar">
+            class="task-calendar"
+            :placeholder="$t('date')">
           </Calendar>
         </div>
         <div v-else class="task-info">
@@ -45,7 +47,7 @@
             v-if="editIndex === index" 
             @click.prevent.stop="clearDate(task)" 
             class="clear-date-button">
-                {{ $t('clear') }}
+                {{ $t('clearDate') }}
             </button>
           <button 
             v-if="editIndex === index" 
@@ -64,12 +66,10 @@ import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import { userStore } from '../stores/userStore';
 
-import TaskEditor from '@/components/TaskEditor.vue';
 import Calendar from 'primevue/calendar';
 
 export default {
     components: { 
-        TaskEditor, 
         Calendar, 
     },
 

@@ -22,7 +22,7 @@ const translations = {
         username: 'Username',
         password: 'Password',
         submit: 'Submit',
-        clear: 'Clear',
+        clearDate: 'Clear date',
     },
 
     sv: {
@@ -46,7 +46,7 @@ const translations = {
         username: 'Användarnamn',
         password: 'Lösenord',
         submit: 'Skicka in',
-        clear: 'Rensa',
+        clearDate: 'Rensa datum',
     }
 };
 
