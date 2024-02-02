@@ -3,7 +3,7 @@
         <div class="flex-auto">
             <div class="flex-auto">
                 <PrimeCalender
-                    placeholder="Date"
+                    :placeholder="$t('date')"
                     showIcon 
                     id="calendar-24h" 
                     v-model="datetime24h"
@@ -16,7 +16,7 @@
             
             <Button
                 class="m-1"
-                severity="primary"
+                severity="info"
                 icon="pi pi-arrow-up" 
                 text 
                 raised
