@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <div class="flex-auto">
-            <div class="flex-auto">
+        <div>
+            <div class="margin-bottom">
                 <PrimeCalender
                     :placeholder="$t('date')"
                     showIcon 
@@ -13,9 +12,7 @@
                     date-format="yy/mm/dd"
                     touchUI />
             </div>
-            
             <Button
-                class="m-1"
                 severity="info"
                 icon="pi pi-arrow-up" 
                 text 
@@ -24,7 +21,6 @@
                 @click="sendDate"> 
             </Button>
         </div>
-    </div>
 </template>
 
 <script>
@@ -61,3 +57,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.margin-bottom {
+    margin-bottom: 5px;
+}
+</style>
