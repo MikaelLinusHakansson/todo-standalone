@@ -51,16 +51,19 @@ export const useTodoStore = defineStore("todoStore", {
       }
     },
 
-    async markDone(task, index, accessToken) {
-      const tempTask = {
-        id : task.id,
-        name : task.name,
-        date : task.date,
-        completed : !task.completed,
-      }
-      
-      const markedAsDone = await todoService.put(task.id, tempTask, accessToken)
-      this.tasks[index] = markedAsDone
+    async markDone(task, accessToken) {
+        const tempTask = {
+            id: task.id,
+            name: task.name,
+            date: task.date,
+            completed: !task.completed,
+        };
+    
+        const updatedTask = await todoService.put(task.id, tempTask, accessToken);
+        const taskIndex = this.tasks.findIndex(t => t.id === task.id);
+        if (taskIndex !== -1) {
+            this.tasks[taskIndex] = updatedTask;
+        }
     },
 
     async getData(accessToken) {
@@ -68,8 +71,19 @@ export const useTodoStore = defineStore("todoStore", {
     },
     
     async removeTasks(taskData, accessToken) {
-      await todoService.delete(taskData.taskId, accessToken)
-      this.tasks.splice(taskData.indexFromTasks, 1)
+        await todoService.delete(taskData.taskId, accessToken);
+        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId);
+        if (indexInTasks !== -1) {
+            this.tasks.splice(indexInTasks, 1);
+        }
+    },
+
+    async removeCompletedTasks(taskData, accessToken) {
+        await todoService.delete(taskData.taskId, accessToken);
+        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId);
+        if (indexInTasks !== -1) {
+            this.tasks.splice(indexInTasks, 1);
+        }
     },
 
     validateTask(task) {

@@ -6,10 +6,11 @@
         v-for="(task, index) in tasks" 
         :key="task.id"
         class="list-item"
-        :class="{ 'task-completed': task.completed, 'selected': editIndex === index }">
+        :class="{ 'task-completed': task.completed, 'selected': editIndex === index }"
+        v-show="!task.completed"> 
         <label class="custom-checkbox">
             <input 
-                @click.prevent.stop="markDoneSender(task, index)" 
+                @click.prevent.stop="markDoneSender(task)" 
                 v-model="task.completed" 
                 class="checkbox" 
                 :binary="true" 
@@ -51,7 +52,7 @@
             </button>
           <button 
             v-if="editIndex === index" 
-            @click.prevent.stop="deleteTasks(task,index)" 
+            @click.prevent.stop="deleteTasks(task)" 
             class="delete-task-button">
                 Delete
             </button>
@@ -107,16 +108,15 @@ export default {
             this.editTask(task, this.getAccessTokens())
         },
 
-        markDoneSender(task, index) {
-            this.editIndex = null
-            this.markDone(task, index, this.getAccessTokens())
+        markDoneSender(task) {
+            this.editIndex = null;
+            this.markDone(task, this.getAccessTokens());
         },
 
-        deleteTasks(task, index) {
+        deleteTasks(task) {
             this.removeTasks({
-                indexFromTasks: index,
                 taskId: task.id
-            }, this.getAccessTokens())
+            }, this.getAccessTokens());
         },
     },
 }
@@ -145,10 +145,6 @@ export default {
     justify-content: space-between;
     padding: 0.5rem;
     width: 100%;
-}
-
-.checkbox {
-    margin-right: 1rem;
 }
 
 .task-editor {
@@ -248,6 +244,10 @@ export default {
 
 .delete-task-button:hover {
     background-color: #6666;
+}
+
+.checkbox {
+    margin-right: 1rem;
 }
 
 .custom-checkbox {
