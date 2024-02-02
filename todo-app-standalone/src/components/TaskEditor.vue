@@ -1,4 +1,5 @@
 <template>
+    <!-- This component is not in use, i think -->
     <div>
       <label for="editTask" /> 
       <label for="editDate" />
