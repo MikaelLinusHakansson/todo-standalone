@@ -8,6 +8,7 @@
         class="list-item"
         :class="{ 'task-completed': task.completed, 'selected': editIndex === index }"
         v-show="!task.completed"> 
+
         <label class="custom-checkbox">
             <input 
                 @click.prevent.stop="markDoneSender(task)" 
@@ -17,16 +18,16 @@
                 type="checkbox">
             <span class="checkmark"></span>
         </label>
-        <div 
-            v-if="!task.completed && editIndex === index" 
-            class="task-editor">
+        
+        <div v-if="!task.completed && editIndex === index" class="task-editor">
           <input 
             @blur="editTask(task, getAccessTokens())"
             @click.stop=""
-            v-model="task.name" 
+            v-model="task.name"
             :placeholder="$t('task')"
             type="text"
             class="task-input">
+
           <Calendar 
             @blur="editTask(task, getAccessTokens())"
             @date-select="editTask(task, getAccessTokens())"
@@ -39,10 +40,12 @@
             :placeholder="$t('date')">
           </Calendar>
         </div>
+
         <div v-else class="task-info">
           <span class="task-name">{{ task.name }}</span>
           <span class="task-date">{{ task.date }}</span>
         </div>
+
         <div class="task-actions">
           <button 
             v-if="editIndex === index" 
@@ -50,6 +53,7 @@
             class="clear-date-button">
                 {{ $t('clearDate') }}
             </button>
+
           <button 
             v-if="editIndex === index" 
             @click.prevent.stop="deleteTasks(task)" 
@@ -82,8 +86,8 @@ export default {
         return {
             editIndex: null,
             editName: '',
-            editDate: '',
-        };
+            editDate: ''
+        }
     },
 
     methods: {
@@ -117,8 +121,8 @@ export default {
             this.removeTasks({
                 taskId: task.id
             }, this.getAccessTokens());
-        },
-    },
+        }
+    }
 }
 </script>
 
@@ -143,8 +147,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 1rem;
     width: 100%;
+}
+
+.list-item:hover {
+    background-color: #0DC0F0;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+    border-radius: 5px;
 }
 
 .task-editor {

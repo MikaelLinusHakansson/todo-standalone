@@ -1,14 +1,16 @@
 <template>
-    <div class="margin-bottom">
-        <div class="margin-bottom-input-text">
-            <input 
-            v-model="taskName" 
-            type="text" 
-            class="rounded-input-task-form" 
-            :placeholder="$t('task')"/>
-        </div>
-        <Calender @date-time="submitNewTask" />
+  <div class="margin-bottom">
+    <div class="margin-bottom-input-text">
+
+      <input 
+        v-model="taskName" 
+        type="text" 
+        class="rounded-input-task-form" 
+        :placeholder="$t('task')"/>
     </div>
+
+      <Calender @date-time="submitNewTask" />
+  </div>
 </template>
 
 <script>
@@ -34,8 +36,7 @@ import { userStore } from '../stores/userStore'
 
         computed: {
             ...mapState(useTodoStore, ["tasks"]),
-            ...mapWritableState(useTodoStore, ["tasks"]),
-            
+            ...mapWritableState(useTodoStore, ["tasks"])
         },
 
         methods: {
@@ -55,7 +56,7 @@ import { userStore } from '../stores/userStore'
             addDateFromCalenderComp(data) {
                 this.taskDate = data.name
             }
-        },
+        }
     }
 </script>
 
