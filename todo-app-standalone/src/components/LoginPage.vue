@@ -7,7 +7,7 @@
                     <h2 class="custom-card-title">{{ $t('login') }}</h2>
                     <form class="custom-card-content">
                         <div class="custom-form-group">
-                            <input v-model="username" id="username" type="text" class="rounded-input" :placeholder="$t('username')">
+                            <TextField v-model="username" :label="$t('username')"></TextField>
                         </div>
 
                         <div class="custom-form-group">
@@ -31,11 +31,13 @@ import { userStore } from '../stores/userStore';
 
 import Password from 'primevue/password';
 import ChangeLanguage from "@/components/ChangeLanguage.vue";
+import TextField from "@/components/form/TextField.vue";
 
 export default { 
     components: {
         Password,
         ChangeLanguage,
+        TextField
     },
     
     data() {
