@@ -7,19 +7,11 @@
         :key="task.id"
         class="list-item"
         :class="{ 'task-completed': task.completed, 'selected': editIndex === index }"
-        v-show="!task.completed"> 
+        v-show="!task.completed">
 
-        <label class="custom-checkbox">
-            <input 
-                @click.prevent.stop="markDoneSender(task)" 
-                v-model="task.completed" 
-                class="checkbox" 
-                :binary="true" 
-                type="checkbox">
-            <span class="checkmark"></span>
-        </label>
+          <CheckBox v-model="task.completed" @click.prevent.stop="markDoneSender(task)" />
         
-        <div v-if="!task.completed && editIndex === index" class="task-editor">
+          <div v-if="!task.completed && editIndex === index" class="task-editor">
             <TextField
               v-model="task.name" 
               :label="$t('task')"
@@ -27,39 +19,39 @@
               @click.stop="">
             </TextField>
 
-          <Calendar 
-            @blur="editTask(task, getAccessTokens())"
-            @date-select="editTask(task, getAccessTokens())"
-            @click.stop=""
-            v-model="task.date" 
-            showTime
-            hourFormat="24"
-            dateFormat="yy/mm/dd"
-            class="task-calendar"
-            :placeholder="$t('date')">
-          </Calendar>
-        </div>
+            <Calendar 
+              @blur="editTask(task, getAccessTokens())"
+              @date-select="editTask(task, getAccessTokens())"
+              @click.stop=""
+              v-model="task.date" 
+              showTime
+              hourFormat="24"
+              dateFormat="yy/mm/dd"
+              class="task-calendar"
+              :placeholder="$t('date')">
+            </Calendar>
+          </div>
 
-        <div v-else class="task-info">
-          <span class="task-name">{{ task.name }}</span>
-          <span class="task-date">{{ task.date }}</span>
-        </div>
+          <div v-else class="task-info">
+            <span class="task-name">{{ task.name }}</span>
+            <span class="task-date">{{ task.date }}</span>
+          </div>
 
-        <div class="task-actions">
-          <button 
-            v-if="editIndex === index" 
-            @click.prevent.stop="clearDate(task)" 
-            class="clear-date-button">
-                {{ $t('clearDate') }}
-            </button>
+          <div class="task-actions">
+            <button 
+              v-if="editIndex === index" 
+              @click.prevent.stop="clearDate(task)" 
+              class="clear-date-button">
+                  {{ $t('clearDate') }}
+              </button>
 
-          <button 
-            v-if="editIndex === index" 
-            @click.prevent.stop="deleteTasks(task)" 
-            class="delete-task-button">
-                Delete
-            </button>
-        </div>
+            <button 
+              v-if="editIndex === index" 
+              @click.prevent.stop="deleteTasks(task)" 
+              class="delete-task-button">
+                  Delete
+              </button>
+          </div>
       </li>
     </ul>
   </div>
@@ -73,11 +65,13 @@ import { userStore } from '../stores/userStore';
 import Calendar from 'primevue/calendar';
 
 import TextField from "@/components/TextField.vue"
+import CheckBox from "@/components/CheckBox.vue"
 
 export default {
     components: { 
         Calendar,
-        TextField
+        TextField,
+        CheckBox
     },
 
     computed: {
