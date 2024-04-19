@@ -1,73 +1,73 @@
 <template>
-    <div class="switch-container">
-        <div class="switch-group">
-            <label class="switch-label">
-                <input type="checkbox" v-model="checkedToggleAll" @change="toggleAll()" />
-                <span class="slider round" />
-            </label>
-            <span class="switch-text">{{ $t('showAll') }} </span>
-        </div>
-
-        <div class="switch-group">
-            <label class="switch-label">
-                <input type="checkbox" v-model="checkedCompleted" @change="toggleCompleted()" />
-                <span class="slider round" />
-            </label>
-            <span class="switch-text">{{ $t('showDone') }}</span>
-        </div>
-        
-        <div class="switch-group">
-            <label class="switch-label">
-                <input type="checkbox" v-model="checkedDataTable" @change="toggleDataTable()" />
-                <span class="slider round" />
-            </label>
-            <span class="switch-text">{{ $t('showDataTable') }}</span>
-        </div>
+  <div class="switch-container">
+    <div class="switch-group">
+      <label class="switch-label">
+        <input type="checkbox" v-model="checkedToggleAll" @change="toggleAll()" />
+        <span class="slider round" />
+      </label>
+        <span class="switch-text">{{ $t('showAll') }} </span>
     </div>
+
+    <div class="switch-group">
+      <label class="switch-label">
+        <input type="checkbox" v-model="checkedCompleted" @change="toggleCompleted()" />
+        <span class="slider round" />
+        </label>
+        <span class="switch-text">{{ $t('showDone') }}</span>
+    </div>
+        
+    <div class="switch-group">
+      <label class="switch-label">
+        <input type="checkbox" v-model="checkedDataTable" @change="toggleDataTable()" />
+        <span class="slider round" />
+      </label>
+      <span class="switch-text">{{ $t('showDataTable') }}</span>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapState, mapWritableState, mapActions } from "pinia";
+import { mapWritableState, mapActions } from "pinia";
 import { useTodoStore } from "@/stores/todoStore.js"
 
 export default {
-    props: {
-        toggleAll: Function,
-        toggleCompleted: Function,
-        toggleEdit: Function,
-        toggleDataTable: Function
-    },
+  props: {
+    toggleAll: Function,
+    toggleCompleted: Function,
+    toggleEdit: Function,
+    toggleDataTable: Function
+  },
 
-    computed: {
-        ...mapState(useTodoStore, ["tasks"]),
-        ...mapWritableState(useTodoStore, ["tasks"]),
-    },
+  computed: {
+    ...mapWritableState(useTodoStore, ['tasks']),
+  },
 
-    data() {
-        return {
-            checkedToggleAll: true,
-            checkedCompleted: false,
-            checkedToggleEdit: false,
-            checkedDataTable: false,
-        }
-    },
-
-    methods: {
-        ...mapActions(useTodoStore, ["markDone"]),
-
-        callOnToggleAll() {
-            this.checkedToggleAll = !this.checkedToggleAll
-        },
-
-        callOnToggleCompleted() {
-            this.checkedCompleted = !this.checkedCompleted
-        },
-
-        callOnCheckedDataTable() {
-            this.checkedDataTable = !this.checkedDataTable
-        }
+  data() {
+    return {
+      checkedToggleAll: true,
+      checkedCompleted: false,
+      checkedToggleEdit: false,
+      checkedDataTable: false,
     }
+  },
+
+  methods: {
+    ...mapActions(useTodoStore, ["markDone"]),
+
+    callOnToggleAll() {
+      this.checkedToggleAll = !this.checkedToggleAll
+    },
+
+    callOnToggleCompleted() {
+      this.checkedCompleted = !this.checkedCompleted
+    },
+
+    callOnCheckedDataTable() {
+      this.checkedDataTable = !this.checkedDataTable
+    }
+  }
 }
+
 </script>
 
 <style scoped>
