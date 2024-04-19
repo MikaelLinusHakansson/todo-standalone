@@ -1,27 +1,18 @@
 <template>
   <div class="switch-container">
     <div class="switch-group">
-      <label class="switch-label">
-        <input type="checkbox" v-model="checkedToggleAll" @change="toggleAll()" />
-        <span class="slider round" />
-      </label>
-        <span class="switch-text">{{ $t('showAll') }} </span>
+      <CheckBoxSlider v-model="checkedToggleAll" @change="toggleAll()"></CheckBoxSlider>
+      <Span :name="'showAll'" />
     </div>
 
     <div class="switch-group">
-      <label class="switch-label">
-        <input type="checkbox" v-model="checkedCompleted" @change="toggleCompleted()" />
-        <span class="slider round" />
-        </label>
-        <span class="switch-text">{{ $t('showDone') }}</span>
+      <CheckBoxSlider v-model="checkedCompleted" @change="toggleCompleted()"></CheckBoxSlider>
+      <Span :name="'showDone'" />
     </div>
         
     <div class="switch-group">
-      <label class="switch-label">
-        <input type="checkbox" v-model="checkedDataTable" @change="toggleDataTable()" />
-        <span class="slider round" />
-      </label>
-      <span class="switch-text">{{ $t('showDataTable') }}</span>
+      <CheckBoxSlider v-model="checkedDataTable" @change="toggleDataTable()"></CheckBoxSlider>
+      <Span :name="'showDataTable'" />
     </div>
   </div>
 </template>
@@ -30,7 +21,15 @@
 import { mapWritableState, mapActions } from "pinia";
 import { useTodoStore } from "@/stores/todoStore.js"
 
+import CheckBoxSlider from "@/components/form/CheckBoxSlider.vue"
+import Span from "@/components/form/Span.vue"
+
 export default {
+  components: {
+    CheckBoxSlider,
+    Span
+  },
+
   props: {
     toggleAll: Function,
     toggleCompleted: Function,
@@ -101,7 +100,7 @@ export default {
     height: 0;
 }
 
-.slider {
+/* .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -143,5 +142,5 @@ export default {
 
 .slider.round::before {
     border-radius: 50%;
-}
+} */
 </style>

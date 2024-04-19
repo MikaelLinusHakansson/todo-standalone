@@ -60,7 +60,7 @@ export default {
     TaskAllTasksList,
     TaskDataTable,
     TaskCompletedList,
-    LoginPage
+    LoginPage,
   },
         
   data() {
