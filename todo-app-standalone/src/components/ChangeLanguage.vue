@@ -1,12 +1,21 @@
 <template>
-    <div class="button-container">
-            <button class="my-button" @click="changeLanguage('en')">English</button>
-            <button class="my-button" @click="changeLanguage('sv')">Svenska</button>
+    <div>
+      <Button :name="'Svenska'" @click="changeLanguage('sv')"></Button>
+      <Button :name="'English'" @click="changeLanguage('en')"></Button>
+
+            <!-- <button class="my-button" @click="changeLanguage('en')">English</button>
+            <button class="my-button" @click="changeLanguage('sv')">Svenska</button> -->
         </div>
 </template>
 
 <script>
+import Button from "@/components/buttons/Button.vue";
+
 export default {
+  components: {
+    Button
+  },
+
      data() {
         return {};
     },
