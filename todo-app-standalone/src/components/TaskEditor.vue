@@ -1,61 +1,64 @@
 <template>
-    <!-- This component is not in use, i think -->
+  <!-- This component is not in use, i think -->
+  <div>
+    <label for="editTask" /> <!-- im not using this component -->
+    <label for="editDate" />
+
     <div>
-      <label for="editTask" /> 
-      <label for="editDate" />
-
-      <div>
-            <div class="flex flex-column gap-2">
-                <span class="p-float-label">
-                    <InlineMessage 
-                        severity="info"> 
-                            {{ $t('task') }}
-                    </InlineMessage>
+      <div class="flex flex-column gap-2">
+        
+        <span class="p-float-label">
+          <InlineMessage
+            severity="info"> 
+              {{ $t('task') }} 
+          </InlineMessage>
                     
-                    <InputText 
-                        v-model.trim="editName" 
-                        aria-describedby="editTask-help"
-                        id="editTask">
-                    </InputText>
-                </span>
-            </div>
-            
-            <div class="flex flex-column gap-2">
-                <span class="p-float-label">
-                    <InlineMessage 
-                        severity="info"> 
-                            {{ $t('date') }}
-                    </InlineMessage>
+          <!-- <InputText 
+            v-model.trim="editName" 
+            aria-describedby="editTask-help"
+            id="editTask">
+          </InputText> -->
 
-                    <PrimeCalendar
-                        showIcon id="calendar-24h" 
-                        v-model="editDate" 
-                        showTime hourFormat="24"
-                        :manual-input=false
-                        showButtonBar
-                        date-format="yy/mm/dd"
-                        touchUI /> 
-                </span>
-            </div>
+          <TextField v-model="editName" :label="$t('task')"></TextField>
+        </span>
       </div>
-      
-        <Bbutton
-            :disabled="this.completedTask.completed"
-            @click="editNameCall"
-            class="me-2 m-1"
-            severity="primary"
-            icon="pi pi-check"
-            text
-            raised>
-        </Bbutton>
+            
+      <div class="flex flex-column gap-2">
+        <span class="p-float-label">
+          <InlineMessage 
+            severity="info"> 
+              {{ $t('date') }}
+          </InlineMessage>
 
-        <Bbutton
-            @click="deleteTasks"
-            class="me-2 m-1"
-            severity="danger"
-            icon="pi pi-trash">
-        </Bbutton>
+          <PrimeCalendar
+            showIcon id="calendar-24h" 
+            v-model="editDate" 
+            showTime hourFormat="24"
+            :manual-input=false
+            showButtonBar
+            date-format="yy/mm/dd"
+            touchUI /> 
+        </span>
+      </div>
     </div>
+      
+    <Bbutton
+      :disabled="this.completedTask.completed"
+      @click="editNameCall"
+      class="me-2 m-1"
+      severity="primary"
+      icon="pi pi-check"
+      text
+      raised>
+    </Bbutton>
+
+    <Bbutton
+      @click="deleteTasks"
+      class="me-2 m-1"
+      severity="danger"
+      icon="pi pi-trash">
+    </Bbutton>
+  </div>
 </template>
 
 <script>
@@ -67,6 +70,7 @@ import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
+import TextField from "@/components/TextField.vue"
 
 export default {
     components: {
@@ -74,6 +78,7 @@ export default {
         InputText,
         Bbutton,
         InlineMessage,
+        TextField
     },
 
     props: {

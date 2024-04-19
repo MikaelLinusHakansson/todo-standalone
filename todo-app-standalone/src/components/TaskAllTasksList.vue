@@ -20,13 +20,12 @@
         </label>
         
         <div v-if="!task.completed && editIndex === index" class="task-editor">
-          <input 
-            @blur="editTask(task, getAccessTokens())"
-            @click.stop=""
-            v-model="task.name"
-            :placeholder="$t('task')"
-            type="text"
-            class="task-input">
+            <TextField
+              v-model="task.name" 
+              :label="$t('task')"
+              @blur="editTask(task, getAccessTokens())"
+              @click.stop="">
+            </TextField>
 
           <Calendar 
             @blur="editTask(task, getAccessTokens())"
@@ -73,9 +72,12 @@ import { userStore } from '../stores/userStore';
 
 import Calendar from 'primevue/calendar';
 
+import TextField from "@/components/TextField.vue"
+
 export default {
     components: { 
-        Calendar, 
+        Calendar,
+        TextField
     },
 
     computed: {
@@ -168,16 +170,16 @@ export default {
 }
 
 .task-input {
-    flex-grow: 1;
+    /* flex-grow: 1;
     flex-shrink: 1;
     flex-basis: calc(100% - 120px); 
     min-width: 0;
     outline: none; 
     padding: 5px; 
-    background-color: #e9ecef; 
-    border: none; 
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.1); 
-    transition: background-color 0.3s, box-shadow 0.3s; 
+    background-color: #e9ecef;  
+    border: none; */
+    /* box-shadow: inset 0 1px 3px rgba(0,0,0,.1);  */
+    /* transition: background-color 0.3s, box-shadow 0.3s;  */
 }
 
 .task-input:focus {
