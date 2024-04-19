@@ -70,7 +70,7 @@ import PrimeCalendar from "primevue/calendar"
 import InputText from "primevue/inputtext"
 import Bbutton from "primevue/button"
 import InlineMessage from 'primevue/inlinemessage';
-import TextField from "@/components/TextField.vue"
+import TextField from "@/components/form/TextField.vue"
 
 export default {
     components: {

@@ -1,11 +1,24 @@
 <template>
   <label class="custom-checkbox">
-    <input class="checkbox" type="checkbox">
-    <span class="checkmark"></span>
+    <input class="checkbox" type="checkbox" :checked="modelValue" @change="updateValue">
+    <span class="checkmark" > </span>
   </label>
 </template>
 
 <script>
+export default {
+  props: {
+    modelValue: {
+      type: Boolean
+    }
+  },
+
+  methods: {
+    updateValue(event) {
+      this.$emit('update:modelValue', event.target.checked)
+    }
+  }
+}
 </script>
 
 <style>
@@ -14,15 +27,15 @@
 }
 
 .custom-checkbox {
-  display: inline-block;
+  display: flex;
   position: relative;
   padding-left: 30px; 
   cursor: pointer;
-  user-select: none; 
+  user-select: none;
 }
 
 .custom-checkbox input[type="checkbox"] {
-  position: absolute;
+  position: flex;
   opacity: 0;
   cursor: pointer;
 }

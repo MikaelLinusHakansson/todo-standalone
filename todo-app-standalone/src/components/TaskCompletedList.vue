@@ -1,23 +1,21 @@
 <template>
-    <div class="custom-container">
-        <span class="completed-tasks-header">
-            {{ $t('done') }}:
-        </span>
-        <ul class="task-list">
-            <li
-                v-for="(completedTask) in completedTasksGetters" :key="completedTask.id" class="list-item" >
-                    <label class="custom-checkbox">
-                        <input class="checkbox" v-model="completedTask.completed" type="checkbox" @click="markDoneSender(completedTask)">
-                            <span class="checkmark"/>
-                    </label>
-                    <div class="task-info">
-                        <span class="task-name">{{ completedTask.name }}</span>
-                        <span class="task-date">{{ completedTask.date }}</span>
-                    </div>
-                    <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button>
-                </li>
-            </ul>
+  <div class="custom-container">
+    <span class="completed-tasks-header"> {{ $t('done') }}: </span>
+    <ul class="task-list">
+      <li
+        v-for="(completedTask) in completedTasksGetters" 
+        :key="completedTask.id" 
+        class="list-item" >
+
+        <CheckBox v-model="completedTask.completed" @click="markDoneSender(completedTask)" />
+        <div class="task-info">
+          <span class="task-name">{{ completedTask.name }}</span>
+          <span class="task-date">{{ completedTask.date }}</span>
         </div>
+        <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -25,7 +23,13 @@ import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
 import { userStore } from '../stores/userStore';
 
+import CheckBox from "@/components/form/CheckBox.vue"
+
 export default {
+    components: {
+        CheckBox
+    },
+
     computed: {
         ...mapState(useTodoStore, ['completedTasksGetters', 'getData']),
     },
@@ -54,7 +58,6 @@ export default {
 </script>
 
 <style scoped>
-
 .delete-task-button {
     background-color: #ff4d4d;
     color: white;
@@ -134,7 +137,7 @@ export default {
     padding: 0.5rem;
 }
 
-.checkbox {
+/* .checkbox {
     margin-right: 1rem;
 }
 
@@ -189,7 +192,7 @@ export default {
   border: solid white;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
-}
+} */
 
 .list-item {
     display: flex;

@@ -11,7 +11,7 @@
 <script>
 import Calender from "@/components/Calender.vue"
 import InputText from 'primevue/inputtext'
-import TextField from "@/components/TextField.vue"
+import TextField from "@/components/form/TextField.vue"
 
 import { mapState, mapActions, mapWritableState } from "pinia"
 import { useTodoStore } from "@/stores/todoStore.js"

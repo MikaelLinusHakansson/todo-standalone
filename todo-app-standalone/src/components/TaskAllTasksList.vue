@@ -64,8 +64,8 @@ import { userStore } from '../stores/userStore';
 
 import Calendar from 'primevue/calendar';
 
-import TextField from "@/components/TextField.vue"
-import CheckBox from "@/components/CheckBox.vue"
+import TextField from "@/components/form/TextField.vue"
+import CheckBox from "@/components/form/CheckBox.vue"
 
 export default {
     components: { 
