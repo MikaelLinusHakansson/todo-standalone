@@ -7,6 +7,8 @@
         type="text" 
         class="rounded-input-task-form" 
         :placeholder="$t('task')"/>
+
+      <Textfield v-model="taskName" :label="$t('task')" />
     </div>
 
       <Calender @date-time="submitNewTask" />
@@ -16,6 +18,7 @@
 <script>
 import Calender from "@/components/Calender.vue"
 import InputText from 'primevue/inputtext'
+import Textfield from "@/components/Textfield.vue"
 
 import { mapState, mapActions, mapWritableState } from "pinia"
 import { useTodoStore } from "@/stores/todoStore.js"
@@ -25,6 +28,7 @@ import { userStore } from '../stores/userStore'
         components: {
             Calender,
             InputText,
+            Textfield
         },
 
         data () {
