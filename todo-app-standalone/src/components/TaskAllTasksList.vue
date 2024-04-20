@@ -13,13 +13,14 @@
         
           <div v-if="!task.completed && editIndex === index" class="task-editor">
             <TextField
+              class="margin-around"
               v-model="task.name" 
               :label="$t('task')"
               @blur="editTask(task, getAccessTokens())"
               @click.stop="">
             </TextField>
 
-            <Calendar 
+            <!-- <Calendar 
               @blur="editTask(task, getAccessTokens())"
               @date-select="editTask(task, getAccessTokens())"
               @click.stop=""
@@ -29,30 +30,48 @@
               dateFormat="yy/mm/dd"
               class="task-calendar"
               :placeholder="$t('date')">
-            </Calendar>
+            </Calendar> -->
 
-            <Calender :hide="true" :task="task" @date-time="something" />
+            <Calender :hide="true" :task="task" @date-time="sendData" />
+            
+          
+            
           </div>
 
           <div v-else class="task-info">
             <span class="task-name">{{ task.name }}</span>
             <span class="task-date">{{ task.date }}</span>
+            
           </div>
 
+          <Button
+            v-if="editIndex === index" 
+            @click.prevent.stop="deleteTasks(task)"
+            :icon="'src/components/assets/navigation/delete.png'"
+            :backgroundColor="'transparent'"> 
+          </Button>
+
+
           <div class="task-actions">
-            <button 
+            <!-- <button 
               v-if="editIndex === index" 
               @click.prevent.stop="clearDate(task)" 
               class="clear-date-button">
                   {{ $t('clearDate') }}
-              </button>
+              </button> -->
 
-            <button 
+              <!-- <Button v-if="editIndex === index" 
+                @click.prevent.stop="clearDate(task)"
+                :icon="''">
+              </Button> -->
+
+            <!-- <button
               v-if="editIndex === index" 
               @click.prevent.stop="deleteTasks(task)" 
               class="delete-task-button">
                   Delete
-              </button>
+              </button> -->
+              
           </div>
       </li>
     </ul>
@@ -69,13 +88,15 @@ import Calendar from 'primevue/calendar';
 import TextField from "@/components/form/TextField.vue"
 import CheckBox from "@/components/form/CheckBox.vue"
 import Calender from "@/components/Calender.vue"
+import Button from "@/components/buttons/Button.vue";
 
 export default {
     components: { 
         Calendar,
         TextField,
         CheckBox,
-        Calender
+        Calender,
+        Button
     },
 
     computed: {
@@ -103,15 +124,8 @@ export default {
             }
         },
 
-        something(data) {
-          console.log(data)
-          if (data !== null) {
-            data.task.date = data.date
-          }
-
-          console.log(data.task)
-
-          this.editTask(data.task, this.getAccessTokens())
+        sendData(data) {
+          this.editTask(data, this.getAccessTokens())
         },
 
         stopEditing () {
@@ -137,7 +151,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .custom-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -156,6 +170,7 @@ export default {
 
 .list-item {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
@@ -163,10 +178,11 @@ export default {
 }
 
 .list-item:hover {
-    background-color: #0DC0F0;
+    background-color: rgb(150, 225, 244);
     transition: background-color 0.3s, box-shadow 0.3s;
     box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .task-editor {
@@ -176,6 +192,10 @@ export default {
     flex-shrink: 1;
     flex-basis: 0;
     margin-right: 1rem;
+}
+
+.margin-around {
+  margin: 5px;
 }
 
 .task-input {

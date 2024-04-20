@@ -1,6 +1,7 @@
 <template>
-  <div class="button-container">
-    <button class="my-button" >
+  <div class="button-container" :style="{ backgroundColor: backgroundColor, color: color}">
+    <button class="my-button" :style="{ backgroundColor: backgroundColor, color: color}" >
+      <img :src="icon" class="button-icon-ass" :style="{ backgroundColor: backgroundColor, color: color}" />
       {{ name }}
     </button>
   </div>
@@ -12,18 +13,30 @@ export default {
     name: {
       type: String,
       default: ''
+    },
+
+    icon: {
+      type: String,
+      default: ''
+    },
+
+    backgroundColor: {
+      type: String,
+      default: 'white'
+    },
+
+    color: {
+      type: String,
+      default: 'white'
     }
   }
 }
 </script>
 
 <style>
-.button-container {
-    margin-bottom: 1rem;
-}
-
 .my-button {
-    margin:0.25rem;
+    height: 40px;
+    width: 40px;
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
@@ -31,10 +44,23 @@ export default {
     color: white;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
 }
 
 .my-button:hover {
     background-color: #0C76F0;
+    width: 40px;
+    height: 40px;
+    transition: width 0.15s ease-in-out, height 0.15s ease-in-out;
+}
+
+.button-icon-ass {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.my-button:hover .button-icon-ass {
+  width: 35px;
+  height: 35px;
 }
 </style>

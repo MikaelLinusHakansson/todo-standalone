@@ -1,19 +1,18 @@
 <template>
-    <div>
-      <Button :name="'Svenska'" @click="changeLanguage('sv')"></Button>
-      <Button :name="'English'" @click="changeLanguage('en')"></Button>
-
-            <!-- <button class="my-button" @click="changeLanguage('en')">English</button>
-            <button class="my-button" @click="changeLanguage('sv')">Svenska</button> -->
-        </div>
+  <div>
+    <Flags :name="'src/components/assets/flags/uk.png'" @click="changeLanguage('sv')"></Flags>
+    <Flags :name="'src/components/assets/flags/sv.png'" @click="changeLanguage('en')"></Flags>
+  </div>
 </template>
 
 <script>
 import Button from "@/components/buttons/Button.vue";
+import Flags from "@/components/buttons/flags.vue";
 
 export default {
   components: {
-    Button
+    Button,
+    Flags
   },
 
      data() {
@@ -27,25 +26,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.button-container {
-    margin-bottom: 1rem;
-}
-
-.my-button {
-    margin:0.25rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    background-color: #0DC0F0;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
-}
-
-.my-button:hover {
-    background-color: #0C76F0;
-}
-</style>

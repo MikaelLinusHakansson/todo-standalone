@@ -1,38 +1,32 @@
 <template>
   <div>
-    <button 
-      @click.prevent.stop="logout()" 
-      class="my-logout-button">
-        {{ this.$t('logout') }}
-    </button>
+    <Button class="container-logout-button spacer-bottom" :icon="'src/components/assets/navigation/logout.png'" :name="'logout'" @click="logout()" />
     
-    <div class="todo-page-container">
-      <task-title-header />
+    <div>
+      <change-language class="container-change-language" />
 
-      <change-language />
+      <task-title-header class="container" />
 
-      <task-form />
+      <task-form class="container" />
 
-      <task-controls 
+      <task-controls
+        class="container-row"
         :toggle-all="toggleAll"
         :toggle-completed="toggleCompleted"
         :toggle-data-table="toggleDataTable">
       </task-controls>
 
-      <div class="todo-page-margin-bottom" :hidden="visableAllTasks">
-        <task-all-tasks-list
-          class="todo-page-list-group" 
-          :isVisable="isVisable">
-          </task-all-tasks-list>
+      <div class="margin-bottom" :hidden="visableAllTasks">
+        <task-all-tasks-list class="margin-bottom" :isVisable="isVisable" />
       </div>
 
-      <div :hidden="this.visableCompleted">
+      <div class="margin-bottom" :hidden="this.visableCompleted" >
         <task-completed-list />
       </div>
             
-        <task-data-table :hidden="visableDataTable" />
-      </div>
+      <task-data-table class="container" :hidden="visableDataTable" />
     </div>
+  </div>
 </template>
 
 <script>
@@ -44,6 +38,7 @@ import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
 import LoginPage from "@/components/LoginPage.vue";
+import Button from "@/components/buttons/Button.vue";
 
 import { nextTick } from 'vue';
 import { useTodoStore } from "../stores/todoStore";
@@ -61,6 +56,7 @@ export default {
     TaskDataTable,
     TaskCompletedList,
     LoginPage,
+    Button
   },
         
   data() {
@@ -107,7 +103,7 @@ export default {
 </script>
 
 <style>
-.todo-page-container {
+/* .todo-page-container {
   max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
@@ -160,5 +156,46 @@ export default {
     padding-right: 10px;
     padding-left: 10px;
   }
+}
+
+.margin-bottom{
+  margin-bottom: 5px;
+} */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.container-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 1rem;
+}
+
+.container-change-language {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: end;
+  margin-right: 1rem;
+}
+
+.container-logout-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  margin-right: 1.5rem;
+}
+
+.spacer-bottom {
+  margin-bottom: 1rem;
 }
 </style>

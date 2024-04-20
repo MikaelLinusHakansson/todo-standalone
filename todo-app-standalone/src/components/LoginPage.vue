@@ -14,7 +14,7 @@
                             <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
                         </div>
 
-                        <button @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
+                        <button @keypress.enter="login" @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
                     </form>
                     <div class="custom-card-footer">
                         <button class="my-register-button" @click="$router.push('/register')">{{$t('register')}}</button>

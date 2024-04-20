@@ -1,10 +1,13 @@
 <template>
-  <div class="margin-bottom">
-    <div class="margin-bottom-input-text">
-      <TextField v-model="taskName" :label="$t('task')" />
-    </div>
-
-    <Calender @date-time="submitNewTask" />
+  <div>
+    <TextField
+      class="margin-bottom"
+      v-model="task.name" 
+      :label="$t('task')"
+      @keypress.enter="submitWithEnter(task)">
+    </TextField>
+    
+    <Calender class="margin-bottom" @date-time="submitNewTask" :task="task" :hide="true" />
   </div>
 </template>
 
@@ -26,8 +29,10 @@ export default {
 
   data () {
     return {
-      taskName: '',
-      taskDate: ''
+      task: {
+        name: '',
+        date: ''
+      }
     }
   },
 
@@ -41,28 +46,24 @@ export default {
     ...mapActions(useTodoStore, ["createNewTask"]),
 
     submitNewTask(data) {
-      this.createNewTask({
-        name: this.taskName,
-        date: data.date
-      }, this.getAccessTokens())
+      this.createNewTask(data, this.getAccessTokens())
 
-      this.taskName = ''
-      this.taskDate = ''
+      this.task.name = ''
+      this.task.date = ''
+    },
+
+    submitWithEnter(data) {
+      this.createNewTask(data, this.getAccessTokens())
+
+      this.task.name = ''
+      this.task.date = ''
     }
-
-           /*  addDateFromCalenderComp(data) {
-                this.taskDate = data.name // probably not needed
-            } */
   }
 }
 </script>
 
-<style scoped>
+<style>
 .margin-bottom {
-  margin-bottom: 1rem;
-}
-
-.margin-bottom-input-text {
-  margin-bottom: 0.25rem;
+    margin-bottom: 5px; 
 }
 </style>

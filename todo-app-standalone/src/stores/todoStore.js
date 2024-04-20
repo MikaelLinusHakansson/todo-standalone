@@ -28,10 +28,6 @@ export const useTodoStore = defineStore("todoStore", {
       
       else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
         alert("Invalid name input");
-      } 
-      
-      else {
-        alert("Invalid input");
       }
       
       return true;

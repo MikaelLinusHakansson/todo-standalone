@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="margin-bottom">
+    <div>
       <PrimeCalender
         :placeholder="$t('date')"
         showIcon 
         id="calendar-24h" 
         v-model="datetime24h"
         showTime hourFormat="24"
-        :manual-input=false
+        :manual-input="false"
         showButtonBar
         date-format="yy/mm/dd"
         touchUI />
@@ -53,7 +53,7 @@ export default {
 
   data() {
     return {
-      datetime24h: '',
+      datetime24h: this.task.date,
       buttondisplay: null,
     }
   },
@@ -69,12 +69,16 @@ export default {
 
       this.datetime24h = ''
     }
+  },
+
+  watch: {
+    datetime24h: {
+      handler(newVal) {
+        this.task.date = newVal
+        
+        this.$emit('date-time', this.task)
+      }
+    }
   }
 }
 </script>
-
-<style scoped>
-.margin-bottom {
-  margin-bottom: 5px;
-}
-</style>

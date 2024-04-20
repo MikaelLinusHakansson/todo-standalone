@@ -1,17 +1,17 @@
 <template>
   <div class="switch-container">
     <div class="switch-group">
-      <CheckBoxSlider v-model="checkedToggleAll" @change="toggleAll()"></CheckBoxSlider>
+      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedToggleAll" @change="toggleAll()"></CheckBoxSlider>
       <Span :name="'showAll'" />
     </div>
 
     <div class="switch-group">
-      <CheckBoxSlider v-model="checkedCompleted" @change="toggleCompleted()"></CheckBoxSlider>
+      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedCompleted" @change="toggleCompleted()"></CheckBoxSlider>
       <Span :name="'showDone'" />
     </div>
         
     <div class="switch-group">
-      <CheckBoxSlider v-model="checkedDataTable" @change="toggleDataTable()"></CheckBoxSlider>
+      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedDataTable" @change="toggleDataTable()"></CheckBoxSlider>
       <Span :name="'showDataTable'" />
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.switch-container {
+/* .switch-container {
     display: flex;
     flex-direction: column;
 }
@@ -98,7 +98,7 @@ export default {
     opacity: 0;
     width: 0;
     height: 0;
-}
+} */
 
 /* .slider {
     position: absolute;
@@ -143,4 +143,8 @@ export default {
 .slider.round::before {
     border-radius: 50%;
 } */
+
+.margin-around {
+  margin-right: 1rem;
+}
 </style>
