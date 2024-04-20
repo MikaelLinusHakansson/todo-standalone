@@ -30,6 +30,8 @@
               class="task-calendar"
               :placeholder="$t('date')">
             </Calendar>
+
+            <Calender :hide="true" :task="task" @date-time="something" />
           </div>
 
           <div v-else class="task-info">
@@ -66,12 +68,14 @@ import Calendar from 'primevue/calendar';
 
 import TextField from "@/components/form/TextField.vue"
 import CheckBox from "@/components/form/CheckBox.vue"
+import Calender from "@/components/Calender.vue"
 
 export default {
     components: { 
         Calendar,
         TextField,
-        CheckBox
+        CheckBox,
+        Calender
     },
 
     computed: {
@@ -97,6 +101,17 @@ export default {
             } else {
                 this.editIndex = index
             }
+        },
+
+        something(data) {
+          console.log(data)
+          if (data !== null) {
+            data.task.date = data.date
+          }
+
+          console.log(data.task)
+
+          this.editTask(data.task, this.getAccessTokens())
         },
 
         stopEditing () {

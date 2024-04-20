@@ -12,13 +12,14 @@
         date-format="yy/mm/dd"
         touchUI />
     </div>
-    <Button
+    <Button 
+      v-if="!hide"
       severity="info"
       icon="pi pi-arrow-up" 
       text 
       raised
       iconPos="right" 
-      @click="sendDate"> 
+      @click="sendDate">
     </Button>
   </div>
 </template>
@@ -32,6 +33,19 @@ import dayjs from 'dayjs';
 import { userStore } from '../stores/userStore';
 
 export default {
+  props: {
+    task: {
+      type: Object,
+      required: false,
+      default: null
+    },
+
+    hide: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   components: {
     PrimeCalender,
     Button
@@ -49,7 +63,8 @@ export default {
 
     sendDate() {
       this.$emit('date-time', {
-        date: dayjs(this.datetime24h)
+        date: dayjs(this.datetime24h),
+        task: this.task
       })
 
       this.datetime24h = ''

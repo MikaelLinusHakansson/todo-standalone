@@ -4,7 +4,7 @@
       <TextField v-model="taskName" :label="$t('task')" />
     </div>
 
-      <Calender @date-time="submitNewTask" />
+    <Calender @date-time="submitNewTask" />
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
       this.taskDate = ''
     }
 
-            /* addDateFromCalenderComp(data) {
+           /*  addDateFromCalenderComp(data) {
                 this.taskDate = data.name // probably not needed
             } */
   }
