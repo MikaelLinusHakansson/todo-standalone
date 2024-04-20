@@ -12,7 +12,14 @@
           <span class="task-name">{{ completedTask.name }}</span>
           <span class="task-date">{{ completedTask.date }}</span>
         </div>
-        <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button>
+        <!-- <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button> -->
+
+        <Button 
+          @click="deleteTasks(completedTask)" 
+          :icon="'src/components/assets/navigation/delete.png'" 
+          :backgroundColor="'transparent'"
+          style="margin: 1rem">
+        </Button>
       </li>
     </ul>
   </div>
@@ -24,10 +31,12 @@ import { useTodoStore } from '@/stores/todoStore.js'
 import { userStore } from '../stores/userStore';
 
 import CheckBox from "@/components/form/CheckBox.vue"
+import Button from "@/components/buttons/Button.vue";
 
 export default {
     components: {
-        CheckBox
+        CheckBox,
+        Button
     },
 
     computed: {

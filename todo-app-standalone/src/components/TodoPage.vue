@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Button class="container-logout-button spacer-bottom" :icon="'src/components/assets/navigation/logout.png'" :name="'logout'" @click="logout()" />
+    <Button 
+      class="container-logout-button spacer-bottom" 
+      :icon="'src/components/assets/navigation/logout.png'" 
+      :name="'logout'" @click="logout()">
+    </Button>
     
     <div>
       <change-language class="container-change-language" />
@@ -185,14 +189,12 @@ export default {
   flex-direction: column-reverse;
   justify-content: flex-end;
   align-items: end;
-  margin-right: 1rem;
 }
 
 .container-logout-button {
   display: flex;
   justify-content: flex-end;
   align-items: end;
-  margin-right: 1.5rem;
 }
 
 .spacer-bottom {

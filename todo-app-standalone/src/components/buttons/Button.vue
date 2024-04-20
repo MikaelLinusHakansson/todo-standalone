@@ -44,23 +44,24 @@ export default {
     color: white;
     font-size: 1rem;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .my-button:hover {
     background-color: #0C76F0;
-    width: 40px;
-    height: 40px;
-    transition: width 0.15s ease-in-out, height 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out;
 }
 
 .button-icon-ass {
   width: 25px;
   height: 25px;
-  vertical-align: middle;
 }
 
 .my-button:hover .button-icon-ass {
   width: 35px;
   height: 35px;
+  transition: width 0.15s ease-in-out, height 0.15s ease-in-out;
 }
 </style>
