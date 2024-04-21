@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button-container">
-      <change-language class="container-change-language" />
+      <LanguageGroup class="container-change-language" />
 
       <IconButton 
         class="container-logout-button spacer-bottom spacer-top" 
@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import ChangeLanguage from "@/components/ChangeLanguage.vue";
-import Title from "@/components/Title.vue";
+import LanguageGroup from "@/components/common/LanguageGroup.vue";
+import Title from "@/components/common/Title.vue";
 import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "@/components/TaskControls.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
@@ -56,7 +56,7 @@ import { userStore } from "../stores/userStore";
 export default {
   components: {
     Title,
-    ChangeLanguage,
+    LanguageGroup,
     TaskForm,
     TaskControls,
     TaskAllTasksList,

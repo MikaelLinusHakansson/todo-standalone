@@ -26,7 +26,7 @@
 
 <script>
 import { mapActions} from "pinia"
-import { userStore } from '../stores/userStore'
+import { userStore } from '../../stores/userStore'
 
 import dayjs from 'dayjs'
 import PrimeCalender from "primevue/calendar"

@@ -1,5 +1,5 @@
 <template>
-  <change-language class="column-row background-color" />
+  <LanguageGroup class="column-row background-color" />
   <div class="custom-container">
     <div class="custom-row">
       <div class="custom-col">
@@ -43,16 +43,16 @@ import { userStore } from '../stores/userStore'
 
 import Password from 'primevue/password'
 
-import ChangeLanguage from './ChangeLanguage.vue'
+import LanguageGroup from './common/LanguageGroup.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
 import TextField from '@/components/form/TextField.vue'
 import Button from '@/components/buttons/Button.vue'
-import Title from '@/components/Title.vue'
+import Title from '@/components/common/Title.vue'
 
 export default {
   components: {
     Password,
-    ChangeLanguage,
+    LanguageGroup,
     IconButton,
     TextField,
     Button,
