@@ -15,27 +15,12 @@
             <TextField
               class="margin-around"
               v-model="task.name" 
-              :label="$t('task')"
+              :label="'task'"
               @blur="editTask(task, getAccessTokens())"
               @click.stop="">
             </TextField>
 
-            <!-- <Calendar 
-              @blur="editTask(task, getAccessTokens())"
-              @date-select="editTask(task, getAccessTokens())"
-              @click.stop=""
-              v-model="task.date" 
-              showTime
-              hourFormat="24"
-              dateFormat="yy/mm/dd"
-              class="task-calendar"
-              :placeholder="$t('date')">
-            </Calendar> -->
-
             <Calender :hide="true" :task="task" @date-time="sendData" />
-            
-          
-            
           </div>
 
           <div v-else class="task-info">
@@ -44,35 +29,12 @@
             
           </div>
 
-          <Button
-            v-if="editIndex === index" 
+          <!-- v-if="editIndex === index" --> 
+          <IconButton
             @click.prevent.stop="deleteTasks(task)"
             :icon="'src/components/assets/navigation/delete.png'"
             :backgroundColor="'transparent'"> 
-          </Button>
-
-
-          <div class="task-actions">
-            <!-- <button 
-              v-if="editIndex === index" 
-              @click.prevent.stop="clearDate(task)" 
-              class="clear-date-button">
-                  {{ $t('clearDate') }}
-              </button> -->
-
-              <!-- <Button v-if="editIndex === index" 
-                @click.prevent.stop="clearDate(task)"
-                :icon="''">
-              </Button> -->
-
-            <!-- <button
-              v-if="editIndex === index" 
-              @click.prevent.stop="deleteTasks(task)" 
-              class="delete-task-button">
-                  Delete
-              </button> -->
-              
-          </div>
+          </IconButton>
       </li>
     </ul>
   </div>
@@ -88,7 +50,7 @@ import Calendar from 'primevue/calendar';
 import TextField from "@/components/form/TextField.vue"
 import CheckBox from "@/components/form/CheckBox.vue"
 import Calender from "@/components/Calender.vue"
-import Button from "@/components/buttons/Button.vue";
+import IconButton from "@/components/buttons/IconButton.vue";
 
 export default {
     components: { 
@@ -96,7 +58,7 @@ export default {
         TextField,
         CheckBox,
         Calender,
-        Button
+        IconButton
     },
 
     computed: {

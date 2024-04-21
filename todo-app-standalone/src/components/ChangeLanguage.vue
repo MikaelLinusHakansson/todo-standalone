@@ -1,17 +1,15 @@
 <template>
   <div>
-    <Flags :name="'src/components/assets/flags/uk.png'" @click="changeLanguage('sv')"></Flags>
-    <Flags :name="'src/components/assets/flags/sv.png'" @click="changeLanguage('en')"></Flags>
+    <Flags :name="'src/components/assets/flags/uk.png'" @click="changeLanguage('en')"></Flags>
+    <Flags :name="'src/components/assets/flags/sv.png'" @click="changeLanguage('sv')"></Flags>
   </div>
 </template>
 
 <script>
-import Button from "@/components/buttons/Button.vue";
 import Flags from "@/components/buttons/flags.vue";
 
 export default {
   components: {
-    Button,
     Flags
   },
 

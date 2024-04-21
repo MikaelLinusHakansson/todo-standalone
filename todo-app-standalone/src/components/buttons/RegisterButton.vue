@@ -1,6 +1,6 @@
 <template>
-  <div class="button-container" :style="{ backgroundColor: backgroundColor, color: color}">
-    <button class="my-login-button" :style="{ backgroundColor: backgroundColor, color: color}" >
+  <div class="button-container">
+    <button class="my-register-button">
       {{ name }}
     </button>
   </div>
@@ -13,16 +13,22 @@ export default {
       type: String,
       default: ''
     }
+  },
+
+  methods: {
+    translation() {
+      return this.name = this.$t(this.name) || ''
+    }
   }
 }
 </script>
 
 <style>
-.my-login-button {
+.my-register-button {
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    background-color: #07F088;
+    background-color: #0DC0F0;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -30,7 +36,7 @@ export default {
     width: 100%;
 }
 
-.my-login-button:hover {
-    background-color:  #0CF0D7;
+.my-register-button:hover {
+    background-color:  #0C76F0;
 }
 </style>

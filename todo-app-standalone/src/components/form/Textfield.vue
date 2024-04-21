@@ -2,7 +2,7 @@
   <input 
     type="text" 
     class="rounded-input-task-form"
-    :placeholder="label"
+    :placeholder="translation()"
     :value="modelValue"
     @input="onInput" />
 </template>
@@ -30,6 +30,10 @@ export default {
 
     isEmpty() {
       return this.modelValue === '' || this.modelValue === null
+    },
+
+    translation() {
+      return this.$t(this.label) || ''
     }
   }
 }

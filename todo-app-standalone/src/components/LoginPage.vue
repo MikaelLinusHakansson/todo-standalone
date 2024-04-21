@@ -1,43 +1,50 @@
 <template>
-    <div class="custom-container">
-        <div class="custom-row">
-            <div class="custom-col">
-                <change-language />
-                <div class="custom-card">
-                    <h2 class="custom-card-title">{{ $t('login') }}</h2>
-                    <form class="custom-card-content">
-                        <div class="custom-form-group">
-                            <TextField v-model="username" :label="$t('username')"></TextField>
-                        </div>
-
-                        <div class="custom-form-group">
-                            <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
-                        </div>
-
-                        <button @keypress.enter="login" @click.prevent.stop="login" class="my-login-button" >{{ $t('login') }}</button>
-                    </form>
-                    <div class="custom-card-footer">
-                        <button class="my-register-button" @click="$router.push('/register')">{{$t('register')}}</button>
-                    </div>
-                </div>
+  <ChangeLanguage class="column-row background-color" />
+  <div class="custom-container">
+    <div class="custom-row">
+      <div class="custom-col">
+        <div class="custom-card">
+          <h2 class="custom-card-title">{{ $t('login') }}</h2>
+          <form class="custom-card-content">
+            <div class="custom-form-group">
+              <TextField v-model="username" :label="'username'"></TextField>
             </div>
+            
+            <div class="custom-form-group">
+              <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
+            </div>
+
+            <RegisterButton @keypress.enter="login" @click.prevent.stop="login" :name="$t('login')" />
+          </form>
+          
+          <div class="custom-card-footer">
+            <RegisterButton :name="$t('register')" @click="$router.push('/register')" />
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import { mapActions } from 'pinia';
-import { userStore } from '../stores/userStore';
+import { mapActions } from 'pinia'
+import { userStore } from '../stores/userStore'
 
-import Password from 'primevue/password';
-import ChangeLanguage from "@/components/ChangeLanguage.vue";
-import TextField from "@/components/form/TextField.vue";
+import Password from 'primevue/password'
+import ChangeLanguage from "@/components/ChangeLanguage.vue"
+import TextField from "@/components/form/TextField.vue"
+import IconButton from "@/components/buttons/IconButton.vue"
+import Button from "@/components/buttons/Button.vue"
+import RegisterButton from './buttons/RegisterButton.vue'
 
 export default { 
     components: {
         Password,
         ChangeLanguage,
-        TextField
+        TextField,
+        IconButton,
+        Button,
+        RegisterButton
     },
     
     data() {
@@ -166,5 +173,18 @@ export default {
     border-color: #80bdff;
     outline: 0;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.column-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.background-color {
+    background-color: transparent;
+    color: transparent;
 }
 </style>

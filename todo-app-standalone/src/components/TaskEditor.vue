@@ -19,7 +19,7 @@
             id="editTask">
           </InputText> -->
 
-          <TextField v-model="editName" :label="$t('task')"></TextField>
+          <TextField v-model="editName" :label="'task'"></TextField>
         </span>
       </div>
             

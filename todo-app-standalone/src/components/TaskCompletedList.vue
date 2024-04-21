@@ -14,12 +14,12 @@
         </div>
         <!-- <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button> -->
 
-        <Button 
+        <IconButton 
           @click="deleteTasks(completedTask)" 
           :icon="'src/components/assets/navigation/delete.png'" 
           :backgroundColor="'transparent'"
           style="margin: 1rem">
-        </Button>
+        </IconButton>
       </li>
     </ul>
   </div>
@@ -31,12 +31,12 @@ import { useTodoStore } from '@/stores/todoStore.js'
 import { userStore } from '../stores/userStore';
 
 import CheckBox from "@/components/form/CheckBox.vue"
-import Button from "@/components/buttons/Button.vue";
+import IconButton from "@/components/buttons/IconButton.vue";
 
 export default {
     components: {
         CheckBox,
-        Button
+        IconButton
     },
 
     computed: {

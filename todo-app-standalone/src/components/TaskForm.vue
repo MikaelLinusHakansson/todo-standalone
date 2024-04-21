@@ -3,7 +3,7 @@
     <TextField
       class="margin-bottom"
       v-model="task.name" 
-      :label="$t('task')"
+      :label="'task'"
       @keypress.enter="submitWithEnter(task)">
     </TextField>
     

@@ -1,13 +1,18 @@
 <template>
   <div>
-    <Button 
-      class="container-logout-button spacer-bottom" 
-      :icon="'src/components/assets/navigation/logout.png'" 
-      :name="'logout'" @click="logout()">
-    </Button>
+    <div class="button-container">
+      <change-language class="container-change-language" />
+
+      <IconButton 
+        class="container-logout-button spacer-bottom spacer-top" 
+        :icon="'src/components/assets/navigation/logout.png'" 
+        :name="'logout'" 
+        @click="logout()">
+      </IconButton>
+  
+    </div>
     
     <div>
-      <change-language class="container-change-language" />
 
       <task-title-header class="container" />
 
@@ -42,7 +47,7 @@ import TaskCompletedList from "@/components/TaskCompletedList.vue";
 import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
 import TaskDataTable from "@/components/TaskDataTable.vue";
 import LoginPage from "@/components/LoginPage.vue";
-import Button from "@/components/buttons/Button.vue";
+import IconButton from "@/components/buttons/IconButton.vue";
 
 import { nextTick } from 'vue';
 import { useTodoStore } from "../stores/todoStore";
@@ -60,7 +65,7 @@ export default {
     TaskDataTable,
     TaskCompletedList,
     LoginPage,
-    Button
+    IconButton
   },
         
   data() {
@@ -186,18 +191,27 @@ export default {
 
 .container-change-language {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   justify-content: flex-end;
   align-items: end;
+  margin: 1rem;
 }
 
 .container-logout-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: end;
+  margin: 1rem;
 }
 
 .spacer-bottom {
   margin-bottom: 1rem;
+}
+
+.spacer-top {
+  margin-top: 1rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 </style>
