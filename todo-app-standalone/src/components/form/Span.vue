@@ -25,20 +25,20 @@ export default {
 }
 
 .task-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    margin-right: 1rem;
-    max-width: 60%;
-    cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  margin-right: 1rem;
+  max-width: 60%;
+  cursor: pointer;
 }
 
 .task-date {
-    flex-shrink: 0;
-    margin-left: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

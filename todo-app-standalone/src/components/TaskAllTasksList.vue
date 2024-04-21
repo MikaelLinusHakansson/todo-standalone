@@ -29,7 +29,7 @@
             
           </div>
 
-          <!-- v-if="editIndex === index" --> 
+          <!-- v-if="editIndex === index" -->
           <IconButton
             @click.prevent.stop="deleteTasks(task)"
             :icon="'src/components/assets/navigation/delete.png'"
@@ -43,9 +43,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
-import { userStore } from '../stores/userStore';
-
-import Calendar from 'primevue/calendar';
+import { userStore } from '../stores/userStore'
 
 import TextField from "@/components/form/TextField.vue"
 import CheckBox from "@/components/form/CheckBox.vue"
@@ -54,7 +52,6 @@ import IconButton from "@/components/buttons/IconButton.vue";
 
 export default {
     components: { 
-        Calendar,
         TextField,
         CheckBox,
         Calender,
@@ -160,28 +157,6 @@ export default {
   margin: 5px;
 }
 
-.task-input {
-    /* flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: calc(100% - 120px); 
-    min-width: 0;
-    outline: none; 
-    padding: 5px; 
-    background-color: #e9ecef;  
-    border: none; */
-    /* box-shadow: inset 0 1px 3px rgba(0,0,0,.1);  */
-    /* transition: background-color 0.3s, box-shadow 0.3s;  */
-}
-
-.task-input:focus {
-    background-color: #f8f9fa; 
-    box-shadow: inset 0 2px 4px rgba(0,0,0,.2); 
-}
-
-.task-calendar {
-    flex-shrink: 0;
-}
-
 .task-info {
     display: flex;
     align-items: center;
@@ -250,63 +225,6 @@ export default {
     background-color: #6666;
 }
 
-.checkbox {
-    margin-right: 1rem;
-}
-
-.custom-checkbox {
-  display: inline-block;
-  position: relative;
-  padding-left: 30px; 
-  cursor: pointer;
-  user-select: none; 
-}
-
-.custom-checkbox input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.custom-checkbox .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
-  border-radius: 4px; 
-  transition: background-color 0.2s;
-}
-
-.custom-checkbox:hover input ~ .checkmark {
-  background-color: #ccc; 
-}
-
-.custom-checkbox input:checked ~ .checkmark {
-  background-color: #0Dc0F0; 
-}
-
-.custom-checkbox .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.custom-checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.custom-checkbox .checkmark:after {
-  left: 7px;
-  top: 3px;
-  width: 6px;
-  height: 11px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}
-
 @media (max-width: 768px) {
     .list-item {
         flex-direction: column;
@@ -318,10 +236,6 @@ export default {
         flex-direction: column;
         align-items: stretch;
         margin-right: 0;
-    }
-
-    .task-input {
-        flex-basis: auto;
     }
 
     .task-actions {

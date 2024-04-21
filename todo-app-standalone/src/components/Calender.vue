@@ -25,12 +25,13 @@
 </template>
 
 <script>
-import PrimeCalender from "primevue/calendar";
-import Button from "primevue/button";
+import { mapActions} from "pinia"
+import { userStore } from '../stores/userStore'
 
-import { mapActions} from "pinia";
-import dayjs from 'dayjs';
-import { userStore } from '../stores/userStore';
+import dayjs from 'dayjs'
+import PrimeCalender from "primevue/calendar"
+import Button from "primevue/button"
+
 
 export default {
   props: {
@@ -54,7 +55,7 @@ export default {
   data() {
     return {
       datetime24h: this.task.date,
-      buttondisplay: null,
+      buttondisplay: null
     }
   },
 

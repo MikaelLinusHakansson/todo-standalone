@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Flags :name="'src/components/assets/flags/uk.png'" @click="changeLanguage('en')"></Flags>
-    <Flags :name="'src/components/assets/flags/sv.png'" @click="changeLanguage('sv')"></Flags>
+    <Flags :name="'src/components/assets/flags/uk.png'" @click="changeLanguage('en')" />
+    <Flags :name="'src/components/assets/flags/sv.png'" @click="changeLanguage('sv')" />
   </div>
 </template>
 
@@ -13,14 +13,10 @@ export default {
     Flags
   },
 
-     data() {
-        return {};
-    },
-
-    methods: {
-        changeLanguage(locale) {
-            this.$i18n.locale = locale
-        },
+  methods: {
+    changeLanguage(locale) {
+      this.$i18n.locale = locale
     }
+  }
 }
 </script>

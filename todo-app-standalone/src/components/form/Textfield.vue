@@ -41,19 +41,18 @@ export default {
 
 <style>
 .rounded-input-task-form {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .rounded-input-task-form:focus {
-    border-color: #80bdff;
-    outline: 0;
-    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.25rem rgba(0, 123, 255, 0.25); */
-    background-color: #f8f9fa; 
-    box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+  border-color: #80bdff;
+  outline: 0;
+  background-color: #f8f9fa; 
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
 }
 </style>

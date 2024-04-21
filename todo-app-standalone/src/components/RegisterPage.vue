@@ -27,11 +27,11 @@
                 </Password>
               </div>
 
-              <RegisterButton @click.prevent.stop="registerUser" :name="$t('submit')" />
+              <Button @click.prevent.stop="registerUser" :name="$t('submit')" />
           </form>
 
           <div class="custom-card-footer">
-            <RegisterButton :name="$t('login')" @click="$router.push('/login')" />
+            <Button :name="$t('login')" @click="$router.push('/login')" />
           </div>
         </div>
       </div>
@@ -49,7 +49,6 @@ import ChangeLanguage from './ChangeLanguage.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
 import TextField from '@/components/form/TextField.vue'
 import Button from '@/components/buttons/Button.vue'
-import RegisterButton from './buttons/RegisterButton.vue'
 
 export default {
   components: {
@@ -57,8 +56,7 @@ export default {
     ChangeLanguage,
     IconButton,
     TextField,
-    Button,
-    RegisterButton
+    Button
   },
 
   data() {

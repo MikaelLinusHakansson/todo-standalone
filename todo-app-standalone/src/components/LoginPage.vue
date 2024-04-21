@@ -7,18 +7,18 @@
           <h2 class="custom-card-title">{{ $t('login') }}</h2>
           <form class="custom-card-content">
             <div class="custom-form-group">
-              <TextField v-model="username" :label="'username'"></TextField>
+              <TextField v-model="username" :label="'username'" />
             </div>
             
             <div class="custom-form-group">
-              <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')"></Password>
+              <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
             </div>
 
-            <RegisterButton @keypress.enter="login" @click.prevent.stop="login" :name="$t('login')" />
+            <Button @keypress.enter="login" @click.prevent.stop="login" :name="$t('login')" />
           </form>
-          
+
           <div class="custom-card-footer">
-            <RegisterButton :name="$t('register')" @click="$router.push('/register')" />
+            <Button :name="$t('register')" @click="$router.push('/register')" />
           </div>
         </div>
       </div>
@@ -35,156 +35,154 @@ import ChangeLanguage from "@/components/ChangeLanguage.vue"
 import TextField from "@/components/form/TextField.vue"
 import IconButton from "@/components/buttons/IconButton.vue"
 import Button from "@/components/buttons/Button.vue"
-import RegisterButton from './buttons/RegisterButton.vue'
 
 export default { 
-    components: {
-        Password,
-        ChangeLanguage,
-        TextField,
-        IconButton,
-        Button,
-        RegisterButton
-    },
+  components: {
+    Password,
+    ChangeLanguage,
+    TextField,
+    IconButton,
+    Button
+  },
     
-    data() {
-        return {
-            username: "",
-            password: "",
-            bearerToken: "",
-        }
-    },
+  data() {
+    return {
+      username: "",
+      password: "",
+      bearerToken: "",
+    }
+  },
     
-    methods: {
-        ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'register']),
+  methods: {
+    ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'register']),
 
-        async login() {
-            const user = {
-                username: this.username,
-                password: this.password,
-            }
+    async login() {
+      const user = {
+        username: this.username,
+        password: this.password,
+      }
             
-            await this.setUser(user)
-            this.bearerToken = this.getAccessTokens()
-            this.$router.push('/todo')
-            
-            this.username = ''
-            this.password = ''
-        },
+      await this.setUser(user)
+      this.bearerToken = this.getAccessTokens()
+      this.$router.push('/todo')
+
+      this.username = ''
+      this.password = ''
     },
+  }
 }
 </script>
 
 <style>
 .custome-container {
-    padding-top: 3rem;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
+  padding-top: 3rem;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .custom-row {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-col {
-    flex: 0 0 auto;
-    width: 50%;
-    max-width: 540px;
+  flex: 0 0 auto;
+  width: 50%;
+  max-width: 540px;
 }
 
 .custom-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    background-color: white;
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  background-color: white;
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
 }
 
 .custom-card-title {
-    margin-bottom: 1rem;
-    text-align: center;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .custom-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .custom-form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .custom-card-footer {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .my-register-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    background-color: #0DC0F0;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
-    width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: #0DC0F0;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  width: 100%;
 }
 
 .my-register-button:hover {
-    background-color:  #0C76F0;
+  background-color:  #0C76F0;
 }
 
 .my-login-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 1.5rem;
-    background-color: white;
-    color: #0DC0F0;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
-    height: 40px;
-    width: auto;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 1.5rem;
+  background-color: white;
+  color: #0DC0F0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  height: 40px;
+  width: auto;
 }
 
 .my-login-button:hover {
-    background-color:  #0C76F0;
-    color: white;
+  background-color:  #0C76F0;
+  color: white;
 }
 
 .rounded-input {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
 
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .rounded-input:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
 }
 
 .column-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 
 }
 
 .background-color {
-    background-color: transparent;
-    color: transparent;
+  background-color: transparent;
+  color: transparent;
 }
 </style>

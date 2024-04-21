@@ -1,7 +1,7 @@
 <template>
   <label class="custom-checkbox">
     <input class="checkbox" type="checkbox" :checked="modelValue" @change="updateValue">
-    <span class="checkmark" > </span>
+    <span class="checkmark" />
   </label>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 
 <style>
 .checkbox {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .custom-checkbox {

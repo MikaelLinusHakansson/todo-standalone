@@ -1,36 +1,19 @@
 <template>
-    <div 
-      class="mb-3">
-        <DataTable
-            :value="tasks"
-            paginator
-            :rows="5"
-            removableSort
-            :rowsPerPageOptions="[5, 10, 20, 50]"
-            tableStyle="min-width: 50rem">
+  <div 
+    class="mb-3">
+      <DataTable
+        :value="tasks"
+        paginator
+        :rows="5"
+        removableSort
+        :rowsPerPageOptions="[5, 10, 20, 50]"
+        tableStyle="min-width: 50rem">
             
-                <Column 
-                    field="completed" 
-                    header="Completed" 
-                    sortable
-                    style="width: 25%">
-                </Column>
-            
-                <Column
-                    field="name" 
-                    header="Name" 
-                    sortable  
-                    style="width: 25%">
-                </Column>
-            
-                <Column
-                    field="date"
-                    header="Date"
-                    sortable
-                    style="width:25%">
-                </Column>
-        </DataTable>
-    </div>
+          <Column  field="completed"  header="Completed"  sortable style="width: 25%" />
+          <Column field="name"  header="Name"  sortable   style="width: 25%" />
+          <Column field="date" header="Date" sortable style="width:25%" />
+    </DataTable>
+  </div>
 </template>
 
 <script>
@@ -50,13 +33,8 @@ export default {
         Row
     },
 
-    data() {
-        return {
-        }
-    },
-
     computed: {
-        ...mapState(useTodoStore, ['tasks']),
+        ...mapState(useTodoStore, ['tasks'])
     }
 }
 </script>
