@@ -4,7 +4,7 @@
     <div class="custom-row">
       <div class="custom-col">
         <div class="custom-card">
-          <h2 class="custom-card-title">{{ $t('login') }}</h2>
+          <Title :name="'login'" class="spacer-bottom" />
           <form class="custom-card-content">
             <div class="custom-form-group">
               <TextField v-model="username" :label="'username'" />
@@ -31,10 +31,12 @@ import { mapActions } from 'pinia'
 import { userStore } from '../stores/userStore'
 
 import Password from 'primevue/password'
+
 import ChangeLanguage from "@/components/ChangeLanguage.vue"
 import TextField from "@/components/form/TextField.vue"
 import IconButton from "@/components/buttons/IconButton.vue"
 import Button from "@/components/buttons/Button.vue"
+import Title from "@/components/Title.vue"
 
 export default { 
   components: {
@@ -42,7 +44,8 @@ export default {
     ChangeLanguage,
     TextField,
     IconButton,
-    Button
+    Button,
+    Title
   },
     
   data() {
@@ -103,9 +106,8 @@ export default {
   box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
 }
 
-.custom-card-title {
+.spacer-bottom {
   margin-bottom: 1rem;
-  text-align: center;
 }
 
 .custom-card-content {

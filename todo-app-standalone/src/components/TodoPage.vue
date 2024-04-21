@@ -13,7 +13,7 @@
     </div>
     
     <div>
-      <task-title-header class="container" />
+      <Title class="container spacer-bottom" :name="'todo'" />
 
       <task-form class="container" />
 
@@ -39,7 +39,7 @@
 
 <script>
 import ChangeLanguage from "@/components/ChangeLanguage.vue";
-import TaskTitleHeader from "@/components/TaskTitleHeader.vue";
+import Title from "@/components/Title.vue";
 import TaskForm from "@/components/taskForm.vue";
 import TaskControls from "@/components/TaskControls.vue";
 import TaskCompletedList from "@/components/TaskCompletedList.vue";
@@ -55,7 +55,7 @@ import { userStore } from "../stores/userStore";
 
 export default {
   components: {
-    TaskTitleHeader,
+    Title,
     ChangeLanguage,
     TaskForm,
     TaskControls,

@@ -5,9 +5,7 @@
       <div class="custom-col">
         <div class="custom-card">
           
-          <h2 class="custom-card-title">
-            {{ $t('register') }}
-          </h2>
+          <Title :name="'register'" class="spacer-bottom" />
 
           <form class="custom-card-content">
 
@@ -49,6 +47,7 @@ import ChangeLanguage from './ChangeLanguage.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
 import TextField from '@/components/form/TextField.vue'
 import Button from '@/components/buttons/Button.vue'
+import Title from '@/components/Title.vue'
 
 export default {
   components: {
@@ -56,7 +55,8 @@ export default {
     ChangeLanguage,
     IconButton,
     TextField,
-    Button
+    Button,
+    Title
   },
 
   data() {
@@ -113,9 +113,8 @@ export default {
   box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
 }
 
-.custom-card-title {
+.spacer-bottom {
   margin-bottom: 1rem;
-  text-align: center;
 }
 
 .custom-card-content {
