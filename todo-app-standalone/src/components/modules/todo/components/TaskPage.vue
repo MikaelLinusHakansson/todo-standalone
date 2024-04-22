@@ -59,9 +59,9 @@ import DataTable from '@/components/common/DataTable.vue';
 import IconButton from '@/components/buttons/IconButton.vue';
 
 import { nextTick } from 'vue';
-import { useTodoStore } from '../stores/todoStore';
+import { useTodoStore } from '../../../../stores/todoStore';
 import { mapActions, mapState} from 'pinia';
-import { userStore } from '../stores/userStore';
+import { userStore } from '../../../../stores/userStore';
 
 
 export default {
