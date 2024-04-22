@@ -1,4 +1,4 @@
-import ApiService from "./apiService"
+import ApiService from "../../../../api/services/apiService"
 const TODO_API_BASE_URL = "http://localhost:8080/api/todo"
 
 class TodoService extends ApiService {
@@ -32,4 +32,4 @@ class TodoService extends ApiService {
     }
 }
 
-export default new TodoService();
+export default new TodoService()

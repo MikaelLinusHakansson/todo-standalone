@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Flags from "@/components/buttons/flags.vue";
+import Flags from "@/components/buttons/flags.vue"
 
 export default {
   components: {

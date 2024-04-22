@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
   history: createWebHistory(),
@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("@/components/LoginPage.vue"),
+      component: () => import("@/components/modules/user/components/LoginPage.vue"),
       meta: {
         requiresAuth: false
       }
@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: "/login",
       name: "login.auth",
-      component: () => import ("@/components/LoginPage.vue"),
+      component: () => import ("@/components/modules/user/components/LoginPage.vue"),
       meta: {
         requiresAuth: false
       }
@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: "/register",
       name: "register.auth",
-      component: () => import ("@/components/RegisterPage.vue"),
+      component: () => import ("@/components/modules/user/components/RegisterPage.vue"),
       meta: {
         requiresAuth: false
       }
@@ -30,18 +30,18 @@ const router = createRouter({
     {
       path: "/todo",
       name: "todo.list",
-      component: () => import("@/components/TodoPage.vue"),
+      component: () => import("@/components/modules/todo/components/TaskPage.vue"),
       meta: {
         requiresAuth: true
       }
     },
   ],
-});
+})
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const isAuthPage = to.name === 'todo.list';
-  const hasToken = $cookies.get('accessToken') !== null;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthPage = to.name === 'todo.list'
+  const hasToken = $cookies.get('accessToken') !== null
 
   if (requiresAuth && hasToken && !isAuthPage) {
     next({ name: 'todo.list' })
@@ -50,6 +50,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-});
+})
 
-export default router;
+export default router

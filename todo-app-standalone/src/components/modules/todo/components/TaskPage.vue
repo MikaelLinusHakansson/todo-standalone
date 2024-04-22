@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button-container">
-      <change-language class="container-change-language" />
+      <LanguageGroup class="container-change-language" />
 
       <IconButton 
         class="container-logout-button spacer-bottom spacer-top" 
@@ -17,51 +17,62 @@
 
       <task-form class="container" />
 
-      <task-controls
+      <task-display-controls
         class="container-row"
         :toggle-all="toggleAll"
         :toggle-completed="toggleCompleted"
         :toggle-data-table="toggleDataTable">
-      </task-controls>
+      </task-display-controls>
 
       <div class="margin-bottom" :hidden="visableAllTasks">
-        <task-all-tasks-list class="margin-bottom" :isVisable="isVisable" />
+        <task-card class="margin-bottom" :isVisable="isVisable" />
       </div>
 
       <div class="margin-bottom" :hidden="this.visableCompleted" >
-        <task-completed-list />
+        <task-completed-card />
       </div>
             
-      <task-data-table class="container" :hidden="visableDataTable" />
+      <data-table
+        class="container" 
+        :hidden="visableDataTable" 
+        :modelValue="tasks" 
+        :columnOne="'completed'" 
+        :header="'completed'" 
+        :columnTwo="'name'"
+        :headerTwo="'Name'"
+        :columnThree="'date'"
+        :headerThree="'Date'"
+        > 
+      </data-table>
     </div>
   </div>
 </template>
 
 <script>
-import ChangeLanguage from "@/components/ChangeLanguage.vue";
-import Title from "@/components/Title.vue";
-import TaskForm from "@/components/taskForm.vue";
-import TaskControls from "@/components/TaskControls.vue";
-import TaskCompletedList from "@/components/TaskCompletedList.vue";
-import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
-import TaskDataTable from "@/components/TaskDataTable.vue";
-import IconButton from "@/components/buttons/IconButton.vue";
+import { nextTick } from 'vue'
+import { mapActions, mapState} from 'pinia'
 
-import { nextTick } from 'vue';
-import { useTodoStore } from "../stores/todoStore";
-import { mapActions} from "pinia";
-import { userStore } from "../stores/userStore";
+import { useTodoStore } from '../stores/todoStore'
+import { userStore } from '../../user/stores/userStore'
 
+import LanguageGroup from '@/components/common/LanguageGroup.vue'
+import Title from '@/components/common/Title.vue'
+import TaskForm from '@/components/modules/todo/components/taskForm.vue'
+import TaskDisplayControls from '@/components/modules/todo/components/TaskDisplayControls.vue'
+import TaskCompletedCard from '@/components/modules/todo/components/TaskCompletedCard.vue'
+import TaskCard from '@/components/modules/todo/components/TaskCard.vue'
+import DataTable from '@/components/common/DataTable.vue'
+import IconButton from '@/components/buttons/IconButton.vue'
 
 export default {
   components: {
     Title,
-    ChangeLanguage,
+    LanguageGroup,
     TaskForm,
-    TaskControls,
-    TaskAllTasksList,
-    TaskDataTable,
-    TaskCompletedList,
+    TaskDisplayControls,
+    TaskCard,
+    DataTable,
+    TaskCompletedCard,
     IconButton
   },
         
@@ -70,8 +81,12 @@ export default {
       isVisable: true,
       visableCompleted: true,
       visableAllTasks: false,
-      visableDataTable: true,
+      visableDataTable: true
     }
+  },
+
+  computed: {
+    ...mapState(useTodoStore, ['tasks']),
   },
 
   methods: {

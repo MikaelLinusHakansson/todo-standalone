@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import UserApiService from "../api/services/UserApiService";
+import { defineStore } from 'pinia'
+import UserApiService from '../api/UserApiService'
 
-export const userStore = defineStore("userStore", {
+export const userStore = defineStore('userStore', {
     state: () => ({
         accessToken: '',
         user: null,
@@ -19,14 +19,14 @@ export const userStore = defineStore("userStore", {
 
     actions: {
         setBearerToken(BearerToken) {
-            this.accessToken = BearerToken;
+            this.accessToken = BearerToken
             
         },
 
         async setUser(user) {
             const response = await UserApiService.post(user)
 
-            this.user = user;
+            this.user = user
             this.accessToken = response.accessToken
 
             $cookies.set('accessToken', this.accessToken)
@@ -52,4 +52,4 @@ export const userStore = defineStore("userStore", {
             localStorage.removeItem('username')
         },
     }
-});
+})

@@ -7,7 +7,8 @@
         :key="completedTask.id" 
         class="list-item" >
 
-        <CheckBox v-model="completedTask.completed" @click="markDoneSender(completedTask)" />
+        <CheckBox v-model="completedTask.completed" @click.prevent.stop="markDoneSender(completedTask)" />
+
         <div class="task-info">
           <span class="task-name">{{ completedTask.name }}</span>
           <span class="task-date">{{ completedTask.date }}</span>
@@ -27,11 +28,11 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
-import { useTodoStore } from '@/stores/todoStore.js'
-import { userStore } from '../stores/userStore'
+import { useTodoStore } from '../stores/todoStore'
+import { userStore } from '../../user/stores/userStore'
 
-import CheckBox from "@/components/form/CheckBox.vue"
-import IconButton from "@/components/buttons/IconButton.vue"
+import CheckBox from '@/components/form/CheckBox.vue'
+import IconButton from '@/components/buttons/IconButton.vue'
 
 export default {
   components: {
@@ -45,10 +46,10 @@ export default {
 
   methods: {
     ...mapActions(userStore, ['getAccessTokens']),
-    ...mapActions(useTodoStore, ["markDone", "removeCompletedTasks"]),
+    ...mapActions(useTodoStore, ['markDone', 'removeCompletedTasks']),
 
     markDoneSender(task) {
-      this.editIndex = null;
+      this.editIndex = null
       this.markDone(task, this.getAccessTokens())
     },
 

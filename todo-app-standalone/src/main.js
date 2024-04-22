@@ -15,11 +15,11 @@ import "primeicons/primeicons.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 
-const app = createApp(App);
-const pinia = createPinia();
-app.use(i18n);
-app.use(VueCookies);
-app.use(pinia);
-app.use(router);
-app.use(primevue);
-app.mount('#app');
+const app = createApp(App)
+const pinia = createPinia()
+app.use(i18n)
+app.use(VueCookies)
+app.use(pinia)
+app.use(router)
+app.use(primevue)
+app.mount('#app')
