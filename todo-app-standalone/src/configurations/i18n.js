@@ -22,7 +22,11 @@ const translations = {
         username: 'Username',
         password: 'Password',
         submit: 'Submit',
-        clearDate: 'Clear date'
+        clearDate: 'Clear date',
+        enterPassword: 'Enter your password',
+        weakLabel: 'Very Weak',
+        mediumLabel: 'Medium',
+        strongLabel: 'Strong'
     },
 
     sv: {
@@ -46,7 +50,11 @@ const translations = {
         username: 'Användarnamn',
         password: 'Lösenord',
         submit: 'Skicka in',
-        clearDate: 'Rensa datum'
+        clearDate: 'Rensa datum',
+        enterPassword: 'Skriv in ditt lösenord',
+        weakLabel: 'Väldigt svagt',
+        mediumLabel: 'Medium',
+        strongLabel: 'Starkt'
     }
 }
 
