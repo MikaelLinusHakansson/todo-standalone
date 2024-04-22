@@ -62,14 +62,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
-import { useTodoStore } from '@/stores/TodoStore'
-import { userStore } from '../stores/userStore';
+import { mapActions, mapState } from 'pinia'
+import { useTodoStore } from '../components/modules/todo/stores/todoStore'
+import { userStore } from '../stores/userStore'
 
 import PrimeCalendar from 'primevue/calendar'
 import InputText from 'primevue/inputtext'
 import Bbutton from 'primevue/button'
-import InlineMessage from 'primevue/inlinemessage';
+import InlineMessage from 'primevue/inlinemessage'
 import TextField from '@/components/form/TextField.vue'
 
 export default {

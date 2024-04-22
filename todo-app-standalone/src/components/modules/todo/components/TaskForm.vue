@@ -16,7 +16,7 @@ import Calender from '@/components/common/Calender.vue'
 import TextField from '@/components/form/TextField.vue'
 
 import { mapState, mapActions, mapWritableState } from 'pinia'
-import { useTodoStore } from '@/stores/todoStore'
+import { useTodoStore } from '../stores/todoStore'
 import { userStore } from '../../user/stores/userStore'
 
 export default {

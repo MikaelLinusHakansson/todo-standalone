@@ -1,14 +1,14 @@
-import { defineStore } from "pinia";
+import { defineStore } from "pinia"
 
-import dayjs from "dayjs";
-import todoService from "../api/services/todoService";
+import dayjs from "dayjs"
+import todoService from "../../../../api/services/todoService"
 
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
     return {
       tasks: [],
       completedTasks: [],
-    };
+    }
   },
 
   getters: {
@@ -27,10 +27,10 @@ export const useTodoStore = defineStore("todoStore", {
       } 
       
       else if (!this.validateTask(newTask.name) && this.validateDate(newTask.date)) {
-        alert("Invalid name input");
+        alert("Invalid name input")
       }
       
-      return true;
+      return true
     },
 
     async editTask(data, accessToken) {
@@ -53,41 +53,41 @@ export const useTodoStore = defineStore("todoStore", {
             name: task.name,
             date: task.date,
             completed: !task.completed,
-        };
+        }
     
-        const updatedTask = await todoService.put(task.id, tempTask, accessToken);
-        const taskIndex = this.tasks.findIndex(t => t.id === task.id);
+        const updatedTask = await todoService.put(task.id, tempTask, accessToken)
+        const taskIndex = this.tasks.findIndex(t => t.id === task.id)
         if (taskIndex !== -1) {
-            this.tasks[taskIndex] = updatedTask;
+            this.tasks[taskIndex] = updatedTask
         }
     },
 
     async getData(accessToken) {
-      this.tasks = await todoService.getAll(accessToken);
+      this.tasks = await todoService.getAll(accessToken)
     },
     
     async removeTasks(taskData, accessToken) {
-        await todoService.delete(taskData.taskId, accessToken);
-        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId);
+        await todoService.delete(taskData.taskId, accessToken)
+        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId)
         if (indexInTasks !== -1) {
-            this.tasks.splice(indexInTasks, 1);
+            this.tasks.splice(indexInTasks, 1)
         }
     },
 
     async removeCompletedTasks(taskData, accessToken) {
-        await todoService.delete(taskData.taskId, accessToken);
-        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId);
+        await todoService.delete(taskData.taskId, accessToken)
+        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId)
         if (indexInTasks !== -1) {
-            this.tasks.splice(indexInTasks, 1);
+            this.tasks.splice(indexInTasks, 1)
         }
     },
 
     validateTask(task) {
-      return task.length > 0;
+      return task.length > 0
     },
 
     validateDate(date) {
-      return dayjs(date).isValid();
+      return dayjs(date).isValid()
     },
   },
-});
+})

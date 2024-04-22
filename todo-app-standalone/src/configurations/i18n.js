@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n';
+import { createI18n } from 'vue-i18n'
 
 const translations = {
     en: {
@@ -22,7 +22,7 @@ const translations = {
         username: 'Username',
         password: 'Password',
         submit: 'Submit',
-        clearDate: 'Clear date',
+        clearDate: 'Clear date'
     },
 
     sv: {
@@ -46,9 +46,9 @@ const translations = {
         username: 'Användarnamn',
         password: 'Lösenord',
         submit: 'Skicka in',
-        clearDate: 'Rensa datum',
+        clearDate: 'Rensa datum'
     }
-};
+}
 
 const i18n = createI18n({
     legacy: false,
@@ -56,4 +56,4 @@ const i18n = createI18n({
     messages: translations
 })
 
-export default i18n;
+export default i18n

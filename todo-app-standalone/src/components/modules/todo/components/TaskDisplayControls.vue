@@ -1,25 +1,25 @@
 <template>
-  <div class="switch-container">
-    <div class="switch-group">
-      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedToggleAll" @change="toggleAll()" />
+  <div>
+    <div>
+      <CheckBoxSlider class="margin-right margin-left" v-model="checkedToggleAll" @change="toggleAll()" />
       <Span :name="'showAll'" />
     </div>
 
-    <div class="switch-group">
-      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedCompleted" @change="toggleCompleted()" />
+    <div>
+      <CheckBoxSlider class="margin-right margin-left" v-model="checkedCompleted" @change="toggleCompleted()" />
       <Span :name="'showDone'" />
     </div>
         
-    <div class="switch-group">
-      <CheckBoxSlider style="margin-right: 10px; margin-left: 10px" v-model="checkedDataTable" @change="toggleDataTable()" />
+    <div>
+      <CheckBoxSlider class="margin-right margin-left" v-model="checkedDataTable" @change="toggleDataTable()" />
       <Span :name="'showDataTable'" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapWritableState, mapActions } from 'pinia';
-import { useTodoStore } from '@/stores/todoStore.js'
+import { mapWritableState, mapActions } from 'pinia'
+import { useTodoStore } from '../stores/todoStore'
 
 import CheckBoxSlider from '@/components/form/CheckBoxSlider.vue'
 import Span from '@/components/form/Span.vue'
@@ -72,5 +72,13 @@ export default {
 <style scoped>
 .margin-around {
   margin-right: 1rem;
+}
+
+.margin-right{
+  margin-right: 10px;
+}
+
+.margin-left {
+  margin-left: 10px;
 }
 </style>

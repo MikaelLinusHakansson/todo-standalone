@@ -32,4 +32,4 @@ class TodoService extends ApiService {
     }
 }
 
-export default new TodoService();
+export default new TodoService()

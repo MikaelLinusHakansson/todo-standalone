@@ -27,7 +27,7 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
-import { useTodoStore } from '@/stores/todoStore'
+import { useTodoStore } from '../stores/todoStore'
 import { userStore } from '../../user/stores/userStore'
 
 import CheckBox from '@/components/form/CheckBox.vue'
@@ -48,7 +48,7 @@ export default {
     ...mapActions(useTodoStore, ['markDone', 'removeCompletedTasks']),
 
     markDoneSender(task) {
-      this.editIndex = null;
+      this.editIndex = null
       this.markDone(task, this.getAccessTokens())
     },
 
