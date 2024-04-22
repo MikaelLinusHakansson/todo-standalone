@@ -17,12 +17,12 @@
 
       <task-form class="container" />
 
-      <task-controls
+      <task-display-controls
         class="container-row"
         :toggle-all="toggleAll"
         :toggle-completed="toggleCompleted"
         :toggle-data-table="toggleDataTable">
-      </task-controls>
+      </task-display-controls>
 
       <div class="margin-bottom" :hidden="visableAllTasks">
         <task-card class="margin-bottom" :isVisable="isVisable" />
@@ -32,7 +32,18 @@
         <task-completed-card />
       </div>
             
-      <task-data-table class="container" :hidden="visableDataTable" />
+      <data-table
+        class="container" 
+        :hidden="visableDataTable" 
+        :modelValue="tasks" 
+        :columnOne="'completed'" 
+        :header="'completed'" 
+        :columnTwo="'name'"
+        :headerTwo="'Name'"
+        :columnThree="'date'"
+        :headerThree="'Date'"
+        > 
+      </data-table>
     </div>
   </div>
 </template>
@@ -41,15 +52,15 @@
 import LanguageGroup from '@/components/common/LanguageGroup.vue';
 import Title from '@/components/common/Title.vue';
 import TaskForm from '@/components/taskForm.vue';
-import TaskControls from '@/components/modules/todo/components/TaskControls.vue';
+import TaskDisplayControls from '@/components/modules/todo/components/TaskDisplayControls.vue';
 import TaskCompletedCard from '@/components/modules/todo/components/TaskCompletedCard.vue';
 import TaskCard from '@/components/modules/todo/components/TaskCard.vue';
-import TaskDataTable from '@/components/TaskDataTable.vue';
+import DataTable from '@/components/common/DataTable.vue';
 import IconButton from '@/components/buttons/IconButton.vue';
 
 import { nextTick } from 'vue';
 import { useTodoStore } from '../stores/todoStore';
-import { mapActions} from 'pinia';
+import { mapActions, mapState} from 'pinia';
 import { userStore } from '../stores/userStore';
 
 
@@ -58,9 +69,9 @@ export default {
     Title,
     LanguageGroup,
     TaskForm,
-    TaskControls,
+    TaskDisplayControls,
     TaskCard,
-    TaskDataTable,
+    DataTable,
     TaskCompletedCard,
     IconButton
   },
@@ -70,8 +81,12 @@ export default {
       isVisable: true,
       visableCompleted: true,
       visableAllTasks: false,
-      visableDataTable: true,
+      visableDataTable: true
     }
+  },
+
+  computed: {
+    ...mapState(useTodoStore, ['tasks']),
   },
 
   methods: {
