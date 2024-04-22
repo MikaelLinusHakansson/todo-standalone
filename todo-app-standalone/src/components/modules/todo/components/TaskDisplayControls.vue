@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import { mapWritableState, mapActions } from "pinia";
-import { useTodoStore } from "@/stores/todoStore.js"
+import { mapWritableState, mapActions } from 'pinia';
+import { useTodoStore } from '@/stores/todoStore.js'
 
-import CheckBoxSlider from "@/components/form/CheckBoxSlider.vue"
-import Span from "@/components/form/Span.vue"
+import CheckBoxSlider from '@/components/form/CheckBoxSlider.vue'
+import Span from '@/components/form/Span.vue'
 
 export default {
   components: {
@@ -51,7 +51,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTodoStore, ["markDone"]),
+    ...mapActions(useTodoStore, ['markDone']),
 
     callOnToggleAll() {
       this.checkedToggleAll = !this.checkedToggleAll

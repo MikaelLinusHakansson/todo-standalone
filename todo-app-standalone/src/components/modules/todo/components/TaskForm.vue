@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import Calender from "@/components/common/Calender.vue"
-import TextField from "@/components/form/TextField.vue"
+import Calender from '@/components/common/Calender.vue'
+import TextField from '@/components/form/TextField.vue'
 
-import { mapState, mapActions, mapWritableState } from "pinia"
-import { useTodoStore } from "@/stores/todoStore.js"
-import { userStore } from '../stores/userStore'
+import { mapState, mapActions, mapWritableState } from 'pinia'
+import { useTodoStore } from '@/stores/todoStore.js'
+import { userStore } from '../../../../stores/userStore'
 
 export default {
   components: {
@@ -35,13 +35,13 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodoStore, ["tasks"]),
-    ...mapWritableState(useTodoStore, ["tasks"])
+    ...mapState(useTodoStore, ['tasks']),
+    ...mapWritableState(useTodoStore, ['tasks'])
   },
 
   methods: {
     ...mapActions(userStore, ['getAccessTokens', 'getUser']),
-    ...mapActions(useTodoStore, ["createNewTask"]),
+    ...mapActions(useTodoStore, ['createNewTask']),
 
     submitNewTask(data) {
       this.createNewTask(data, this.getAccessTokens())

@@ -51,7 +51,7 @@
 <script>
 import LanguageGroup from '@/components/common/LanguageGroup.vue';
 import Title from '@/components/common/Title.vue';
-import TaskForm from '@/components/taskForm.vue';
+import TaskForm from '@/components/modules/todo/components/taskForm.vue';
 import TaskDisplayControls from '@/components/modules/todo/components/TaskDisplayControls.vue';
 import TaskCompletedCard from '@/components/modules/todo/components/TaskCompletedCard.vue';
 import TaskCard from '@/components/modules/todo/components/TaskCard.vue';
