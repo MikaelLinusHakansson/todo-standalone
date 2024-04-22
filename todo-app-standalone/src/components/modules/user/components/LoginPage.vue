@@ -28,7 +28,8 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { userStore } from '../../../../stores/userStore'
+
+import { userStore } from '../../user/stores/userStore'
 
 import Password from 'primevue/password'
 

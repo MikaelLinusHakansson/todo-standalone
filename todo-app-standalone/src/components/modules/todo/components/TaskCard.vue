@@ -42,8 +42,9 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
+
 import { useTodoStore } from '@/stores/todoStore.js'
-import { userStore } from '../../../../stores/userStore'
+import { userStore } from '../../user/stores/userStore'
 
 import TextField from '@/components/form/TextField.vue'
 import CheckBox from '@/components/form/CheckBox.vue'

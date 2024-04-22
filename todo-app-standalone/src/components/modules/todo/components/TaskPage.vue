@@ -49,6 +49,12 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
+import { mapActions, mapState} from 'pinia';
+
+import { useTodoStore } from '../../../../stores/todoStore';
+import { userStore } from '../../user/stores/userStore';
+
 import LanguageGroup from '@/components/common/LanguageGroup.vue';
 import Title from '@/components/common/Title.vue';
 import TaskForm from '@/components/modules/todo/components/taskForm.vue';
@@ -57,12 +63,6 @@ import TaskCompletedCard from '@/components/modules/todo/components/TaskComplete
 import TaskCard from '@/components/modules/todo/components/TaskCard.vue';
 import DataTable from '@/components/common/DataTable.vue';
 import IconButton from '@/components/buttons/IconButton.vue';
-
-import { nextTick } from 'vue';
-import { useTodoStore } from '../../../../stores/todoStore';
-import { mapActions, mapState} from 'pinia';
-import { userStore } from '../../../../stores/userStore';
-
 
 export default {
   components: {

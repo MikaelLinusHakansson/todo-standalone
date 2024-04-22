@@ -62,15 +62,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import { useTodoStore } from "@/stores/TodoStore"
+import { mapActions, mapState } from 'pinia';
+import { useTodoStore } from '@/stores/TodoStore'
 import { userStore } from '../stores/userStore';
 
-import PrimeCalendar from "primevue/calendar"
-import InputText from "primevue/inputtext"
-import Bbutton from "primevue/button"
+import PrimeCalendar from 'primevue/calendar'
+import InputText from 'primevue/inputtext'
+import Bbutton from 'primevue/button'
 import InlineMessage from 'primevue/inlinemessage';
-import TextField from "@/components/form/TextField.vue"
+import TextField from '@/components/form/TextField.vue'
 
 export default {
     components: {
@@ -98,7 +98,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(userStore, ["getAccessTokens"]),
+        ...mapActions(userStore, ['getAccessTokens']),
         ...mapActions(useTodoStore, ['editTask', 'removeTasks', 'getData']),
 
         editNameCall() {
@@ -109,8 +109,8 @@ export default {
                 date: this.editDate,
             }, this.getAccessTokens())
 
-            this.editName = ""
-            this.editDate = ""
+            this.editName = ''
+            this.editDate = ''
         },
 
         deleteTasks() {
