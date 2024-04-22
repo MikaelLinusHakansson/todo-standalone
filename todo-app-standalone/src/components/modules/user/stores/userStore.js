@@ -1,7 +1,7 @@
-import { defineStore } from "pinia"
-import UserApiService from "../../../../api/services/UserApiService"
+import { defineStore } from 'pinia'
+import UserApiService from '../api/UserApiService'
 
-export const userStore = defineStore("userStore", {
+export const userStore = defineStore('userStore', {
     state: () => ({
         accessToken: '',
         user: null,

@@ -7,7 +7,8 @@
         :key="completedTask.id" 
         class="list-item" >
 
-        <CheckBox v-model="completedTask.completed" @click="markDoneSender(completedTask)" />
+        <CheckBox v-model="completedTask.completed" @click.prevent.stop="markDoneSender(completedTask)" />
+
         <div class="task-info">
           <span class="task-name">{{ completedTask.name }}</span>
           <span class="task-date">{{ completedTask.date }}</span>

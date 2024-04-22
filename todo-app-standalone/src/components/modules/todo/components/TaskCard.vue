@@ -17,7 +17,7 @@
               v-model="task.name" 
               :label="'task'"
               @blur="editTask(task, getAccessTokens())"
-              @click.stop="">
+              @click.prevent.stop="">
             </TextField>
 
             <Calender :hide="true" :task="task" @date-time="sendData" />

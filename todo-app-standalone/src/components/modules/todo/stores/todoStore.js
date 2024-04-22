@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 
 import dayjs from "dayjs"
-import todoService from "../../../../api/services/todoService"
+import todoService from "../api/todoService"
 
 export const useTodoStore = defineStore("todoStore", {
   state: () => {
