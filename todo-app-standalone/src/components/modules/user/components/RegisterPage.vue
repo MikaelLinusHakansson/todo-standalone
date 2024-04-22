@@ -1,27 +1,36 @@
 <template>
-    <LanguageGroup class="column-row background-color" />
-  <div>
+  <div class="button-container">
+    <LanguageGroup class="container-change-language" />
 
+    <IconButton 
+      class="container-logout-button spacer-bottom spacer-top" 
+      :icon="'src/components/assets/navigation/enter.png'" 
+      :name="'logout'" 
+      @click="$router.push('/login')">
+    </IconButton>
+  </div>
+
+  <div>
     <Card>
       <template v-slot:header>
         <Title :name="'register'" />
       </template>
 
       <template v-slot:body>
-        <Textfield v-model="username" :label="'username'" class="margin-around" />
+        <Textfield v-model="username" :label="'username'" class="spacer-around" />
 
         <Password 
           v-model="password" 
-            toggleMask promptLabel="Enter your password" 
-            weakLabel="Very Weak" 
-            mediumLabel="Medium" 
-            strongLabel="Strong" 
-            :placeholder="$t('password')">
-              password
-          </Password>
+          toggleMask 
+          :promptLabel="$t('enterPassword')"
+          :weakLabel="$t('weakLabel')"
+          :mediumLabel="$t('mediumLabel')"
+          :strongLabel="$t('strongLabel')"
+          :placeholder="$t('password')">
+            password
+        </Password>
 
-          <Button @click.prevent.stop="registerUser" :name="$t('submit')" class="margin-around" />
-          <Button :name="$t('login')" @click="$router.push('/login')" />
+          <Button @click.prevent.stop="registerUser" :name="$t('submit')" class="spacer-around" />
       </template>
     </Card>
   </div>
@@ -77,7 +86,7 @@ export default {
 </script>
 
 <style>
-.margin-around {
+.spacer-around {
   margin: 1rem;
 }
 
@@ -92,5 +101,27 @@ export default {
 .background-color {
   background-color: transparent;
   color: transparent;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.spacer-top {
+  margin-top: 1rem;
+}
+
+.container-change-language {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: end;
+  margin: 1rem;
+}
+
+.container-logout-button {
+  margin: 1rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 1rem">
     <div class="button-container">
       <LanguageGroup class="container-change-language" />
 
@@ -24,25 +24,25 @@
         :toggle-data-table="toggleDataTable">
       </task-display-controls>
 
-      <div class="margin-bottom" :hidden="visableAllTasks">
-        <task-card class="margin-bottom" :isVisable="isVisable" />
+      <div class="margin-bottom">
+        <task-card class="margin-bottom" v-if="!visableAllTasks" />
       </div>
 
-      <div class="margin-bottom" :hidden="this.visableCompleted" >
-        <task-completed-card />
+      <div class="margin-bottom">
+        <task-completed-card v-if="!visableCompleted" />
       </div>
             
       <data-table
         class="container" 
-        :hidden="visableDataTable" 
-        :modelValue="tasks" 
-        :columnOne="'completed'" 
-        :header="'completed'" 
+        v-if="!visableDataTable"
+        :modelValue="tasks"
+        :columnOne="'completed'"
+        :header="'completed'"
         :columnTwo="'name'"
         :headerTwo="'Name'"
         :columnThree="'date'"
         :headerThree="'Date'"
-        > 
+        >
       </data-table>
     </div>
   </div>
@@ -128,6 +128,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 .margin-bottom {

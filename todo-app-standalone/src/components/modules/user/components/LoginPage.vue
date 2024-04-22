@@ -6,10 +6,10 @@
     </template>
     
       <template v-slot:body>
-        <Textfield v-slot:content v-model="username" :label="'username'" class="margin-around" />
-        <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
+        <Textfield v-slot:content v-model="username" :label="'username'" class="space-around" />
+        <Password @keypress.enter="login" v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
 
-        <Button @keypress.enter="login()" @click.prevent.stop="login()" :name="$t('login')" class="margin-around" /> <!-- Bug where enter does not trigger event -->
+        <Button @click.prevent.stop="login" :name="$t('login')" class="space-around" /> <!-- Bug where enter does not trigger event -->
         <Button :name="$t('register')" @click="$router.push('/register')" />
       </template>
   </Card>
@@ -69,32 +69,6 @@ export default {
 </script>
 
 <style>
-.custome-container {
-  padding-top: 3rem;
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.custom-row {
-  display: flex;
-  justify-content: center;
-}
-
-.custom-col {
-  flex: 0 0 auto;
-  width: 50%;
-  max-width: 540px;
-}
-
-.spacer-bottom {
-  margin-bottom: 1rem;
-}
-
-.custom-form-group {
-  margin-bottom: 1rem;
-}
-
 .column-row {
   display: flex;
   flex-direction: row;
@@ -108,7 +82,7 @@ export default {
   color: transparent;
 }
 
-.margin-around {
+.space-around {
   margin: 1rem;
 }
 </style>

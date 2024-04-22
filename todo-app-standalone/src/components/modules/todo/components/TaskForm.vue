@@ -1,13 +1,13 @@
 <template>
   <div>
     <TextField
-      class="margin-bottom"
+      class="margin"
       v-model="task.name" 
       :label="'task'"
       @keypress.enter="submitWithEnter(task)">
     </TextField>
     
-    <Calender class="margin-bottom" @date-time="submitNewTask" :task="task" :hide="true" />
+    <Calender class="margin" @date-time="submitNewTask" :task="task" :hide="true" />
   </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style>
-.margin-bottom {
-  margin-bottom: 5px;
+.margin {
+  margin: 5px;
 }
 </style>
