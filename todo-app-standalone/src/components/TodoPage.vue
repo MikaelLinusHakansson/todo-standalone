@@ -29,7 +29,7 @@
       </div>
 
       <div class="margin-bottom" :hidden="this.visableCompleted" >
-        <task-completed-list />
+        <task-completed-card />
       </div>
             
       <task-data-table class="container" :hidden="visableDataTable" />
@@ -41,8 +41,8 @@
 import LanguageGroup from '@/components/common/LanguageGroup.vue';
 import Title from '@/components/common/Title.vue';
 import TaskForm from '@/components/taskForm.vue';
-import TaskControls from '@/components/TaskControls.vue';
-import TaskCompletedList from '@/components/TaskCompletedList.vue';
+import TaskControls from '@/components/modules/todo/components/TaskControls.vue';
+import TaskCompletedCard from '@/components/modules/todo/components/TaskCompletedCard.vue';
 import TaskCard from '@/components/modules/todo/components/TaskCard.vue';
 import TaskDataTable from '@/components/TaskDataTable.vue';
 import IconButton from '@/components/buttons/IconButton.vue';
@@ -61,7 +61,7 @@ export default {
     TaskControls,
     TaskCard,
     TaskDataTable,
-    TaskCompletedList,
+    TaskCompletedCard,
     IconButton
   },
         

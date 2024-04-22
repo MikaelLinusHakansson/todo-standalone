@@ -28,10 +28,10 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
-import { userStore } from '../stores/userStore'
+import { userStore } from '../../../../stores/userStore'
 
-import CheckBox from "@/components/form/CheckBox.vue"
-import IconButton from "@/components/buttons/IconButton.vue"
+import CheckBox from '@/components/form/CheckBox.vue'
+import IconButton from '@/components/buttons/IconButton.vue'
 
 export default {
   components: {
