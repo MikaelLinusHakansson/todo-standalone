@@ -25,7 +25,7 @@
       </task-controls>
 
       <div class="margin-bottom" :hidden="visableAllTasks">
-        <task-all-tasks-list class="margin-bottom" :isVisable="isVisable" />
+        <task-card class="margin-bottom" :isVisable="isVisable" />
       </div>
 
       <div class="margin-bottom" :hidden="this.visableCompleted" >
@@ -38,19 +38,19 @@
 </template>
 
 <script>
-import LanguageGroup from "@/components/common/LanguageGroup.vue";
-import Title from "@/components/common/Title.vue";
-import TaskForm from "@/components/taskForm.vue";
-import TaskControls from "@/components/TaskControls.vue";
-import TaskCompletedList from "@/components/TaskCompletedList.vue";
-import TaskAllTasksList from "@/components/TaskAllTasksList.vue";
-import TaskDataTable from "@/components/TaskDataTable.vue";
-import IconButton from "@/components/buttons/IconButton.vue";
+import LanguageGroup from '@/components/common/LanguageGroup.vue';
+import Title from '@/components/common/Title.vue';
+import TaskForm from '@/components/taskForm.vue';
+import TaskControls from '@/components/TaskControls.vue';
+import TaskCompletedList from '@/components/TaskCompletedList.vue';
+import TaskCard from '@/components/modules/todo/components/TaskCard.vue';
+import TaskDataTable from '@/components/TaskDataTable.vue';
+import IconButton from '@/components/buttons/IconButton.vue';
 
 import { nextTick } from 'vue';
-import { useTodoStore } from "../stores/todoStore";
-import { mapActions} from "pinia";
-import { userStore } from "../stores/userStore";
+import { useTodoStore } from '../stores/todoStore';
+import { mapActions} from 'pinia';
+import { userStore } from '../stores/userStore';
 
 
 export default {
@@ -59,7 +59,7 @@ export default {
     LanguageGroup,
     TaskForm,
     TaskControls,
-    TaskAllTasksList,
+    TaskCard,
     TaskDataTable,
     TaskCompletedList,
     IconButton

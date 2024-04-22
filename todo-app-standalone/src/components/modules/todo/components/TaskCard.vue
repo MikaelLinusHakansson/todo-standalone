@@ -43,12 +43,12 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useTodoStore } from '@/stores/todoStore.js'
-import { userStore } from '../stores/userStore'
+import { userStore } from '../../../../stores/userStore'
 
-import TextField from "@/components/form/TextField.vue"
-import CheckBox from "@/components/form/CheckBox.vue"
-import Calender from "@/components/common/Calender.vue"
-import IconButton from "@/components/buttons/IconButton.vue";
+import TextField from '@/components/form/TextField.vue'
+import CheckBox from '@/components/form/CheckBox.vue'
+import Calender from '@/components/common/Calender.vue'
+import IconButton from '@/components/buttons/IconButton.vue';
 
 export default {
     components: { 

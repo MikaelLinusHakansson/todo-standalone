@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("@/components/LoginPage.vue"),
+      component: () => import("@/components/modules/user/components/LoginPage.vue"),
       meta: {
         requiresAuth: false
       }
@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: "/login",
       name: "login.auth",
-      component: () => import ("@/components/LoginPage.vue"),
+      component: () => import ("@/components/modules/user/components/LoginPage.vue"),
       meta: {
         requiresAuth: false
       }
@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: "/register",
       name: "register.auth",
-      component: () => import ("@/components/RegisterPage.vue"),
+      component: () => import ("@/components/modules/user/components/RegisterPage.vue"),
       meta: {
         requiresAuth: false
       }

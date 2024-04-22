@@ -4,32 +4,21 @@
     <div class="custom-row">
       <div class="custom-col">
         <div class="custom-card">
-          
-          <Title :name="'register'" class="spacer-bottom" />
-
+          <Title :name="'login'" class="spacer-bottom" />
           <form class="custom-card-content">
+            <div class="custom-form-group">
+              <TextField v-model="username" :label="'username'" />
+            </div>
+            
+            <div class="custom-form-group">
+              <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
+            </div>
 
-              <div class="custom-form-group"> 
-                <TextField v-model="username" :label="'username'" />
-              </div>
-
-              <div class="custom-form-group">
-                <Password 
-                  v-model="password" 
-                  toggleMask promptLabel="Enter your password" 
-                  weakLabel="Very Weak" 
-                  mediumLabel="Medium" 
-                  strongLabel="Strong" 
-                  :placeholder="$t('password')">
-                    password
-                </Password>
-              </div>
-
-              <Button @click.prevent.stop="registerUser" :name="$t('submit')" />
+            <Button @keypress.enter="login" @click.prevent.stop="login" :name="$t('login')" />
           </form>
 
           <div class="custom-card-footer">
-            <Button :name="$t('login')" @click="$router.push('/login')" />
+            <Button :name="$t('register')" @click="$router.push('/register')" />
           </div>
         </div>
       </div>
@@ -39,47 +28,51 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { userStore } from '../stores/userStore'
+import { userStore } from '../../../../stores/userStore'
 
 import Password from 'primevue/password'
 
-import LanguageGroup from './common/LanguageGroup.vue'
-import IconButton from '@/components/buttons/IconButton.vue'
-import TextField from '@/components/form/TextField.vue'
-import Button from '@/components/buttons/Button.vue'
-import Title from '@/components/common/Title.vue'
+import LanguageGroup from "@/components/common/LanguageGroup.vue"
+import TextField from "@/components/form/TextField.vue"
+import IconButton from "@/components/buttons/IconButton.vue"
+import Button from "@/components/buttons/Button.vue"
+import Title from "@/components/common/Title.vue"
 
-export default {
+export default { 
   components: {
     Password,
     LanguageGroup,
-    IconButton,
     TextField,
+    IconButton,
     Button,
     Title
   },
-
+    
   data() {
     return {
-      username: '',
-      password: ''
+      username: "",
+      password: "",
+      bearerToken: "",
     }
   },
-
+    
   methods: {
-    ...mapActions(userStore, ['register']),
+    ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'register']),
 
-    registerUser() {
+    async login() {
       const user = {
         username: this.username,
-        password: this.password
+        password: this.password,
       }
+            
+      await this.setUser(user)
+      this.bearerToken = this.getAccessTokens()
+      this.$router.push('/todo')
 
-      this.register(user)
       this.username = ''
       this.password = ''
-    }
-  } 
+    },
+  }
 }
 </script>
 
@@ -118,7 +111,10 @@ export default {
 }
 
 .custom-card-content {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .custom-form-group {
@@ -148,17 +144,19 @@ export default {
 .my-login-button {
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
-  background-color: #07F088;
-  color: white;
+  border-radius: 1.5rem;
+  background-color: white;
+  color: #0DC0F0;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
-  width: 100%;
+  height: 40px;
+  width: auto;
 }
 
 .my-login-button:hover {
-  background-color:  #0CF0D7;
+  background-color:  #0C76F0;
+  color: white;
 }
 
 .rounded-input {

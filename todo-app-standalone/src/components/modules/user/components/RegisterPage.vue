@@ -4,21 +4,32 @@
     <div class="custom-row">
       <div class="custom-col">
         <div class="custom-card">
-          <Title :name="'login'" class="spacer-bottom" />
-          <form class="custom-card-content">
-            <div class="custom-form-group">
-              <TextField v-model="username" :label="'username'" />
-            </div>
-            
-            <div class="custom-form-group">
-              <Password v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
-            </div>
+          
+          <Title :name="'register'" class="spacer-bottom" />
 
-            <Button @keypress.enter="login" @click.prevent.stop="login" :name="$t('login')" />
+          <form class="custom-card-content">
+
+              <div class="custom-form-group"> 
+                <TextField v-model="username" :label="'username'" />
+              </div>
+
+              <div class="custom-form-group">
+                <Password 
+                  v-model="password" 
+                  toggleMask promptLabel="Enter your password" 
+                  weakLabel="Very Weak" 
+                  mediumLabel="Medium" 
+                  strongLabel="Strong" 
+                  :placeholder="$t('password')">
+                    password
+                </Password>
+              </div>
+
+              <Button @click.prevent.stop="registerUser" :name="$t('submit')" />
           </form>
 
           <div class="custom-card-footer">
-            <Button :name="$t('register')" @click="$router.push('/register')" />
+            <Button :name="$t('login')" @click="$router.push('/login')" />
           </div>
         </div>
       </div>
@@ -28,51 +39,47 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { userStore } from '../stores/userStore'
+import { userStore } from '../../../../stores/userStore'
 
 import Password from 'primevue/password'
 
-import LanguageGroup from "@/components/common/LanguageGroup.vue"
-import TextField from "@/components/form/TextField.vue"
-import IconButton from "@/components/buttons/IconButton.vue"
-import Button from "@/components/buttons/Button.vue"
-import Title from "@/components/common/Title.vue"
+import LanguageGroup from '../../../common/LanguageGroup.vue'
+import IconButton from '@/components/buttons/IconButton.vue'
+import TextField from '@/components/form/TextField.vue'
+import Button from '@/components/buttons/Button.vue'
+import Title from '@/components/common/Title.vue'
 
-export default { 
+export default {
   components: {
     Password,
     LanguageGroup,
-    TextField,
     IconButton,
+    TextField,
     Button,
     Title
   },
-    
+
   data() {
     return {
-      username: "",
-      password: "",
-      bearerToken: "",
+      username: '',
+      password: ''
     }
   },
-    
-  methods: {
-    ...mapActions(userStore, ['setUser','setBearerToken' , 'logout', 'getAccessTokens', 'register']),
 
-    async login() {
+  methods: {
+    ...mapActions(userStore, ['register']),
+
+    registerUser() {
       const user = {
         username: this.username,
-        password: this.password,
+        password: this.password
       }
-            
-      await this.setUser(user)
-      this.bearerToken = this.getAccessTokens()
-      this.$router.push('/todo')
 
+      this.register(user)
       this.username = ''
       this.password = ''
-    },
-  }
+    }
+  } 
 }
 </script>
 
@@ -111,10 +118,7 @@ export default {
 }
 
 .custom-card-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  width: 100%;
 }
 
 .custom-form-group {
@@ -144,19 +148,17 @@ export default {
 .my-login-button {
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
-  border-radius: 1.5rem;
-  background-color: white;
-  color: #0DC0F0;
+  border-radius: 0.25rem;
+  background-color: #07F088;
+  color: white;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
-  height: 40px;
-  width: auto;
+  width: 100%;
 }
 
 .my-login-button:hover {
-  background-color:  #0C76F0;
-  color: white;
+  background-color:  #0CF0D7;
 }
 
 .rounded-input {
