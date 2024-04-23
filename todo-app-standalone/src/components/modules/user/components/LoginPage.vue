@@ -28,7 +28,6 @@ import IconButton from '@/components/buttons/IconButton.vue'
 import Button from '@/components/buttons/Button.vue'
 import Title from '@/components/common/Title.vue'
 import Card from '@/components/common/Card.vue'
-import LoginForm from './LoginForm.vue'
 
 export default { 
   components: {
@@ -38,8 +37,7 @@ export default {
     IconButton,
     Button,
     Title,
-    Card,
-    LoginForm
+    Card
   },
     
   data() {
