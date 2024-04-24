@@ -53,7 +53,7 @@ import { nextTick } from 'vue'
 import { mapActions, mapState} from 'pinia'
 
 import { useTodoStore } from '../stores/todoStore'
-import { userStore } from '../../user/stores/userStore'
+import { userStore } from '@/components/modules/user/stores/userStore'
 
 import LanguageGroup from '@/components/common/LanguageGroup.vue'
 import Title from '@/components/common/Title.vue'

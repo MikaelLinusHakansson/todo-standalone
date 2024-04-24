@@ -1,6 +1,7 @@
 <template>
   <div class="custom-container">
-    <span class="completed-tasks-header"> {{ $t('done') }}: </span>
+    <Span :fontWeight="'bold'" :color="'default'" :name="'done'" />
+
     <ul class="task-list">
       <li
         v-for="(completedTask) in completedTasksGetters" 
@@ -10,8 +11,8 @@
         <CheckBox v-model="completedTask.completed" @click.prevent.stop="markDoneSender(completedTask)" />
 
         <div class="task-info">
-          <span class="task-name">{{ completedTask.name }}</span>
-          <span class="task-date">{{ completedTask.date }}</span>
+          <Span class="task-name" :name="completedTask.name" />
+          <Span class="task-date" :name="completedTask.date" />
         </div>
         <!-- <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button> -->
 
@@ -28,16 +29,19 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
+
 import { useTodoStore } from '../stores/todoStore'
-import { userStore } from '../../user/stores/userStore'
+import { userStore } from '@/components/modules/user/stores/userStore'
 
 import CheckBox from '@/components/form/CheckBox.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
+import Span from '@/components/form/Span.vue'
 
 export default {
   components: {
     CheckBox,
-    IconButton
+    IconButton,
+    Span
   },
 
   computed: {

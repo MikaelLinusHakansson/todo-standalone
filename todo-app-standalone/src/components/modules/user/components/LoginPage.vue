@@ -9,7 +9,7 @@
         <Textfield v-slot:content v-model="username" :label="'username'" class="space-around" />
         <Password @keypress.enter="login" v-model="password" :feedback="false" toggleMask :placeholder="$t('password')" />
 
-        <Button @click.prevent.stop="login" :name="$t('login')" class="space-around" /> <!-- Bug where enter does not trigger event -->
+        <Button @click.prevent.stop="login" :name="$t('login')" class="space-around" />
         <Button :name="$t('register')" @click="$router.push('/register')" />
       </template>
   </Card>
@@ -44,7 +44,7 @@ export default {
     return {
       username: '',
       password: '',
-      bearerToken: '',
+      bearerToken: ''
     }
   },
     
@@ -54,7 +54,7 @@ export default {
     async login() {
       const user = {
         username: this.username,
-        password: this.password,
+        password: this.password
       }
             
       await this.setUser(user)
@@ -63,11 +63,11 @@ export default {
 
       this.username = ''
       this.password = ''
-    },
+    }
   }
 }
-</script>
 
+</script>
 <style>
 .column-row {
   display: flex;
