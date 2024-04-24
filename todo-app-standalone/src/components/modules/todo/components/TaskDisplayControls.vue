@@ -46,7 +46,7 @@ export default {
       checkedToggleAll: true,
       checkedCompleted: false,
       checkedToggleEdit: false,
-      checkedDataTable: false,
+      checkedDataTable: false
     }
   },
 
