@@ -1,6 +1,6 @@
-import ApiService from "../../../../api/services/apiService"
+import ApiService from '@/api/services/apiService'
 
-const USER_API_BASE_URL = "http://localhost:8080/api/auth"
+const USER_API_BASE_URL = 'http://localhost:8080/api/auth'
 
 class UserApiService extends ApiService {
     constructor() {
@@ -27,4 +27,5 @@ class UserApiService extends ApiService {
         return response
     }
 }
+
 export default new UserApiService()

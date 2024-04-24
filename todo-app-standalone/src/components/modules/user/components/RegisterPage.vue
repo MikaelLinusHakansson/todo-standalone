@@ -43,7 +43,7 @@ import { userStore } from '../../user/stores/userStore'
 
 import Password from 'primevue/password'
 
-import LanguageGroup from '../../../common/LanguageGroup.vue'
+import LanguageGroup from '@/components/common/LanguageGroup.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
 import Textfield from '@/components/form/Textfield.vue'
 import Button from '@/components/buttons/Button.vue'

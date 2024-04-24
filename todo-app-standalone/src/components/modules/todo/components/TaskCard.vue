@@ -33,7 +33,7 @@
           <IconButton
             @click.prevent.stop="deleteTasks(task)"
             :icon="'src/components/assets/navigation/delete.png'"
-            :backgroundColor="'transparent'"> 
+            :backgroundColor="'transparent'">
           </IconButton>
       </li>
     </ul>

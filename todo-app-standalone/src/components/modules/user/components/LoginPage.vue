@@ -44,7 +44,7 @@ export default {
     return {
       username: '',
       password: '',
-      bearerToken: '',
+      bearerToken: ''
     }
   },
     
@@ -54,7 +54,7 @@ export default {
     async login() {
       const user = {
         username: this.username,
-        password: this.password,
+        password: this.password
       }
             
       await this.setUser(user)
@@ -63,11 +63,11 @@ export default {
 
       this.username = ''
       this.password = ''
-    },
+    }
   }
 }
-</script>
 
+</script>
 <style>
 .column-row {
   display: flex;
