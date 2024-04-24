@@ -50,13 +50,15 @@ import TextField from '@/components/form/TextField.vue'
 import CheckBox from '@/components/form/CheckBox.vue'
 import Calender from '@/components/common/Calender.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
+import Span from '@/components/form/Span.vue'
 
 export default {
   components: { 
     TextField,
     CheckBox,
     Calender,
-    IconButton
+    IconButton,
+    Span
   },
 
   computed: {

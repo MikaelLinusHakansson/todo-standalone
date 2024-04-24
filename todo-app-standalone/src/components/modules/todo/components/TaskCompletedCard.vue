@@ -1,9 +1,10 @@
 <template>
   <div class="custom-container">
-    <span 
+    <Span :fontWeight="'bold'" :color="'default'" :name="'done'" />
+    <!-- <span 
       class="completed-tasks-header"> 
         {{ $t('done') }}:
-    </span>
+    </span> -->
 
     <ul class="task-list">
       <li
@@ -45,11 +46,13 @@ import { userStore } from '@/components/modules/user/stores/userStore'
 
 import CheckBox from '@/components/form/CheckBox.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
+import Span from '@/components/form/Span.vue'
 
 export default {
   components: {
     CheckBox,
-    IconButton
+    IconButton,
+    Span
   },
 
   computed: {
