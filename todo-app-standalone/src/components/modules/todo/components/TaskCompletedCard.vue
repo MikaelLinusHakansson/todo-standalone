@@ -1,10 +1,6 @@
 <template>
   <div class="custom-container">
     <Span :fontWeight="'bold'" :color="'default'" :name="'done'" />
-    <!-- <span 
-      class="completed-tasks-header"> 
-        {{ $t('done') }}:
-    </span> -->
 
     <ul class="task-list">
       <li
@@ -15,15 +11,8 @@
         <CheckBox v-model="completedTask.completed" @click.prevent.stop="markDoneSender(completedTask)" />
 
         <div class="task-info">
-          <span 
-            class="task-name">
-              {{ completedTask.name }}
-          </span>
-
-          <span 
-            class="task-date">
-              {{ completedTask.date }}
-          </span>
+          <Span class="task-name" :name="completedTask.name" />
+          <Span class="task-date" :name="completedTask.date" />
         </div>
         <!-- <button @click="deleteTasks(completedTask)" class="delete-task-button">Delete</button> -->
 
