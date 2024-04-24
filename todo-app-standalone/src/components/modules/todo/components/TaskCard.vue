@@ -44,7 +44,7 @@
 import { mapState, mapActions } from 'pinia'
 
 import { useTodoStore } from '../stores/todoStore'
-import { userStore } from '../../user/stores/userStore'
+import { userStore } from '@/components/modules/user/stores/userStore'
 
 import TextField from '@/components/form/TextField.vue'
 import CheckBox from '@/components/form/CheckBox.vue'
@@ -52,106 +52,105 @@ import Calender from '@/components/common/Calender.vue'
 import IconButton from '@/components/buttons/IconButton.vue'
 
 export default {
-    components: { 
-        TextField,
-        CheckBox,
-        Calender,
-        IconButton
-    },
+  components: { 
+    TextField,
+    CheckBox,
+    Calender,
+    IconButton
+  },
 
-    computed: {
-        ...mapState(useTodoStore, ["tasks", "getData"])
-    },
+  computed: {
+    ...mapState(useTodoStore, ["tasks", "getData"])
+  },
 
-    data() {
-        return {
-            editIndex: null,
-            editName: '',
-            editDate: ''
-        }
-    },
-
-    methods: {
-        ...mapActions(userStore, ['getAccessTokens']),
-        ...mapActions(useTodoStore, ["markDone", "removeTasks", 'editTask']),
-
-        startEditing(index) {
-            if (this.editIndex === index) {
-                this.editIndex = null
-            
-            } else {
-                this.editIndex = index
-            }
-        },
-
-        sendData(data) {
-          this.editTask(data, this.getAccessTokens())
-        },
-
-        stopEditing () {
-            this.editIndex = null
-        },
-
-        clearDate(task) {
-            task.date = ''
-            this.editTask(task, this.getAccessTokens())
-        },
-
-        markDoneSender(task) {
-            this.editIndex = null
-            this.markDone(task, this.getAccessTokens())
-        },
-
-        deleteTasks(task) {
-            this.removeTasks({
-                taskId: task.id
-            }, this.getAccessTokens())
-        }
+  data() {
+    return {
+      editIndex: null,
+      editName: '',
+      editDate: ''
     }
+  },
+
+  methods: {
+    ...mapActions(userStore, ['getAccessTokens']),
+    ...mapActions(useTodoStore, ["markDone", "removeTasks", 'editTask']),
+
+    startEditing(index) {
+      if (this.editIndex === index) {
+        this.editIndex = null
+      } else {
+          this.editIndex = index
+        }
+    },
+
+    sendData(data) {
+      this.editTask(data, this.getAccessTokens())
+    },
+
+    stopEditing () {
+      this.editIndex = null
+    },
+
+    clearDate(task) {
+      task.date = ''
+      this.editTask(task, this.getAccessTokens())
+    },
+
+    markDoneSender(task) {
+      this.editIndex = null
+      this.markDone(task, this.getAccessTokens())
+    },
+
+    deleteTasks(task) {
+      this.removeTasks({
+        taskId: task.id
+      }, this.getAccessTokens())
+    }
+  }
 }
 </script>
 
 <style>
 .custom-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
 .task-list {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
 }
 
 .list-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
 }
 
 .list-item:hover {
-    background-color: rgb(150, 225, 244);
-    transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: rgb(150, 225, 244);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .task-editor {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  margin-right: 1rem;
 }
 
 .margin-around {
@@ -159,89 +158,89 @@ export default {
 }
 
 .task-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-grow: 1;
-    max-width: calc(100% - 120px);
-    min-width: 0;
-    margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  max-width: calc(100% - 120px);
+  min-width: 0;
+  margin: 0 1rem;
 }
 
 .task-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    margin-right: 1rem;
-    max-width: 60%;
-    cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  margin-right: 1rem;
+  max-width: 60%;
+  cursor: pointer;
 }
 
 .task-date {
-    flex-shrink: 0;
-    margin-left: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  justify-content: flex-end;
 }
 
 .clear-date-button {
-    margin:0.25rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    background-color: #0DC0F0;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
+  margin:0.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: #0DC0F0;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
 }
 
 .clear-date-button:hover {
-    background-color: #0C76F0;
+  background-color: #0C76F0;
 }
 
 .delete-task-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    margin:0.25rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin:0.25rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
 }
 
 .delete-task-button:hover {
-    background-color: #6666;
+  background-color: #6666;
 }
 
 @media (max-width: 768px) {
-    .list-item {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .list-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .task-editor,
-    .task-info {
-        flex-direction: column;
-        align-items: stretch;
-        margin-right: 0;
-    }
+  .task-editor,
+  .task-info {
+    flex-direction: column;
+    align-items: stretch;
+    margin-right: 0;
+  }
 
-    .task-actions {
-        justify-content: space-between;
-        padding-top: 0.5rem;
-    }
+  .task-actions {
+    justify-content: space-between;
+    padding-top: 0.5rem;
+  }
 }
 </style>
