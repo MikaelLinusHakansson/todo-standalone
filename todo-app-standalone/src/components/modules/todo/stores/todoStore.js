@@ -88,6 +88,6 @@ export const useTodoStore = defineStore("todoStore", {
 
     validateDate(date) {
       return dayjs(date).isValid()
-    },
-  },
+    }
+  }
 })
