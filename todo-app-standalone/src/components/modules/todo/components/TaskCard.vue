@@ -24,9 +24,8 @@
           </div>
 
           <div v-else class="task-info">
-            <span class="task-name">{{ task.name }}</span>
-            <span class="task-date">{{ task.date }}</span>
-            
+            <Span class="task-name" :name="task.name" />
+            <Span class="task-date" :name="task.date" />
           </div>
 
           <!-- v-if="editIndex === index" -->
@@ -62,7 +61,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodoStore, ["tasks", "getData"])
+    ...mapState(useTodoStore, ['tasks', 'getData'])
   },
 
   data() {

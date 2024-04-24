@@ -1,7 +1,7 @@
 <template>
   <span 
     :class="[fontStyles, colorStyles]"> 
-      {{ $t(name) }} 
+      {{ value }}
   </span>
 </template>
 
@@ -41,6 +41,10 @@ export default {
       }
 
       return textDecoration[this.color];
+    },
+
+    value() {
+      return this.$te(this.name) ? this.$t(this.name) : this.name
     }
   }
 }
