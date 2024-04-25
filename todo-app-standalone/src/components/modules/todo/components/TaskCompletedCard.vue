@@ -50,7 +50,7 @@ export default {
 
   methods: {
     ...mapActions(userStore, ['getAccessTokens']),
-    ...mapActions(useTodoStore, ['markDone', 'removeCompletedTasks']),
+    ...mapActions(useTodoStore, ['markDone', 'removeTasks']),
 
     markDoneSender(task) {
       this.editIndex = null
@@ -58,9 +58,7 @@ export default {
     },
 
     deleteTasks(task) {
-      this.removeCompletedTasks({
-        taskId: task.id
-        }, this.getAccessTokens())
+      this.removeTasks(task, this.getAccessTokens())
       }
   }
 }

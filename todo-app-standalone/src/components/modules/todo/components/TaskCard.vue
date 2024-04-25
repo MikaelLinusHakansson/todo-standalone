@@ -103,9 +103,7 @@ export default {
     },
 
     deleteTasks(task) {
-      this.removeTasks({
-        taskId: task.id
-      }, this.getAccessTokens())
+      this.removeTasks(task, this.getAccessTokens())
     }
   }
 }

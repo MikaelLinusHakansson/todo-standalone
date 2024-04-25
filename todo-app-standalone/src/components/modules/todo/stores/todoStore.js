@@ -42,7 +42,7 @@ export const useTodoStore = defineStore("todoStore", {
         if (this.validateDate(data.date)) {
           data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
-          const updatedTask = await todoService.put(data.id, data, accessToken)
+          const updatedTask = await todoService.put(data, accessToken)
           this.tasks[data.indexFromTasks] = updatedTask
       }
     },
@@ -53,10 +53,12 @@ export const useTodoStore = defineStore("todoStore", {
             name: task.name,
             date: task.date,
             completed: !task.completed,
+            username: task.username
         }
     
-        const updatedTask = await todoService.put(task.id, tempTask, accessToken)
+        const updatedTask = await todoService.put(tempTask, accessToken)
         const taskIndex = this.tasks.findIndex(t => t.id === task.id)
+        
         if (taskIndex !== -1) {
             this.tasks[taskIndex] = updatedTask
         }
@@ -67,16 +69,10 @@ export const useTodoStore = defineStore("todoStore", {
     },
     
     async removeTasks(taskData, accessToken) {
-        await todoService.delete(taskData.taskId, accessToken)
-        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId)
-        if (indexInTasks !== -1) {
-            this.tasks.splice(indexInTasks, 1)
-        }
-    },
+        await todoService.delete(taskData, accessToken)
 
-    async removeCompletedTasks(taskData, accessToken) {
-        await todoService.delete(taskData.taskId, accessToken)
-        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.taskId)
+        const indexInTasks = this.tasks.findIndex(task => task.id === taskData.id)
+
         if (indexInTasks !== -1) {
             this.tasks.splice(indexInTasks, 1)
         }
