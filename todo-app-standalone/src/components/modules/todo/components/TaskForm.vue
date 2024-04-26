@@ -1,29 +1,34 @@
 <template>
   <div>
-    <TextField
-      class="margin"
+    <TextField 
+      @keypress.enter="submitWithEnter(task)" 
       v-model="task.name" 
-      :label="'task'"
-      @keypress.enter="submitWithEnter(task)">
+      :label="'task'" 
+      class="margin"
+      > 
     </TextField>
     
-    <Calender class="margin" @date-time="submitNewTask" :task="task" :hide="true" />
+    <Calender @date="date" :hide="true"  class="margin" /> 
+    
+    <Button @click="submitNewTask(task)" :name="'+'"  />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapWritableState } from 'pinia'
+import { mapActions} from 'pinia'
 
 import { useTodoStore } from '../stores/todoStore'
 import { userStore } from '@/components/modules/user/stores/userStore'
 
 import Calender from '@/components/common/Calender.vue'
 import TextField from '@/components/form/TextField.vue'
+import Button from '@/components/buttons/Button.vue'
 
 export default {
   components: {
     Calender,
-    TextField
+    TextField,
+    Button
   },
 
   data () {
@@ -35,14 +40,9 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(useTodoStore, ['tasks']),
-    ...mapWritableState(useTodoStore, ['tasks'])
-  },
-
   methods: {
-    ...mapActions(userStore, ['getAccessTokens', 'getUser']),
-    ...mapActions(useTodoStore, ['createNewTask']),
+    ...mapActions(userStore, ['getAccessTokens']),
+    ...mapActions(useTodoStore, ['createNewTask', 'editTask']),
 
     submitNewTask(data) {
       this.createNewTask(data, this.getAccessTokens())
@@ -51,12 +51,25 @@ export default {
       this.task.date = ''
     },
 
+    date(value) {
+      this.task.date = value
+    },
+
     submitWithEnter(data) {
       this.createNewTask(data, this.getAccessTokens())
 
       this.task.name = ''
       this.task.date = ''
-    }
+    },
+
+    sendData(data) {
+      const task = {
+        name: this.task.name,
+        date: data
+      }
+
+      this.editTask(task, this.getAccessTokens())
+    },
   }
 }
 </script>
