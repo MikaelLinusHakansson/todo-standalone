@@ -26,8 +26,7 @@ export default {
 
   data() {
     return {
-      datetime24h: '',
-      buttondisplay: null
+      datetime24h: ''
     }
   },
 

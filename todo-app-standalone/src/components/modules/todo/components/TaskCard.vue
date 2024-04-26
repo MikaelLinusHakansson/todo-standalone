@@ -7,7 +7,8 @@
         :key="task.id"
         class="list-item"
         :class="{ 'task-completed': task.completed, 'selected': editIndex === index }"
-        v-show="!task.completed">
+        v-show="!task.completed"
+        >
 
           <CheckBox v-model="task.completed" @click.prevent.stop="markDoneSender(task)" />
         
@@ -17,10 +18,11 @@
               v-model="task.name"
               :label="'task'"
               @blur="editTask(task, getAccessTokens())"
-              @click.prevent.stop="">
+              @click.prevent.stop=""
+              >
             </TextField>
 
-            <Calender :hide="true" @date="sendData" />
+            <Calender @date="sendData" />
           </div>
 
           <div v-else class="task-info">
@@ -32,7 +34,8 @@
           <IconButton
             @click.prevent.stop="deleteTasks(task)"
             :icon="'src/components/assets/navigation/delete.png'"
-            :backgroundColor="'transparent'">
+            :backgroundColor="'transparent'"
+            >
           </IconButton>
       </li>
     </ul>
