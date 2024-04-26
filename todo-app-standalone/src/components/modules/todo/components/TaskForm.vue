@@ -1,16 +1,16 @@
 <template>
   <div>
-    <TextField 
-      @keypress.enter="submitWithEnter(task)" 
-      v-model="task.name" 
-      :label="'task'" 
+    <TextField
+      @keypress.enter="submitWithEnter(task)"
+      v-model="task.name"
+      :label="'task'"
       class="margin"
-      > 
+      >
     </TextField>
     
-    <Calender @date="date" :hide="true"  class="margin" /> 
+    <Calender @date="date" :hide="true"  class="margin" />
     
-    <Button @click="submitNewTask(task)" :name="'+'"  />
+    <Button @click="submitNewTask(task)" :name="'+'" />
   </div>
 </template>
 
