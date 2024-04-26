@@ -2,25 +2,27 @@
   <div class="custom-container">
     <ul class="task-list">
       <li
-        @click.stop="startEditing(index)" 
-        v-for="(task, index) in tasks" 
+        @click.stop="startEditing(index, task)" 
+        v-for="(task, index) in tasks"
         :key="task.id"
         class="list-item"
         :class="{ 'task-completed': task.completed, 'selected': editIndex === index }"
-        v-show="!task.completed">
+        v-show="!task.completed"
+        >
 
           <CheckBox v-model="task.completed" @click.prevent.stop="markDoneSender(task)" />
         
           <div v-if="!task.completed && editIndex === index" class="task-editor">
             <TextField
               class="margin-around"
-              v-model="task.name" 
+              v-model="task.name"
               :label="'task'"
               @blur="editTask(task, getAccessTokens())"
-              @click.prevent.stop="">
+              @click.prevent.stop=""
+              >
             </TextField>
 
-            <Calender :hide="true" :task="task" @date-time="sendData" />
+            <Calender @date="sendData" />
           </div>
 
           <div v-else class="task-info">
@@ -32,7 +34,8 @@
           <IconButton
             @click.prevent.stop="deleteTasks(task)"
             :icon="'src/components/assets/navigation/delete.png'"
-            :backgroundColor="'transparent'">
+            :backgroundColor="'transparent'"
+            >
           </IconButton>
       </li>
     </ul>
@@ -61,14 +64,19 @@ export default {
   },
 
   computed: {
-    ...mapState(useTodoStore, ['tasks', 'getData'])
+    ...mapState(useTodoStore, ['tasks'])
   },
 
   data() {
     return {
       editIndex: null,
-      editName: '',
-      editDate: ''
+      task: {
+        id: '',
+        name: '',
+        date: '',
+        completed: null,
+        username: ''
+      }
     }
   },
 
@@ -76,16 +84,19 @@ export default {
     ...mapActions(userStore, ['getAccessTokens']),
     ...mapActions(useTodoStore, ["markDone", "removeTasks", 'editTask']),
 
-    startEditing(index) {
+    startEditing(index, task) {
       if (this.editIndex === index) {
         this.editIndex = null
       } else {
           this.editIndex = index
+          this.task = task
         }
     },
 
-    sendData(data) {
-      this.editTask(data, this.getAccessTokens())
+    sendData(date) {
+      this.task.date = date
+
+      this.editTask(this.task, this.getAccessTokens())
     },
 
     stopEditing () {
