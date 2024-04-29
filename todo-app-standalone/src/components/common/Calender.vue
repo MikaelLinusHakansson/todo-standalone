@@ -32,6 +32,10 @@ export default {
 
   methods: {
     onInput(value) {
+      if (value === null) {
+        value = ''
+      }
+      
       this.$emit('date', value)
     }
   }
