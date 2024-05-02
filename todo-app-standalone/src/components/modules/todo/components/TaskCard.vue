@@ -74,7 +74,7 @@ export default {
         id: '',
         name: '',
         date: '',
-        completed: null,
+        completed: false,
         username: ''
       }
     }
@@ -93,19 +93,10 @@ export default {
         }
     },
 
-    sendData(date) {
+    async sendData(date) {
       this.task.date = date
 
-      this.editTask(this.task, this.getAccessTokens())
-    },
-
-    stopEditing () {
-      this.editIndex = null
-    },
-
-    clearDate(task) {
-      task.date = ''
-      this.editTask(task, this.getAccessTokens())
+      await this.editTask(this.task, this.getAccessTokens())
     },
 
     markDoneSender(task) {

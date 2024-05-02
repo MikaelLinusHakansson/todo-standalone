@@ -29,6 +29,11 @@ class TodoService extends ApiService {
     const json = await this.makeRequest('GET', '/getall', null, accessToken, null)
     return json
   }
+
+  async getById(id, accessToken) {
+    const json = await this.makeRequest('GET', `/getbyid/${id}`, null, accessToken, null)
+    return json
+  }
     
     // async makeRequest(method, endpoint, data = null, accessToken = null , returnFullResponse = null)
   async delete(data, accessToken){
