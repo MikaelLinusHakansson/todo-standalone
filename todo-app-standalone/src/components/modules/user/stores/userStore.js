@@ -23,7 +23,9 @@ export const userStore = defineStore('userStore', {
     },
 
     async setUser(user) {
-      const response = await UserApiService.post(user)
+      const response = await UserApiService.post(user).catch((error) => {
+        alert(error)
+      })
 
       this.user = user
       this.accessToken = response.accessToken
