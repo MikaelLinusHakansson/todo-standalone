@@ -13,6 +13,7 @@ export const useTodoStore = defineStore("todoStore", {
 
   getters: {
     completedTasksGetters: (state) => state.tasks.filter((task) => task.completed),
+    taskGetters: (state) => state.tasks
   },
 
   actions: {
@@ -36,6 +37,7 @@ export const useTodoStore = defineStore("todoStore", {
     async editTask(data, accessToken) {
       if (!this.validateTask(data.name)) {
         alert("Task can't be empty")
+        this.tasks[this.tasks.findIndex(t => t.id === data.id)] = await this.getById(data.id, accessToken)
       }
       
       else {
@@ -43,7 +45,7 @@ export const useTodoStore = defineStore("todoStore", {
           data.date = dayjs(data.date).format('ddd, MMM DD HH:mm:ss [CET] YYYY')
         }
           const updatedTask = await todoService.put(data, accessToken)
-          this.tasks[data.indexFromTasks] = updatedTask
+          this.tasks[this.tasks.findIndex(t => t.id === data.id)] = updatedTask
       }
     },
 
@@ -66,6 +68,10 @@ export const useTodoStore = defineStore("todoStore", {
 
     async getData(accessToken) {
       this.tasks = await todoService.getAll(accessToken)
+    },
+    
+    async getById(data, accessToken) {
+      return await todoService.getById(data, accessToken)
     },
     
     async removeTasks(taskData, accessToken) {
