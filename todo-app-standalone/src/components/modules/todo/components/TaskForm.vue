@@ -8,7 +8,7 @@
       >
     </TextField>
     
-    <Calender @date="date" :hide="true"  class="margin" />
+    <Calender :value="task.date" @date="date" :hide="true"  class="margin" />
     
     <Button @click="submitNewTask(task)" :name="'+'" />
   </div>
