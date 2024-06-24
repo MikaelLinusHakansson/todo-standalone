@@ -20,6 +20,12 @@
 import PrimeCalender from 'primevue/calendar'
 
 export default {
+  props: {
+    value: {
+      type: [String, Date]
+    }
+  },
+
   components: {
     PrimeCalender
   },
@@ -37,6 +43,14 @@ export default {
       }
       
       this.$emit('date', value)
+    }
+  },
+
+  watch: {
+    value(value) {
+      if (value == null || value === '') {
+        this.datetime24h = ''
+      }
     }
   }
 }
